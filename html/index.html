@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sostituzioni · GoldenHour AI</title>
+  <meta name="description" content="Il gestionale di sostituzioni docenti per le scuole italiane. Orari, assenze e gite incrociate automaticamente, con la logica di assegnazione su misura della tua scuola."/>
+
+  <link rel="icon" href="assets/goldenhour-symbol.png" type="image/png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container row">
+      <a href="#" class="brand" aria-label="GoldenHour AI · Sostituzioni">
+        <img src="assets/goldenhour-symbol.png" alt=""/>
+        <span>GoldenHour AI</span>
+        <span class="sep">/</span>
+        <span class="product">Sostituzioni</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="#funzionalita">Funzionalità</a>
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#scuole">Scuole</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+          <svg id="themeIconLight" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg id="themeIconDark" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="#contatti" class="btn btn-primary btn-sm">Prenota una call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        Per le scuole italiane
+      </span>
+      <h1>Le sostituzioni del giorno, <span class="serif-it accent">in pochi secondi.</span></h1>
+      <p class="lead">
+        Un gestionale che incrocia orari, assenze e gite e assegna automaticamente i docenti supplenti seguendo le regole della tua scuola. Premi <em>Genera sostituzioni</em>: in pochi secondi hai il piano pronto.
+      </p>
+      <div class="hero-cta">
+        <a href="#contatti" class="btn btn-primary">
+          Prenota una call
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#come-funziona" class="btn btn-ghost">Come funziona</a>
+      </div>
+      <div class="hero-meta">
+        <span class="check-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+          Configurazione delle regole inclusa
+        </span>
+        <span class="dot"></span>
+        <span>Supporto in italiano</span>
+        <span class="dot"></span>
+        <span>Pensato per le scuole italiane</span>
+      </div>
+
+      <div class="mockup-wrap">
+        <div class="video-frame">
+          <video
+            src="assets/demoshort.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label="Demo del prodotto Sostituzioni"
+          ></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="funzionalita">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Funzionalità</span>
+        <h2>Tutto il necessario,<br/><span class="serif-it accent">niente di superfluo.</span></h2>
+        <p>Costruito a partire dal flusso reale di una segreteria. Ogni funzionalità risponde a un problema concreto della giornata.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+          </div>
+          <h3>Orario centralizzato</h3>
+          <p>Importi l'orario una volta a inizio anno e diventa la fonte di verità. Sempre allineato, sempre in lettura ovunque serva.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Registro assenze</h3>
+          <p>Gestisci assenze intere o parziali, anche per la singola ora. Permessi, malattie e assenze: tutto tracciato e documentato.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M7 17v2M17 17v2"/><circle cx="8" cy="14" r="1"/><circle cx="16" cy="14" r="1"/></svg>
+          </div>
+          <h3>Gite e uscite didattiche</h3>
+          <p>Le classi in uscita liberano automaticamente i docenti coinvolti, che diventano disponibili per coprire altre ore.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <h3>Generazione on demand</h3>
+          <p>Premi <em>Genera sostituzioni</em> e in pochi secondi hai il piano completo del giorno. Lo apri, controlli, pubblichi.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l1.5 3.5L20 9l-3.5 1.5L15 14l-1.5-3.5L10 9l3.5-1.5L15 4z"/><path d="M3 21l9-9"/></svg>
+          </div>
+          <h3>Logica su misura, configurata da noi</h3>
+          <p>Le regole interne della tua scuola le implementiamo noi insieme a te durante il setup. Tu non scrivi una riga: ce le racconti e diventano funzionanti.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Modifica in autonomia</h3>
+          <p>Una volta avviato il sistema, l'editor visuale è tuo: puoi affinare priorità, vincoli ed eccezioni in qualsiasi momento, senza dipendere da nessuno.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="come-funziona">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Come funziona</span>
+        <h2>Tre passaggi.<br/><span class="serif-it accent">Da settembre a giugno.</span></h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num">i.</span>
+          <h3>Importi l'orario</h3>
+          <p>Carichi l'orario scolastico una volta a inizio anno. Da lì in avanti il sistema lo conosce, classe per classe, docente per docente.</p>
+        </div>
+        <div class="step">
+          <span class="num">ii.</span>
+          <h3>Configuriamo le tue regole</h3>
+          <p>Ci racconti come vengono fatte oggi le sostituzioni nella tua scuola. Implementiamo noi la logica nell'editor visuale: priorità, vincoli, eccezioni. È tutto compreso nel pacchetto.</p>
+        </div>
+        <div class="step">
+          <span class="num">iii.</span>
+          <h3>Generi il piano del giorno</h3>
+          <p>Quando ti serve, premi <em>Genera sostituzioni</em> e in pochi secondi hai il piano pronto. Lo scorri, fai gli aggiustamenti finali, lo pubblichi al collegio in un click.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="num">1+<small>ore</small></div>
+          <div class="label">Risparmiate ogni giorno dalla segreteria</div>
+        </div>
+        <div class="stat">
+          <div class="num">&lt;10<small>sec</small></div>
+          <div class="label">Per generare il piano di sostituzioni del giorno</div>
+        </div>
+        <div class="stat">
+          <div class="num">100<small>%</small></div>
+          <div class="label">Logica di assegnazione configurata insieme a te</div>
+        </div>
+        <div class="stat">
+          <div class="num">0</div>
+          <div class="label">Fogli Excel da incrociare a mano</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="scuole">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Le scuole che lo usano</span>
+        <h2>Pensato con i dirigenti,<br/><span class="serif-it accent">scritto con le segreterie.</span></h2>
+      </div>
+      <div class="t-grid">
+        <div class="tm featured t-1">
+          <blockquote>
+            "Prima impiegavamo quasi un'ora ogni mattina a sistemare le sostituzioni. Ora premiamo Genera, controlliamo due dettagli, pubblichiamo. Il tempo libero lo dedichiamo a tutto il resto, che non è poco."
+          </blockquote>
+          <div class="who">
+            <div class="avatar">EM</div>
+            <div class="info">
+              <strong>Elena Marchetti</strong>
+              <span>DSGA · IIS Galileo Galilei, Bologna</span>
+            </div>
+          </div>
+        </div>
+        <div class="tm">
+          <blockquote>"L'editor della logica ci ha permesso di replicare esattamente le regole interne del nostro istituto, senza dover scendere a compromessi."</blockquote>
+          <div class="who">
+            <div class="avatar">RB</div>
+            <div class="info">
+              <strong>Roberto Bianchi</strong>
+              <span>Dirigente · Liceo Volta, Milano</span>
+            </div>
+          </div>
+        </div>
+        <div class="tm">
+          <blockquote>"Le gite spariscono dall'orario, i docenti tornano disponibili. Sembra una sciocchezza, ma per noi è stata una rivoluzione."</blockquote>
+          <div class="who">
+            <div class="avatar">SR</div>
+            <div class="info">
+              <strong>Silvia Romano</strong>
+              <span>Vicaria · IC Manzoni, Firenze</span>
+            </div>
+          </div>
+        </div>
+        <div class="tm">
+          <blockquote>"Il setup l'hanno fatto loro insieme a noi. Abbiamo spiegato come ragioniamo, e l'hanno tradotto nell'editor. Senza dover diventare informatici."</blockquote>
+          <div class="who">
+            <div class="avatar">GA</div>
+            <div class="info">
+              <strong>Giovanni Amato</strong>
+              <span>Dirigente · IC Pascoli, Bari</span>
+            </div>
+          </div>
+        </div>
+        <div class="tm">
+          <blockquote>"Quando cambia qualcosa nelle nostre regole interne entriamo nell'editor e la modifichiamo da soli. È quello che cercavamo da anni."</blockquote>
+          <div class="who">
+            <div class="avatar">FR</div>
+            <div class="info">
+              <strong>Francesca Rinaldi</strong>
+              <span>Segreteria · Liceo Tasso, Roma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contatti">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">Prenota una call</span>
+        <h2>Vediamo se è la soluzione giusta per la tua scuola.</h2>
+        <p>Una call con il nostro team per capire come funziona la tua segreteria oggi e mostrarti, su un caso reale, come potrebbe funzionare con Sostituzioni.</p>
+        <div class="contact-meta">
+          <div class="row">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l1.5 3.5L20 9l-3.5 1.5L15 14l-1.5-3.5L10 9l3.5-1.5L15 4z"/><path d="M3 21l9-9"/></svg>
+            <span>Configurazione della logica della tua scuola inclusa nel pacchetto</span>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <span>sostituzioni@goldenhourai.it</span>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span>Supporto in italiano · team in Italia</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="nome">Nome e cognome</label>
+            <input id="nome" name="nome" type="text" required placeholder="Mario Rossi"/>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="m.rossi@scuola.it"/>
+          </div>
+        </div>
+        <div class="field">
+          <label for="scuola">Scuola o organizzazione</label>
+          <input id="scuola" name="scuola" type="text" required placeholder="IIS Galileo Galilei, Bologna"/>
+        </div>
+        <div class="field">
+          <label for="msg">Messaggio</label>
+          <textarea id="msg" name="msg" placeholder="Quante classi? Cosa usate oggi per le sostituzioni? Cosa vorresti migliorare?"></textarea>
+          <span class="hint">Facoltativo — più ci dici, più la call sarà utile.</span>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Prenota una call
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <div class="form-success" id="formSuccess">
+          Grazie. Ti scriviamo entro un giorno lavorativo per fissare la call.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-row">
+      <div class="brand" style="font-size:14px">
+        <img src="assets/goldenhour-symbol.png" alt="" style="height:22px;width:22px"/>
+        <span>GoldenHour AI</span>
+        <span class="sep">/</span>
+        <span class="product">Sostituzioni</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://goldenhourai.it" target="_blank" rel="noopener">goldenhourai.it</a>
+        <a href="#">Privacy</a>
+        <a href="#">Termini</a>
+        <a href="mailto:sostituzioni@goldenhourai.it">Contatti</a>
+      </div>
+      <div>© 2026 GoldenHour AI · P.IVA in fase di registrazione</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('themeToggle');
+    const iconLight = document.getElementById('themeIconLight');
+    const iconDark = document.getElementById('themeIconDark');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('gh-theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+      iconLight.style.display = 'none';
+      iconDark.style.display = 'block';
+    }
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('gh-theme', next);
+      if (next === 'dark') {
+        iconLight.style.display = 'none';
+        iconDark.style.display = 'block';
+      } else {
+        iconLight.style.display = 'block';
+        iconDark.style.display = 'none';
+      }
+    });
+
+    // Contact form
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      success.classList.add('show');
+      form.reset();
+      setTimeout(() => success.classList.remove('show'), 6000);
+    });
+  </script>
+</body>
+</html>
