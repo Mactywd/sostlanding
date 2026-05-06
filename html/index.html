@@ -56,42 +56,48 @@
   a:hover { color: var(--forest-deep); }
 
   /* ---------- NAV ---------- */
-  .nav {
+  .site-header {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(250, 247, 240, 0.85);
     backdrop-filter: saturate(140%) blur(10px);
     -webkit-backdrop-filter: saturate(140%) blur(10px);
-    border-bottom: 1px solid var(--line);
-    transition: border-color .3s ease;
+    background: color-mix(in oklab, var(--cream) 82%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
   }
-  .nav.at-top { border-bottom-color: transparent; background: rgba(250, 247, 240, 0); backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .nav-inner {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 28px;
-    padding: 14px 0;
-    height: 72px;
-  }
-  .nav-center {
+  .site-header .row {
     display: flex;
     align-items: center;
-    gap: 26px;
-    justify-self: center;
+    justify-content: space-between;
+    height: 68px;
   }
-  .nav-side { display: flex; gap: 26px; align-items: center; }
-  .nav-side.right { justify-self: end; }
-  .nav-side a { font-size: 14.5px; color: var(--ink-2); }
-  .nav-side a:hover { color: var(--ink); }
-  .nav-center a { font-size: 14.5px; color: var(--ink-2); }
-  .nav-center a:hover { color: var(--ink); }
-
-  /* The slot the morphing logo lands in. Reserves space for a square logo
-     including the "Golden Hour AI" wordmark beneath the symbol. */
-  .nav-logo-slot {
-    width: 56px; height: 56px;
-    flex-shrink: 0;
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 16px;
+    white-space: nowrap;
+    color: var(--ink);
   }
+  .brand:hover { color: var(--ink); }
+  .brand .sep { color: var(--line-2); font-weight: 400; margin: 0 2px; }
+  .brand .product { color: var(--ink-2); font-weight: 500; }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .nav-links a {
+    padding: 8px 14px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+    border-radius: 8px;
+    transition: color 0.15s, background 0.15s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--ink); background: rgba(230,223,207,0.5); }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+  @media (max-width: 940px) { .nav-links { display: none; } }
 
   /* Language slider */
   .lang-toggle {
@@ -143,38 +149,16 @@
   }
   .nav-cta:hover { background: var(--forest-deep); border-color: var(--forest-deep); color: var(--cream) !important; transform: translateY(-1px); }
 
-  @media (max-width: 820px) {
-    .nav-center a { display: none; }
-    .nav-inner { grid-template-columns: auto 1fr auto; }
-    .nav-center { justify-self: start; }
-  }
-
-  /* ---------- MORPHING LOGO ---------- */
-  /* One single logo element fixed-positioned and animated by JS between
-     a "big" rect inside the hero and a "small" rect inside the nav. */
-  .morph-logo {
-    position: fixed;
-    top: 0; left: 0;
-    width: 0; height: 0;
-    z-index: 60;
-    will-change: transform, width, height;
-    cursor: pointer;
-  }
-  .morph-logo img {
-    width: 100%; height: 100%;
-    display: block;
-    pointer-events: none;
-  }
-
-  /* Reserves space in the hero for the big logo */
-  .hero-logo-anchor {
+  /* ---------- HERO LOGO ---------- */
+  .hero-logo {
     width: 200px;
     height: 200px;
     margin: 0 auto 12px;
     flex-shrink: 0;
   }
+  .hero-logo img { width: 100%; height: 100%; object-fit: contain; }
   @media (max-width: 720px) {
-    .hero-logo-anchor { width: 140px; height: 140px; margin-bottom: 8px; }
+    .hero-logo { width: 140px; height: 140px; margin-bottom: 8px; }
   }
 
   /* ---------- HERO ---------- */
@@ -703,8 +687,6 @@
   /* ---------- COMPREHENSIVE MOBILE ---------- */
   @media (max-width: 720px) {
     .wrap { padding: 0 20px; }
-    .nav-inner { padding: 12px 0; gap: 16px; height: 56px; }
-    .nav-side { gap: 14px; }
     .lang-toggle { padding: 2px; }
     .lang-toggle button { padding: 5px 10px; font-size: 11.5px; }
     .nav-cta { padding: 10px 16px; font-size: 13px; }
@@ -757,7 +739,6 @@
 
   @media (max-width: 400px) {
     .nav-cta { padding: 9px 12px; font-size: 12.5px; }
-    .nav-side { gap: 10px; }
     h1.hero-title { font-size: clamp(30px, 8.4vw, 40px); }
     .hero-card-head { flex-wrap: wrap; gap: 8px; }
     .reclaim { grid-template-columns: 1fr; gap: 8px; }
@@ -768,15 +749,16 @@
 <body>
 
 <!-- ========== NAV ========== -->
-<header class="nav" id="siteNav">
-  <div class="wrap nav-inner">
-    <div aria-hidden="true"></div>
-    <div class="nav-center">
-      <div class="nav-logo-slot" id="navLogoSlot" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="wrap row">
+    <a href="/" class="brand" aria-label="Golden Hour AI">
+      <span>GoldenHour AI</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigazione principale">
       <a href="#method" data-i18n="nav.method">Metodo</a>
       <a href="#products" data-i18n="nav.products">Prodotti</a>
-    </div>
-    <div class="nav-side right">
+    </nav>
+    <div class="header-actions">
       <div class="lang-toggle" id="langToggle" role="group" aria-label="Language">
         <span class="lang-pill"></span>
         <button type="button" data-lang="it" class="active">IT</button>
@@ -787,16 +769,13 @@
   </div>
 </header>
 
-<!-- The single morphing logo. Fixed-positioned; JS animates its rect on scroll. -->
-<a href="#top" class="morph-logo" id="morphLogo" aria-label="Golden Hour AI">
-  <img src="assets/logo.png" alt="Golden Hour AI" />
-</a>
-
 <!-- ========== HERO ========== -->
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <div class="hero-logo-anchor" id="heroLogoAnchor" aria-hidden="true"></div>
+      <div class="hero-logo">
+        <img src="assets/logo_tagline.png" alt="GoldenHour AI"/>
+      </div>
       <span class="hero-eyebrow" id="heroEyebrow" data-i18n-html="hero.eyebrow"><span class="dot"></span>AI Transformation Partner · Siena, Toscana</span>
       <h1 class="hero-title" id="heroTitle" data-i18n-html="hero.title">
         Riprenditi il tuo tempo. <span class="nl">Portiamo l'<em>AI</em> nel cuore della tua impresa.</span>
@@ -1105,108 +1084,6 @@
 
 <script>
 (function() {
-  /* ============== MORPHING LOGO ============== */
-  // The hero logo is huge & centered, then on scroll it shrinks and migrates
-  // to a slot in the centered nav (between the link groups). We animate a
-  // single fixed-positioned <a> by interpolating its rect (top/left/w/h)
-  // between the two anchor elements based on scroll progress.
-  const morphLogo = document.getElementById('morphLogo');
-  const heroAnchor = document.getElementById('heroLogoAnchor');
-  const navSlot = document.getElementById('navLogoSlot');
-  const siteNav = document.getElementById('siteNav');
-
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  // smoothstep for a gentle ease in/out
-  function ease(t) { return t * t * (3 - 2 * t); }
-
-  let bigRect = null, smallRect = null, scrollDistance = 0, morphStart = 0;
-  const heroTitle = document.getElementById('heroTitle');
-
-  function measure() {
-    // Big rect: hero anchor's absolute position (document coords).
-    const hr = heroAnchor.getBoundingClientRect();
-    const sy = window.scrollY || window.pageYOffset;
-    bigRect = {
-      top: hr.top + sy,
-      left: hr.left,
-      width: hr.width,
-      height: hr.height
-    };
-    // Small rect: the slot inside the (sticky) nav. Its viewport top when
-    // the nav is pinned at top:0 is just its offset within siteNav.
-    const nr = navSlot.getBoundingClientRect();
-    let slotTopFromNav = 0, walker = navSlot;
-    while (walker && walker !== siteNav) {
-      slotTopFromNav += walker.offsetTop;
-      walker = walker.offsetParent;
-    }
-    smallRect = {
-      top: slotTopFromNav,
-      left: nr.left,
-      width: nr.width,
-      height: nr.height
-    };
-    // Distance over which to morph.
-    scrollDistance = Math.max(120, bigRect.top - smallRect.top - smallRect.height);
-    // Don't START morphing until the user has scrolled to the H1 headline.
-    // morphStart = scrollY at which the H1 top reaches the bottom of the nav.
-    if (heroTitle) {
-      const tr = heroTitle.getBoundingClientRect();
-      const sy = window.scrollY || window.pageYOffset;
-      const titleTopAbs = tr.top + sy;
-      morphStart = Math.max(0, titleTopAbs - smallRect.height - smallRect.top - 20);
-    } else {
-      morphStart = 0;
-    }
-  }
-
-  function update() {
-    if (!bigRect || !smallRect) return;
-    const sy = window.scrollY || window.pageYOffset;
-    const progress = sy - morphStart;
-    const raw = scrollDistance > 0 ? progress / scrollDistance : 1;
-    const t = ease(Math.max(0, Math.min(1, raw)));
-
-    // Interpolate. Big rect's "top" is in document coords; we need viewport
-    // coords for fixed-positioning, so subtract scrollY. Small rect's "top"
-    // is already viewport coords (pinned at top:0 + offset).
-    const topViewport = lerp(bigRect.top - sy, smallRect.top, t);
-    const left = lerp(bigRect.left, smallRect.left, t);
-    const width = lerp(bigRect.width, smallRect.width, t);
-    const height = lerp(bigRect.height, smallRect.height, t);
-
-    morphLogo.style.transform = `translate(${left}px, ${topViewport}px)`;
-    morphLogo.style.width = width + 'px';
-    morphLogo.style.height = height + 'px';
-
-    morphLogo.classList.toggle('docked', t > 0.92);
-    siteNav.classList.toggle('at-top', t < 0.05);
-  }
-
-  let ticking = false;
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => { update(); ticking = false; });
-      ticking = true;
-    }
-  }
-
-  function init() {
-    measure();
-    update();
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { measure(); update(); });
-  // Re-measure once images & fonts settle
-  if (document.readyState === 'complete') init();
-  else window.addEventListener('load', init);
-  // First-pass measure right away so logo isn't 0×0 before load
-  init();
-  // And once more after a tick (fonts may shift layout)
-  setTimeout(() => { measure(); update(); }, 200);
-  setTimeout(() => { measure(); update(); }, 800);
-
   /* ============== i18n ============== */
   const CAL_URL = 'https://calendly.com/goldenhour-ai/intro';
   const I18N = {
