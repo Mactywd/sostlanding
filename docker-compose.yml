@@ -1,7 +1,7 @@
 services:
   web:
     image: nginx:alpine
-    container_name: sostlanding
+    container_name: goldenhourai
     restart: unless-stopped
     volumes:
       - ./html:/usr/share/nginx/html:ro
@@ -10,10 +10,10 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sostlanding.rule=Host(`sostlanding.mattiagirellini.com`)"
-      - "traefik.http.routers.sostlanding.tls=true"
-      - "traefik.http.routers.sostlanding.tls.certresolver=letsencrypt"
-      - "traefik.http.services.sostlanding.loadbalancer.server.port=80"
+      - "traefik.http.routers.goldenhourai.rule=Host(`goldenhourai.mattiagirellini.com`)"
+      - "traefik.http.routers.goldenhourai.tls=true"
+      - "traefik.http.routers.goldenhourai.tls.certresolver=letsencrypt"
+      - "traefik.http.services.goldenhourai.loadbalancer.server.port=80"
 
 networks:
   web:
