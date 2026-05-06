@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
 
+  <link rel="stylesheet" href="../shared.css"/>
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
@@ -20,7 +21,6 @@
   <header class="site-header">
     <div class="container row">
       <a href="/" class="brand" aria-label="GoldenHour AI · Sostituzioni">
-        <img src="assets/goldenhour-symbol.png" alt=""/>
         <span>GoldenHour AI</span>
         <span class="sep">/</span>
         <span class="product">Sostituzioni</span>
@@ -44,6 +44,11 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container hero-grid">
+
+      <div class="hero-logo">
+        <img src="assets/logo_with_tagline.png" alt="GoldenHour AI"/>
+      </div>
+
       <span class="eyebrow">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
         Per le scuole italiane
@@ -311,56 +316,85 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-row">
-      <div class="brand" style="font-size:14px">
-        <img src="assets/goldenhour-symbol.png" alt="" style="height:22px;width:22px"/>
-        <span>GoldenHour AI</span>
-        <span class="sep">/</span>
-        <span class="product">Sostituzioni</span>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="foot-grid">
+
+        <div class="foot-brand-col">
+          <div class="foot-brand">
+            <img src="assets/goldenhour-symbol.png" alt=""/>
+            <span>Golden Hour AI</span>
+          </div>
+          <p class="foot-payoff">Reclaim your time.</p>
+          <p class="foot-desc">AI Transformation Partner per le PMI. Educhiamo, mappiamo, costruiamo — un passo alla volta, al fianco di chi guida l'azienda.</p>
+        </div>
+
+        <div>
+          <h4>Navigazione</h4>
+          <ul>
+            <li><a href="https://goldenhourai.it/#method">Metodo</a></li>
+            <li><a href="https://goldenhourai.it/#products">Prodotti</a></li>
+            <li><a href="https://goldenhourai.it/#contact">Prenota una call</a></li>
+          </ul>
+          <h4>Prodotti</h4>
+          <ul>
+            <li><a href="https://goldenhourai.it/#products">Cezànne · Hospitality</a></li>
+            <li><a href="/sostituzioni">Sostituzioni · Education</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Community</h4>
+          <ul>
+            <li><span class="foot-sainet"><span class="pip"></span>SAINET — Siena AI Network</span></li>
+            <li><a href="#">Workshop &amp; corsi</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contatti</h4>
+          <ul>
+            <li><a href="#">LinkedIn</a></li>
+            <li>Sede legale<br/><span>Siena, Toscana — Italia</span></li>
+            <li><a href="mailto:sostituzioni@goldenhourai.it">sostituzioni@goldenhourai.it</a></li>
+          </ul>
+        </div>
+
       </div>
-      <div class="footer-links">
-        <a href="https://goldenhourai.it">goldenhourai.it</a>
-        <a href="#">Privacy</a>
-        <a href="#">Termini</a>
-        <a href="mailto:sostituzioni@goldenhourai.it">Contatti</a>
+      <div class="foot-bottom">
+        <span>© 2026 Golden Hour AI · P.IVA in fase di registrazione</span>
+        <span>Privacy · Cookie · Termini</span>
       </div>
-      <div>© 2026 GoldenHour AI · P.IVA in fase di registrazione</div>
     </div>
   </footer>
 
   <script>
     // Theme toggle
-    const toggle = document.getElementById('themeToggle');
-    const iconLight = document.getElementById('themeIconLight');
-    const iconDark = document.getElementById('themeIconDark');
-    const html = document.documentElement;
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const iconLight = document.getElementById('themeIconLight');
+      const iconDark  = document.getElementById('themeIconDark');
+      const html = document.documentElement;
 
-    const savedTheme = localStorage.getItem('gh-theme') || 'light';
-    html.setAttribute('data-theme', savedTheme);
-    if (savedTheme === 'dark') {
-      iconLight.style.display = 'none';
-      iconDark.style.display = 'block';
-    }
-
-    toggle.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('gh-theme', next);
-      if (next === 'dark') {
+      const saved = localStorage.getItem('gh-theme') || 'light';
+      html.setAttribute('data-theme', saved);
+      if (saved === 'dark') {
         iconLight.style.display = 'none';
-        iconDark.style.display = 'block';
-      } else {
-        iconLight.style.display = 'block';
-        iconDark.style.display = 'none';
+        iconDark.style.display  = 'block';
       }
-    });
+
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('gh-theme', next);
+        iconLight.style.display = next === 'dark' ? 'none'  : 'block';
+        iconDark.style.display  = next === 'dark' ? 'block' : 'none';
+      });
+    })();
 
     // Contact form
     const form = document.getElementById('contactForm');
     const success = document.getElementById('formSuccess');
-
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       success.classList.add('show');

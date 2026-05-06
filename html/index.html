@@ -664,32 +664,32 @@
   }
 
   /* ---------- FOOTER ---------- */
-  footer { background: var(--ink); color: #C9C2B5; padding: 60px 0 32px; }
+  footer { background: var(--cream); color: var(--ink-2); padding: 60px 0 32px; border-top: 1px solid var(--line); }
   .foot-grid {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr 1fr;
     gap: 40px;
     padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid var(--line);
   }
-  .foot-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-  .foot-brand img { width: 44px; height: 44px; border-radius: 50%; background: var(--cream); padding: 4px; }
-  .foot-brand .n { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; }
-  .foot-payoff { font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; color: var(--gold-soft); margin-bottom: 14px; }
-  .foot-desc { font-size: 14px; line-height: 1.6; max-width: 320px; }
-  footer h4 { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #fff; margin: 0 0 18px; font-weight: 500; }
-  footer ul { list-style: none; padding: 0; margin: 0; }
-  footer li { margin-bottom: 10px; font-size: 14px; }
-  footer li a { color: #C9C2B5; }
-  footer li a:hover { color: var(--gold-soft); }
+  .foot-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .foot-brand img { width: 36px; height: 36px; border-radius: 50%; }
+  .foot-brand .n { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--ink); }
+  .foot-payoff { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--gold-deep); margin-bottom: 14px; }
+  .foot-desc { font-size: 14px; line-height: 1.6; max-width: 320px; color: var(--ink-2); }
+  footer h4 { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); margin: 0 0 16px; font-weight: 500; }
+  footer ul { list-style: none; padding: 0; margin: 0 0 20px; }
+  footer li { margin-bottom: 9px; font-size: 14px; color: var(--ink-2); }
+  footer li a { color: var(--ink-2); }
+  footer li a:hover { color: var(--ink); }
   .foot-bottom {
     display: flex; justify-content: space-between; align-items: center;
-    padding-top: 24px; font-size: 13px; color: #8A7F6E;
+    padding-top: 24px; font-size: 13px; color: var(--ink-3);
     flex-wrap: wrap; gap: 12px;
   }
   .foot-sainet {
     display: inline-flex; align-items: center; gap: 8px;
-    color: var(--gold-soft);
+    color: var(--gold-deep);
   }
   .foot-sainet .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 

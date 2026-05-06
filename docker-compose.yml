@@ -7,14 +7,15 @@ services:
       - ./html:/usr/share/nginx/html:ro
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
-      - web
+      - traefik-public
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.goldenhourai.rule=Host(`goldenhourai.it`)"
+      - "traefik.http.routers.goldenhourai.entrypoints=websecure"
       - "traefik.http.routers.goldenhourai.tls=true"
       - "traefik.http.routers.goldenhourai.tls.certresolver=letsencrypt"
       - "traefik.http.services.goldenhourai.loadbalancer.server.port=80"
 
 networks:
-  web:
+  traefik-public:
     external: true
