@@ -10,7 +10,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.goldenhourai.rule=Host(`goldenhourai.mattiagirellini.com`)"
+      - "traefik.http.routers.goldenhourai.rule=Host(`goldenhourai.it`)"
       - "traefik.http.routers.goldenhourai.tls=true"
       - "traefik.http.routers.goldenhourai.tls.certresolver=letsencrypt"
       - "traefik.http.services.goldenhourai.loadbalancer.server.port=80"

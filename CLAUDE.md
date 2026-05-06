@@ -4,8 +4,8 @@
 
 Single nginx container serving two landing pages under the same domain, managed via Docker Compose + Traefik on a VPS.
 
-- **Main:** `https://goldenhourai.mattiagirellini.com` → GoldenHour AI corporate landing
-- **Sostituzioni:** `https://goldenhourai.mattiagirellini.com/sostituzioni/` → product landing for school substitution management
+- **Main:** `https://goldenhourai.it` → GoldenHour AI corporate landing
+- **Sostituzioni:** `https://goldenhourai.it/sostituzioni/` → product landing for school substitution management
 
 ## File structure
 
@@ -30,7 +30,7 @@ Golden Hour Landing/      # Source/design files for the main landing (not served
   tweaks-panel.jsx        # Dev-only tweaks panel (not included in html/index.html)
   assets/
 nginx.conf                # Nginx routing: / → main, /sostituzioni/ → product
-docker-compose.yml        # Traefik labels for goldenhourai.mattiagirellini.com
+docker-compose.yml        # Traefik labels for goldenhourai.it
 ```
 
 ## Architecture
