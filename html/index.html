@@ -6,7 +6,7 @@
 <title>Golden Hour AI — Riprenditi il tuo tempo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
     /* Palette */
@@ -31,6 +31,22 @@
 
     --shadow-1: 0 1px 2px rgba(31,26,20,.04), 0 8px 24px -12px rgba(31,26,20,.10);
     --shadow-2: 0 1px 2px rgba(31,26,20,.05), 0 24px 60px -28px rgba(31,26,20,.18);
+  }
+
+  [data-theme="dark"] {
+    --cream:       #0D1209;
+    --cream-2:     #111A0F;
+    --ivory:       #141F12;
+    --ink:         #E8EDEA;
+    --ink-2:       #A2ADA7;
+    --ink-3:       #6A7570;
+    --line:        #1D2E25;
+    --line-2:      #243626;
+    --gold:        #D4A23B;
+    --gold-deep:   #FDC74D;
+    --gold-soft:   #F2D98C;
+    --forest:      #3A8A50;
+    --forest-deep: #4FA865;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -73,6 +89,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
     font-weight: 600;
     letter-spacing: -0.02em;
     font-size: 16px;
@@ -148,6 +165,22 @@
     transition: transform .15s ease, background .15s ease;
   }
   .nav-cta:hover { background: var(--forest-deep); border-color: var(--forest-deep); color: var(--cream) !important; transform: translateY(-1px); }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 7px 10px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+  }
+  .theme-toggle:hover {
+    color: var(--ink);
+    background: rgba(230,223,207,0.5);
+    border-color: var(--line-2);
+  }
 
   /* ---------- HERO LOGO ---------- */
   .hero-logo {
@@ -236,6 +269,21 @@
   }
   .btn-gold:hover { transform: translateY(-1px); background: #DDB04A; color: #1F1A14; box-shadow: 0 1px 0 rgba(255,255,255,.4) inset, 0 12px 28px -10px rgba(212,162,59,0.7); }
   .btn-gold svg { width: 16px; height: 16px; }
+  .btn-gold.btn-to-product {
+    background: var(--forest);
+    color: #fff !important;
+    border-color: var(--forest-deep);
+    box-shadow: 0 1px 0 rgba(255,255,255,.15) inset, 0 8px 22px -10px rgba(46,107,61,0.5);
+  }
+  .btn-gold.btn-to-product:hover {
+    background: var(--forest-deep);
+    color: #fff !important;
+    box-shadow: 0 1px 0 rgba(255,255,255,.15) inset, 0 12px 28px -10px rgba(46,107,61,0.7);
+  }
+  [data-theme="dark"] .btn-gold.btn-to-product {
+    background: var(--forest);
+    border-color: var(--forest-deep);
+  }
 
   .btn-ghost {
     display: inline-flex; align-items: center; gap: 8px;
@@ -531,6 +579,19 @@
   }
   .sched-foot strong { color: var(--forest-deep); font-weight: 600; }
 
+  /* Fragrance reveal card (Atelier) */
+  .frag-reveal { display: flex; flex-direction: column; gap: 14px; }
+  .frag-name { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-style: italic; color: var(--ink); letter-spacing: -0.01em; }
+  .frag-layers { display: flex; flex-direction: column; gap: 6px; }
+  .frag-layer { display: flex; gap: 12px; align-items: flex-start; font-size: 12.5px; padding: 9px 12px; border-radius: 8px; background: var(--cream-2); }
+  .frag-layer .ll { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; font-weight: 600; color: var(--ink-3); min-width: 38px; padding-top: 1px; }
+  .frag-layer .ln { color: var(--ink-2); line-height: 1.5; }
+  .frag-bar-wrap { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; }
+  .frag-bar-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-3); letter-spacing: 0.06em; text-transform: uppercase; }
+  .frag-bar-track { height: 5px; border-radius: 999px; background: var(--line); overflow: hidden; }
+  .frag-bar-fill { height: 100%; width: 78%; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); border-radius: 999px; }
+  .frag-desc { font-size: 13px; color: var(--ink-3); font-style: italic; line-height: 1.55; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 2px; }
+
   @media (max-width: 880px) {
     .product, .product.reverse { grid-template-columns: 1fr; gap: 32px; }
     .product.reverse .product-text { order: 1; }
@@ -594,57 +655,14 @@
     background: var(--ivory);
     border: 1px solid var(--line);
     border-radius: var(--r-xl);
-    padding: 36px;
+    padding: 0;
+    overflow: hidden;
     box-shadow: var(--shadow-2);
   }
-  .form-row { display: grid; gap: 18px; }
-  .form-row.split { grid-template-columns: 1fr 1fr; }
-  .field { display: flex; flex-direction: column; gap: 8px; }
-  .field label { font-size: 13px; font-weight: 500; color: var(--ink-2); letter-spacing: 0.01em; }
-  .field label .req { color: var(--gold-deep); }
-  .field input, .field textarea, .field select {
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-radius: var(--r-md);
-    padding: 13px 14px;
-    font: inherit;
-    font-size: 15px;
-    color: var(--ink);
-    transition: border-color .15s, background .15s, box-shadow .15s;
-    font-family: inherit;
-  }
-  .field textarea { resize: vertical; min-height: 120px; }
-  .field input:focus, .field textarea:focus, .field select:focus {
-    outline: none;
-    border-color: var(--gold);
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(212,162,59,.15);
-  }
-  .field input::placeholder, .field textarea::placeholder { color: var(--ink-3); }
-
-  .submit-row { margin-top: 28px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-  .submit-row .btn-gold { padding: 16px 28px; font-size: 15px; }
-  .submit-row .help { font-size: 12.5px; color: var(--ink-3); flex: 1; min-width: 180px; }
-
-  .form-success {
-    display: none;
-    text-align: center;
-    padding: 40px 20px;
-  }
-  .form-success.on { display: block; }
-  .form-success .icon {
-    width: 56px; height: 56px; margin: 0 auto 18px;
-    border-radius: 50%; background: rgba(46,107,61,.12);
-    color: var(--forest);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .form-success h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 26px; margin: 0 0 8px; }
-  .form-success p { color: var(--ink-2); margin: 0 0 20px; }
+  .calendly-inline-widget iframe { display: block; }
 
   @media (max-width: 920px) {
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-    .form-row.split { grid-template-columns: 1fr; }
-    .form-card { padding: 28px; }
   }
 
   /* ---------- FOOTER ---------- */
@@ -726,12 +744,7 @@
     #contact { padding: 64px 0; }
     .contact-side h2 { font-size: clamp(26px, 7vw, 32px); }
     .contact-side .sub { font-size: 15.5px; }
-    .form-card { padding: 22px !important; }
-    .form-card label { font-size: 13px; }
-    .form-card input, .form-card select, .form-card textarea { font-size: 16px; padding: 12px 14px; }
-    .submit-row { gap: 12px; }
-    .submit-row .btn-gold { width: 100%; justify-content: center; }
-    .submit-row .help { min-width: 0; flex: 1 1 100%; }
+    .calendly-inline-widget { height: 600px !important; }
 
     footer { padding: 48px 0 28px; }
     .foot-bottom { flex-direction: column; align-items: flex-start; gap: 8px; text-align: left; }
@@ -759,6 +772,10 @@
       <a href="#products" data-i18n="nav.products">Prodotti</a>
     </nav>
     <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+        <svg id="themeIconLight" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg id="themeIconDark" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <div class="lang-toggle" id="langToggle" role="group" aria-label="Language">
         <span class="lang-pill"></span>
         <button type="button" data-lang="it" class="active">IT</button>
@@ -911,7 +928,7 @@
             <div class="who" data-i18n="products.p2.who">Elena Marchetti, DSGA · IIS Galileo Galilei, Bologna</div>
           </div>
         </div>
-        <a href="/sostituzioni" class="btn-gold" style="margin-top:16px;display:inline-flex;width:fit-content">
+        <a href="/sostituzioni" class="btn-gold btn-to-product" data-config="sostituzioni" style="margin-top:16px;display:inline-flex;width:fit-content">
           <span data-i18n="products.p2.cta">Scopri Sostituzioni</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -937,6 +954,66 @@
         </div>
       </div>
     </div>
+
+    <!-- Luxury & Retail (Atelier) -->
+    <div class="product">
+      <div class="product-text">
+        <div class="product-vertical"><span class="sq"></span><span data-i18n="products.p3.vertical">Luxury &amp; Retail</span></div>
+        <h3 data-i18n="products.p3.name">Atelier</h3>
+        <p class="lede" data-i18n="products.p3.lede">La nostra piattaforma AI per profumerie e atelier del lusso. Un'esperienza conversazionale trasforma i ricordi del cliente in una composizione olfattiva unica — senza competenze tecniche, senza personale aggiuntivo.</p>
+        <div class="metric-row">
+          <div class="metric"><div class="v">5<small>min</small></div><div class="l" data-i18n="products.p3.m1">DA RACCONTO A PROFILO OLFATTIVO</div></div>
+          <div class="metric"><div class="v">dal<small> €69</small></div><div class="l" data-i18n="products.p3.m2">PER BOTTIGLIA PERSONALIZZATA</div></div>
+        </div>
+        <div class="case-quote">
+          <div class="badge">"</div>
+          <div>
+            <span data-i18n="products.p3.quote">Da quando offriamo l'esperienza Atelier, i clienti tornano per i riordini e ci portano amici. Il percorso AI ha trasformato un acquisto in un ricordo.</span>
+            <div class="who" data-i18n="products.p3.who">Caso studio · Note del Chianti, Toscana</div>
+          </div>
+        </div>
+        <a href="/atelier" class="btn-gold btn-to-product" data-config="atelier" style="margin-top:16px;display:inline-flex;width:fit-content">
+          <span data-i18n="products.p3.cta">Scopri Atelier</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="product-visual">
+        <div class="pv">
+          <div class="pv-head">
+            <span class="title">Atelier · Profilo Olfattivo</span>
+            <span class="tag">Generato</span>
+          </div>
+          <div class="frag-reveal">
+            <div class="frag-name">Nebbia di Giugno</div>
+            <div class="frag-layers">
+              <div class="frag-layer">
+                <span class="ll">Testa</span>
+                <span class="ln">Bergamotto · Pompelmo · Cedro</span>
+              </div>
+              <div class="frag-layer">
+                <span class="ll">Cuore</span>
+                <span class="ln">Rosa · Iris · Pepe Bianco</span>
+              </div>
+              <div class="frag-layer">
+                <span class="ll">Fondo</span>
+                <span class="ln">Vetiver · Sandalo · Muschio Bianco</span>
+              </div>
+            </div>
+            <div class="frag-bar-wrap">
+              <div class="frag-bar-label"><span>Intensità</span><span>8 / 10</span></div>
+              <div class="frag-bar-track"><div class="frag-bar-fill"></div></div>
+            </div>
+            <div class="frag-desc">"Fresco e luminoso all'apertura, avvolgente e persistente nel drydown."</div>
+          </div>
+          <div class="sched-foot" style="margin-top:16px">
+            <span>15ml · 50ml · 100ml disponibili</span>
+            <span class="mono">dal €69 →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -945,7 +1022,7 @@
   <div class="wrap contact-grid">
     <div class="contact-side">
       <h2 data-i18n="contact.title">Pronto a trasformare il tuo business?</h2>
-      <p class="sub" data-i18n="contact.sub">Inserisci i tuoi dettagli qui sotto. Dopo l'invio potrai scegliere direttamente l'orario per la nostra call dal mio calendario.</p>
+      <p class="sub" data-i18n="contact.sub">Scegli direttamente giorno e ora che ti vanno meglio — nel mio calendario, senza rimbalzi di email.</p>
 
       <ul class="contact-promises">
         <li>
@@ -968,68 +1045,9 @@
       </div>
     </div>
 
-    <form class="form-card" id="leadForm" novalidate>
-      <div id="formBody">
-        <div class="form-row split">
-          <div class="field">
-            <label for="name" data-i18n-html="form.name">Nome e cognome <span class="req">*</span></label>
-            <input id="name" name="name" type="text" placeholder="Mario Rossi" data-i18n-ph="form.name.ph" required />
-          </div>
-          <div class="field">
-            <label for="email" data-i18n-html="form.email">Email aziendale <span class="req">*</span></label>
-            <input id="email" name="email" type="email" placeholder="mario@azienda.it" required />
-          </div>
-        </div>
-        <div class="form-row split" style="margin-top: 18px;">
-          <div class="field">
-            <label for="company" data-i18n-html="form.company">Azienda <span class="req">*</span></label>
-            <input id="company" name="company" type="text" placeholder="Es. La tua azienda" data-i18n-ph="form.company.ph" required />
-          </div>
-          <div class="field">
-            <label for="sector" data-i18n-html="form.sector">Settore <span class="req">*</span></label>
-            <select id="sector" name="sector" required>
-              <option value="" data-i18n="form.select">Seleziona…</option>
-              <option data-i18n="form.sec.hosp">Hospitality / Ricettività</option>
-              <option data-i18n="form.sec.edu">Education / Scuola</option>
-              <option data-i18n="form.sec.fac">Facility services / Pulizie</option>
-              <option data-i18n="form.sec.ret">Retail / Commercio</option>
-              <option data-i18n="form.sec.serv">Servizi professionali</option>
-              <option data-i18n="form.sec.other">Altro</option>
-            </select>
-          </div>
-        </div>
-        <div class="field" style="margin-top: 18px;">
-          <label for="interest" data-i18n-html="form.interest">Cosa ti interessa di più? <span class="req">*</span></label>
-          <select id="interest" name="interest" required>
-            <option value="" data-i18n="form.select">Seleziona…</option>
-            <option value="formazione" data-i18n="form.int.form">Formazione · Workshop in azienda</option>
-            <option value="audit" data-i18n="form.int.audit">Audit strategico · Mappatura processi</option>
-            <option value="sviluppo" data-i18n="form.int.dev">Sviluppo su misura</option>
-            <option value="non-so" data-i18n="form.int.unsure">Non so ancora, vorrei capirne di più</option>
-          </select>
-        </div>
-        <div class="field" style="margin-top: 18px;">
-          <label for="problem" id="problemLabel" data-i18n-html="form.problem.default.label">Qual è il collo di bottiglia o il problema che vorresti risolvere con l'AI? <span class="req">*</span></label>
-          <textarea id="problem" name="problem" rows="5" placeholder="Es. Rispondiamo a centinaia di richieste WhatsApp degli ospiti ogni settimana e il personale è saturo…" data-i18n-ph="form.problem.default.ph" required></textarea>
-        </div>
-
-        <div class="submit-row">
-          <button type="submit" class="btn-gold">
-            <span data-i18n="form.submit">Invia e prenota una call</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </button>
-          <span class="help" data-i18n="form.help">Verrai reindirizzato al calendario per scegliere l'orario.</span>
-        </div>
-      </div>
-
-      <div class="form-success" id="formSuccess">
-        <div class="icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3 data-i18n="form.success.t">Grazie. Ti porto al calendario.</h3>
-        <p data-i18n-html="form.success.p">Reindirizzamento in corso… Se non parte, <a href="#" id="calLink" style="color: var(--gold-deep); text-decoration: underline;">clicca qui</a>.</p>
-      </div>
-    </form>
+    <div class="form-card">
+      <div class="calendly-inline-widget" id="calendlyWidget" style="min-width:280px;height:700px;"></div>
+    </div>
   </div>
 </section>
 
@@ -1055,23 +1073,24 @@
         <h4 data-i18n="foot.products" style="margin-top:24px">Prodotti</h4>
         <ul>
           <li><a href="#products">Cezànne · Hospitality</a></li>
-          <li><a href="/sostituzioni" data-i18n="foot.sost">Sostituzioni · Education</a></li>
+          <li><a href="/sostituzioni" data-i18n="foot.sost" data-config="sostituzioni">Sostituzioni · Education</a></li>
+          <li><a href="/atelier" data-i18n="foot.atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.community">Community</h4>
         <ul>
-          <li><a href="#"><span class="foot-sainet"><span class="pip"></span>SAINET — Siena AI Network</span></a></li>
-          <li><a href="#" data-i18n="foot.fest">AI Festival Siena</a></li>
-          <li><a href="#" data-i18n="foot.workshops">Workshop & corsi</a></li>
+          <li><a href="#" data-config="sainet"><span class="foot-sainet"><span class="pip"></span>SAINET — Siena AI Network</span></a></li>
+          <li><a href="#" data-i18n="foot.fest" data-config="aiFestival">AI Festival Siena</a></li>
+          <li><a href="#" data-i18n="foot.workshops" data-config="workshops">Workshop & corsi</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.contacts">Contatti</h4>
         <ul>
-          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#" data-config="linkedin">LinkedIn</a></li>
           <li><span data-i18n="foot.legal">Sede legale</span><br/><span style="color:#8A7F6E" data-i18n="foot.legal.addr">Siena, Toscana — Italia</span></li>
-          <li><a href="mailto:hello@goldenhour.ai">hello@goldenhour.ai</a></li>
+          <li><a href="mailto:hello@goldenhourai.it" data-config="emailMain">hello@goldenhourai.it</a></li>
         </ul>
       </div>
     </div>
@@ -1082,10 +1101,36 @@
   </div>
 </footer>
 
+<script src="/assets/config.js"></script>
 <script>
+(function () {
+  /* ============== theme toggle ============== */
+  const toggle = document.getElementById('themeToggle');
+  if (toggle) {
+    const iconLight = document.getElementById('themeIconLight');
+    const iconDark  = document.getElementById('themeIconDark');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('gh-theme') || 'light';
+    html.setAttribute('data-theme', saved);
+    if (saved === 'dark') {
+      iconLight.style.display = 'none';
+      iconDark.style.display  = 'block';
+    }
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('gh-theme', next);
+      iconLight.style.display = next === 'dark' ? 'none'  : 'block';
+      iconDark.style.display  = next === 'dark' ? 'block' : 'none';
+    });
+  }
+})();
+
 (function() {
   /* ============== i18n ============== */
-  const CAL_URL = 'https://calendly.com/goldenhour-ai/intro';
+  const CAL_URL = (window.SITE_CONFIG && window.SITE_CONFIG.calendarUrl)
+    ? window.SITE_CONFIG.calendarUrl
+    : 'https://calendly.com/goldenhour-ai/';
   const I18N = {
     it: {
       "nav.method": "Metodo",
@@ -1143,8 +1188,19 @@
       "products.p2.who": "Elena Marchetti, DSGA · IIS Galileo Galilei, Bologna",
       "products.p2.cta": "Scopri Sostituzioni",
 
+      "products.p3.vertical": "Luxury & Retail",
+      "products.p3.name": "Atelier",
+      "products.p3.lede": "La nostra piattaforma AI per profumerie e atelier del lusso. Un'esperienza conversazionale trasforma i ricordi del cliente in una composizione olfattiva unica — senza competenze tecniche, senza personale aggiuntivo.",
+      "products.p3.m1": "DA RACCONTO A PROFILO OLFATTIVO",
+      "products.p3.m2": "PER BOTTIGLIA PERSONALIZZATA",
+      "products.p3.quote": "Da quando offriamo l'esperienza Atelier, i clienti tornano per i riordini e ci portano amici. Il percorso AI ha trasformato un acquisto in un ricordo.",
+      "products.p3.who": "Caso studio · Note del Chianti, Toscana",
+      "products.p3.cta": "Scopri Atelier",
+
+      "foot.atelier": "Atelier · Luxury & Retail",
+
       "contact.title": "Pronto a trasformare il tuo business?",
-      "contact.sub": "Inserisci i tuoi dettagli qui sotto. Dopo l'invio potrai scegliere direttamente l'orario per la nostra call dal mio calendario.",
+      "contact.sub": "Scegli direttamente giorno e ora che ti vanno meglio — nel mio calendario, senza rimbalzi di email.",
       "contact.p1.s": "30 minuti, niente pitch.",
       "contact.p1.t": "Capiamo insieme se ha senso lavorare insieme.",
       "contact.p2.s": "Risposta entro 24 ore.",
@@ -1152,39 +1208,6 @@
       "contact.p3.s": "Zero impegno.",
       "contact.p3.t": "Se non è il momento giusto, te lo diciamo apertamente.",
       "contact.role": "Founder e CEO, Golden Hour AI · Siena",
-
-      "form.name": "Nome e cognome <span class=\"req\">*</span>",
-      "form.name.ph": "Mario Rossi",
-      "form.email": "Email aziendale <span class=\"req\">*</span>",
-      "form.company": "Azienda <span class=\"req\">*</span>",
-      "form.company.ph": "Es. La tua azienda",
-      "form.sector": "Settore <span class=\"req\">*</span>",
-      "form.select": "Seleziona…",
-      "form.sec.hosp": "Hospitality / Ricettività",
-      "form.sec.edu": "Education / Scuola",
-      "form.sec.fac": "Facility services / Pulizie",
-      "form.sec.ret": "Retail / Commercio",
-      "form.sec.serv": "Servizi professionali",
-      "form.sec.other": "Altro",
-      "form.interest": "Cosa ti interessa di più? <span class=\"req\">*</span>",
-      "form.int.form": "Formazione · Workshop in azienda",
-      "form.int.audit": "Audit strategico · Mappatura processi",
-      "form.int.dev": "Sviluppo su misura",
-      "form.int.unsure": "Non so ancora, vorrei capirne di più",
-      "form.problem.default.label": "Qual è il collo di bottiglia o il problema che vorresti risolvere con l'AI? <span class=\"req\">*</span>",
-      "form.problem.default.ph": "Es. Rispondiamo a centinaia di richieste WhatsApp degli ospiti ogni settimana e il personale è saturo…",
-      "form.problem.formazione.label": "Quali aspetti dell'AI vorresti far conoscere al tuo team? <span class=\"req\">*</span>",
-      "form.problem.formazione.ph": "Es. Vorremmo che lo staff smettesse di vedere l'AI come una minaccia e capisse dove può aiutarli concretamente nel lavoro di tutti i giorni…",
-      "form.problem.audit.label": "Quali processi senti più pesanti o ripetitivi nella tua azienda? <span class=\"req\">*</span>",
-      "form.problem.audit.ph": "Es. Passiamo ore a smistare email, gestire prenotazioni, aggiornare fogli Excel… vorremmo capire dove l'AI può davvero alleggerire il carico…",
-      "form.problem.sviluppo.label": "Hai già un'idea di quale strumento AI vorresti costruire? <span class=\"req\">*</span>",
-      "form.problem.sviluppo.ph": "Es. Ci serve un assistente che risponda automaticamente alle richieste dei clienti su WhatsApp, integrato col nostro gestionale…",
-      "form.problem.non-so.label": "Raccontaci la tua azienda e cosa ti spinge a esplorare l'AI <span class=\"req\">*</span>",
-      "form.problem.non-so.ph": "Es. Siamo una PMI di 12 persone, il settore sta cambiando, sentiamo che l'AI può fare la differenza ma non sappiamo da dove iniziare…",
-      "form.submit": "Invia e prenota una call",
-      "form.help": "Verrai reindirizzato al calendario per scegliere l'orario.",
-      "form.success.t": "Grazie. Ti porto al calendario.",
-      "form.success.p": "Reindirizzamento in corso… Se non parte, <a href=\"#\" id=\"calLink\" style=\"color: var(--gold-deep); text-decoration: underline;\">clicca qui</a>.",
 
       "foot.payoff": "Reclaim your time.",
       "foot.desc": "AI Transformation Partner per le PMI. Educhiamo, mappiamo, costruiamo — un passo alla volta, al fianco di chi guida l'azienda.",
@@ -1256,8 +1279,19 @@
       "products.p2.who": "Elena Marchetti, DSGA · IIS Galileo Galilei, Bologna",
       "products.p2.cta": "Discover Sostituzioni",
 
+      "products.p3.vertical": "Luxury & Retail",
+      "products.p3.name": "Atelier",
+      "products.p3.lede": "Our AI platform for luxury perfumeries and ateliers. A conversational experience turns the customer's memories into a unique olfactory composition — no technical expertise, no extra staff.",
+      "products.p3.m1": "FROM STORY TO FRAGRANCE PROFILE",
+      "products.p3.m2": "PER PERSONALISED BOTTLE",
+      "products.p3.quote": "Since we started offering the Atelier experience, customers come back for refills and bring friends. The AI journey turned a purchase into a memory.",
+      "products.p3.who": "Case study · Note del Chianti, Tuscany",
+      "products.p3.cta": "Discover Atelier",
+
+      "foot.atelier": "Atelier · Luxury & Retail",
+
       "contact.title": "Ready to transform your business?",
-      "contact.sub": "Drop your details below. After submission you'll be able to pick a time directly from my calendar.",
+      "contact.sub": "Pick the day and time that suit you best — straight from my calendar, no email back-and-forth.",
       "contact.p1.s": "30 minutes, no pitch.",
       "contact.p1.t": "We figure out together if it makes sense to work together.",
       "contact.p2.s": "Reply within 24 hours.",
@@ -1265,39 +1299,6 @@
       "contact.p3.s": "Zero commitment.",
       "contact.p3.t": "If it's not the right time, we'll tell you openly.",
       "contact.role": "Founder & CEO, Golden Hour AI · Siena",
-
-      "form.name": "Full name <span class=\"req\">*</span>",
-      "form.name.ph": "Jane Smith",
-      "form.email": "Work email <span class=\"req\">*</span>",
-      "form.company": "Company <span class=\"req\">*</span>",
-      "form.company.ph": "e.g. Your company",
-      "form.sector": "Sector <span class=\"req\">*</span>",
-      "form.select": "Select…",
-      "form.sec.hosp": "Hospitality / Lodging",
-      "form.sec.edu": "Education / Schools",
-      "form.sec.fac": "Facility services / Cleaning",
-      "form.sec.ret": "Retail / Commerce",
-      "form.sec.serv": "Professional services",
-      "form.sec.other": "Other",
-      "form.interest": "What interests you most? <span class=\"req\">*</span>",
-      "form.int.form": "Training · On-site workshop",
-      "form.int.audit": "Strategic audit · Process mapping",
-      "form.int.dev": "Custom development",
-      "form.int.unsure": "Not sure yet, I want to learn more",
-      "form.problem.default.label": "What's the bottleneck or problem you'd like to solve with AI? <span class=\"req\">*</span>",
-      "form.problem.default.ph": "e.g. We answer hundreds of guest WhatsApp messages every week and the team is saturated…",
-      "form.problem.formazione.label": "Which aspects of AI would you like your team to understand? <span class=\"req\">*</span>",
-      "form.problem.formazione.ph": "e.g. We'd like our staff to stop seeing AI as a threat and understand where it can concretely help them in their daily work…",
-      "form.problem.audit.label": "Which processes feel heaviest or most repetitive in your company? <span class=\"req\">*</span>",
-      "form.problem.audit.ph": "e.g. We spend hours sorting emails, handling bookings, updating spreadsheets… we'd like to understand where AI can really lighten the load…",
-      "form.problem.sviluppo.label": "Do you already have an idea of what AI tool you'd like to build? <span class=\"req\">*</span>",
-      "form.problem.sviluppo.ph": "e.g. We need an assistant that replies automatically to customer requests on WhatsApp, integrated with our back-office…",
-      "form.problem.non-so.label": "Tell us about your company and what's pushing you to explore AI <span class=\"req\">*</span>",
-      "form.problem.non-so.ph": "e.g. We're a 12-person SMB, the industry is changing, we feel AI can make the difference but we don't know where to start…",
-      "form.submit": "Submit and book a call",
-      "form.help": "You'll be redirected to the calendar to pick a time.",
-      "form.success.t": "Thank you. Taking you to the calendar.",
-      "form.success.p": "Redirecting… If it doesn't start, <a href=\"#\" id=\"calLink\" style=\"color: var(--gold-deep); text-decoration: underline;\">click here</a>.",
 
       "foot.payoff": "Reclaim your time.",
       "foot.desc": "AI Transformation Partner for SMBs. We educate, map, and build — one step at a time, alongside the people who run the company.",
@@ -1332,11 +1333,6 @@
       const k = el.getAttribute('data-i18n-ph');
       if (dict[k] != null) el.setAttribute('placeholder', dict[k]);
     });
-    // Re-apply problem field for current interest selection
-    syncProblemField();
-    // Re-bind cal link (innerHTML rewrite re-creates the node)
-    const cl = document.getElementById('calLink');
-    if (cl) cl.href = CAL_URL;
   }
 
   const langToggle = document.getElementById('langToggle');
@@ -1349,44 +1345,30 @@
     });
   });
 
-  // Form submission
-  const form = document.getElementById('leadForm');
-  const body = document.getElementById('formBody');
-  const success = document.getElementById('formSuccess');
-  // calLink is inside the success block (which uses data-i18n-html), so look it up lazily on submit.
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const required = form.querySelectorAll('[required]');
-    let ok = true;
-    required.forEach(el => {
-      if (!el.value.trim()) { ok = false; el.style.borderColor = '#C36B3B'; }
-      else { el.style.borderColor = ''; }
-    });
-    if (!ok) return;
-    body.style.display = 'none';
-    success.classList.add('on');
-    setTimeout(() => { /* window.location.href = CAL_URL; */ }, 1400);
-  });
-
-  // Adapt the last question to the user's interest (i18n-aware)
-  const interestEl = document.getElementById('interest');
-  const problemEl = document.getElementById('problem');
-  const problemLabel = document.getElementById('problemLabel');
-  function syncProblemField() {
-    if (!interestEl || !problemEl || !problemLabel) return;
-    const dict = I18N[currentLang];
-    const key = interestEl.value || 'default';
-    const labelKey = `form.problem.${key}.label`;
-    const phKey = `form.problem.${key}.ph`;
-    problemLabel.innerHTML = dict[labelKey] || dict['form.problem.default.label'];
-    problemEl.placeholder = dict[phKey] || dict['form.problem.default.ph'];
-  }
-  if (interestEl) interestEl.addEventListener('change', syncProblemField);
-
   // Initial render
   applyLang('it');
+
+  // Init Calendly inline widget with configured URL
+  const calendlyWidget = document.getElementById('calendlyWidget');
+  if (calendlyWidget) calendlyWidget.setAttribute('data-url', CAL_URL + '?hide_gdpr_banner=1&primary_color=D4A23B');
+
+  function applyConfig() {
+    const cfg = window.SITE_CONFIG;
+    if (!cfg) return;
+    document.querySelectorAll('[data-config="emailMain"]').forEach(el => {
+      el.href = 'mailto:' + cfg.emailMain;
+      el.textContent = cfg.emailMain;
+    });
+    document.querySelectorAll('[data-config="linkedin"]').forEach(el => { el.href = cfg.linkedinUrl; });
+    document.querySelectorAll('[data-config="sainet"]').forEach(el => { el.href = cfg.sainetUrl; });
+    document.querySelectorAll('[data-config="aiFestival"]').forEach(el => { el.href = cfg.aiFestivalUrl; });
+    document.querySelectorAll('[data-config="workshops"]').forEach(el => { el.href = cfg.workshopsUrl; });
+    document.querySelectorAll('[data-config="sostituzioni"]').forEach(el => { el.href = cfg.urlSostituzioni; });
+    document.querySelectorAll('[data-config="atelier"]').forEach(el => { el.href = cfg.urlAtelier; });
+  }
+  applyConfig();
 })();</script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 </body>
 </html>

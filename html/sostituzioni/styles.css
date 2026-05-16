@@ -258,63 +258,19 @@
 .contact-meta .row svg { color: var(--green); flex-shrink: 0; }
 [data-theme="dark"] .contact-meta .row svg { color: var(--gold-soft); }
 
-/* ---------- Form ---------- */
-.form {
+/* ---------- Calendly card ---------- */
+.calendly-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 36px;
+  overflow: hidden;
   box-shadow: var(--shadow);
-  display: flex; flex-direction: column; gap: 18px;
 }
-.field { display: flex; flex-direction: column; gap: 8px; }
-.field label { font-size: 13.5px; font-weight: 500; letter-spacing: -0.005em; }
-.field input, .field textarea {
-  font-family: inherit;
-  font-size: 15px;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg);
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-  width: 100%;
-}
-.field input::placeholder, .field textarea::placeholder { color: var(--text-faint); }
-.field input:focus, .field textarea:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--green) 20%, transparent);
-}
-[data-theme="dark"] .field input:focus, [data-theme="dark"] .field textarea:focus {
-  border-color: var(--gold-soft);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--gold-soft) 25%, transparent);
-}
-.field textarea { min-height: 120px; resize: vertical; line-height: 1.45; }
-.field .hint { font-size: 12.5px; color: var(--text-muted); }
-.form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form button[type="submit"] { margin-top: 6px; width: 100%; justify-content: center; }
-
-.form-success {
-  background: var(--green-light);
-  border: 1px solid color-mix(in oklab, var(--green) 25%, transparent);
-  color: var(--green-deep);
-  padding: 14px 16px;
-  border-radius: 10px;
-  font-size: 14.5px;
-  display: none;
-}
-.form-success.show { display: block; }
-[data-theme="dark"] .form-success {
-  background: color-mix(in oklab, var(--gold-soft) 12%, transparent);
-  border-color: color-mix(in oklab, var(--gold-soft) 30%, transparent);
-  color: var(--gold-soft);
-}
+.calendly-inline-widget iframe { display: block; }
 
 @media (max-width: 900px) {
   .contact-grid { grid-template-columns: 1fr; gap: 32px; }
-  .form { padding: 24px; }
-  .form .form-row { grid-template-columns: 1fr; }
+  .calendly-inline-widget { height: 600px !important; }
 }
 
 /* ---------- Animations ---------- */

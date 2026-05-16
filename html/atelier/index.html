@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atelier · GoldenHour AI</title>
+  <meta name="description" content="Piattaforma AI per profumerie e atelier del lusso. Trasforma i ricordi dei tuoi clienti in composizioni olfattive uniche, in cinque minuti."/>
+
+  <link rel="icon" href="assets/goldenhour-symbol.png" type="image/png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="../shared.css"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container row">
+      <a href="/" class="brand" aria-label="GoldenHour AI · Atelier">
+        <span>GoldenHour AI</span>
+        <span class="sep">/</span>
+        <span class="product">Atelier</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="#come-funziona">Come funziona</a>
+        <a href="#esperienza">Esperienza</a>
+        <a href="#prezzi">Prezzi</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+          <svg id="themeIconLight" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg id="themeIconDark" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="#contatti" class="btn btn-primary btn-sm">Porta Atelier nel tuo atelier</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+
+      <div class="hero-logo">
+        <img src="assets/logo_with_tagline.png" alt="GoldenHour AI"/>
+      </div>
+
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        Profumeria Personalizzata · AI
+      </span>
+
+      <h1>Ogni profumo nasce da un racconto, <span class="serif-it accent">non da una formula.</span></h1>
+
+      <p class="lead">
+        L'AI Alchimista ascolta i ricordi e le emozioni dei tuoi clienti e li trasforma in una composizione olfattiva unica. In cinque minuti: una storia, un profumo, un'esperienza indelebile.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#contatti" class="btn btn-primary">
+          Porta Atelier nel tuo atelier
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#come-funziona" class="btn btn-ghost">Come funziona</a>
+      </div>
+
+      <div class="hero-meta">
+        <span class="check-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+          Esperienza gratuita per il cliente
+        </span>
+        <span class="dot"></span>
+        <span>Consegna in tutta Italia</span>
+        <span class="dot"></span>
+        <span>Bottiglia dal €69</span>
+      </div>
+
+      <!-- Hero mockup: chat + reveal card -->
+      <div class="mockup-wrap">
+        <div class="atelier-mockup">
+
+          <!-- Left: AI conversation -->
+          <div class="mock-chat">
+            <div class="mock-chat-header">
+              <span class="pip"></span>
+              L'Alchimista · Conversazione
+            </div>
+            <div class="mock-bubble user">
+              "Ho un ricordo di un giardino d'estate. Gelsomino, terra bagnata dalla pioggia, qualcosa di dolce nell'aria..."
+            </div>
+            <div class="mock-bubble ai">
+              Che immagine evocativa. Sento la freschezza della pioggia su quella terra calda. Dimmi — in quel momento eri sola, o c'era qualcuno accanto a te?
+            </div>
+            <div class="mock-bubble user">
+              "C'era mia nonna. Raccoglieva le rose."
+            </div>
+            <div class="mock-typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <!-- Right: Fragrance reveal -->
+          <div class="mock-reveal">
+            <div class="mock-reveal-header">Profilo Olfattivo Generato</div>
+            <div class="mock-frag-name">Giardino della Nonna</div>
+            <div class="mock-notes">
+              <div class="mock-note-row">
+                <span class="note-label">Testa</span>
+                <span class="note-val">Gelsomino · Bergamotto · Verbena</span>
+              </div>
+              <div class="mock-note-row">
+                <span class="note-label">Cuore</span>
+                <span class="note-val">Rosa · Petrichor · Iris</span>
+              </div>
+              <div class="mock-note-row">
+                <span class="note-label">Fondo</span>
+                <span class="note-val">Muschio · Terra · Sandalo</span>
+              </div>
+            </div>
+            <div class="mock-intensity">
+              <div class="mock-intensity-label"><span>Intensità</span><span>7 / 10</span></div>
+              <div class="mock-intensity-track"><div class="mock-intensity-fill"></div></div>
+            </div>
+            <div class="mock-price-row">
+              <div class="mock-price-chip">
+                <strong>15ml</strong>
+                €69
+              </div>
+              <div class="mock-price-chip active">
+                <strong>50ml</strong>
+                €109
+              </div>
+              <div class="mock-price-chip">
+                <strong>100ml</strong>
+                €149
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="come-funziona">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Come funziona</span>
+        <h2>Tre momenti.<br/><span class="serif-it accent">Un profumo irripetibile.</span></h2>
+        <p>Dal racconto alla bottiglia: un percorso guidato dall'AI che non richiede competenze olfattive. Solo storie vere.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num">i.</span>
+          <h3>Il cliente racconta</h3>
+          <p>L'AI Alchimista conduce il cliente con domande evocative: ricordi, luoghi, persone, stagioni. Non si chiede "bergamotto o vaniglia" — si chiede di un mattino, di un posto, di qualcuno di speciale.</p>
+        </div>
+        <div class="step">
+          <span class="num">ii.</span>
+          <h3>L'Alchimista interpreta</h3>
+          <p>In pochi secondi l'AI costruisce il profilo olfattivo personalizzato: note di testa, cuore e fondo selezionate sulla narrazione. Intensità, carattere, accordi — tutto su misura per quella storia.</p>
+        </div>
+        <div class="step">
+          <span class="num">iii.</span>
+          <h3>Il profumo prende forma</h3>
+          <p>Il cliente scopre la sua composizione, sceglie la taglia della bottiglia e completa l'acquisto. Il profumo viene preparato e spedito. Il profilo olfattivo resta salvato per i riordini futuri.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="esperienza">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Esperienza</span>
+        <h2>Tutto quello che serve.<br/><span class="serif-it accent">Niente di superfluo.</span></h2>
+        <p>Una piattaforma pensata per chi vende lusso: discreta, elegante, pronta all'uso.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Conversazione guidata</h3>
+          <p>L'AI conduce il cliente attraverso un percorso narrativo. Nessuna scheda tecnica, nessun questionario. Solo domande che aprono ricordi e fanno venire voglia di raccontare.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+          </div>
+          <h3>Composizione su misura</h3>
+          <p>Ogni profilo olfattivo è unico: costruito sull'intreccio di note generate dall'AI sulla base di quanto il cliente ha condiviso. Nessun profumo viene generato due volte uguale.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+          </div>
+          <h3>White-label, senza sforzo</h3>
+          <p>Il tuo brand, la tua voce. Atelier si integra nell'identità del tuo atelier e non cita mai la tecnologia. Il cliente vive l'esperienza come qualcosa di tuo, perché lo è.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h3>Integrazione immediata</h3>
+          <p>Un link, un QR code, un embedding nel tuo sito. Nessuna infrastruttura da gestire, nessun server da configurare. Noi aggiorniamo il modello, tu continui a vendere.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Analisi degli acquisti</h3>
+          <p>Dashboard aggregata dei profili generati nel tuo atelier. Scopri quali note dominano, quali accordi piacciono di più ai tuoi clienti, e come orientare le tue prossime proposte.</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Riordini senza attrito</h3>
+          <p>Il profilo olfattivo del cliente è salvato. Quando vuole riordinare il suo profumo — per sé o come regalo — basta accedere e scegliere la taglia. Il ricordo non si perde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="num">5<small>min</small></div>
+          <div class="label">Durata del percorso olfattivo, dalla prima domanda al profilo completo</div>
+        </div>
+        <div class="stat">
+          <div class="num">3<small>taglie</small></div>
+          <div class="label">15ml, 50ml e 100ml — ogni cliente sceglie la propria misura</div>
+        </div>
+        <div class="stat">
+          <div class="num">0</div>
+          <div class="label">Personale aggiuntivo richiesto. L'AI gestisce il percorso in autonomia</div>
+        </div>
+        <div class="stat">
+          <div class="num">∞</div>
+          <div class="label">Combinazioni olfattive possibili. Nessun profumo viene generato due volte uguale</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="clienti">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Chi lo usa</span>
+        <h2>Pensato con gli artigiani,<br/><span class="serif-it accent">costruito per il lusso.</span></h2>
+      </div>
+      <div class="t-grid">
+        <div class="tm featured">
+          <blockquote>
+            "Da quando offriamo l'esperienza Atelier, i clienti non entrano più solo per comprare un profumo. Entrano per raccontare una storia. E tornano — per i riordini, per i regali, per portare amici. Il percorso AI ha trasformato un acquisto in un ricordo."
+          </blockquote>
+          <div class="who">
+            <div class="avatar">NC</div>
+            <div class="info">
+              <strong>Note del Chianti</strong>
+              <span>Profumeria artigianale · Toscana</span>
+            </div>
+          </div>
+        </div>
+        <div class="tm">
+          <blockquote>"Non avevo idea di cosa significasse 'profumo personalizzato' fino a quando non ho vissuto la conversazione. Il mio profumo porta il nome di mio padre."</blockquote>
+          <div class="who">
+            <div class="avatar">LB</div>
+            <div class="info">
+              <strong>Laura B.</strong>
+              <span>Cliente finale</span>
+            </div>
+          </div>
+        </div>
+        <div class="tm">
+          <blockquote>"Ho regalato l'esperienza Atelier a mia sorella per il compleanno. La bottiglia è arrivata con la storia che aveva raccontato stampata sulla scatola. Ha pianto."</blockquote>
+          <div class="who">
+            <div class="avatar">MR</div>
+            <div class="info">
+              <strong>Marco R.</strong>
+              <span>Cliente finale</span>
+            </div>
+          </div>
+        </div>
+        <div class="tm">
+          <blockquote>"Il setup è stato semplicissimo. In meno di una settimana l'esperienza era attiva sul nostro sito, con il nostro logo e i nostri colori."</blockquote>
+          <div class="who">
+            <div class="avatar">GT</div>
+            <div class="info">
+              <strong>Giulia T.</strong>
+              <span>Proprietaria · Profumeria indipendente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="prezzi">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Prezzi al cliente finale</span>
+        <h2>Tre formati.<br/><span class="serif-it accent">Un profumo unico.</span></h2>
+        <p class="pricing-intro">L'esperienza di creazione è sempre gratuita per il cliente. Paga solo quando sceglie la sua bottiglia personalizzata.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-size">15<small>ml</small></div>
+          <div class="price-amount">€69</div>
+          <div class="price-desc">Il gesto. La dimensione perfetta per un regalo o per scoprire il proprio profumo prima di impegnarsi in un formato più grande.</div>
+          <div class="price-note">Spedizione gratuita sopra €89</div>
+        </div>
+        <div class="price-card highlighted">
+          <div class="price-badge">Il più scelto</div>
+          <div class="price-size">50<small>ml</small></div>
+          <div class="price-amount">€109</div>
+          <div class="price-desc">L'esperienza completa. Il formato ideale per chi vuole un profumo che duri nel tempo e accompagni le stagioni.</div>
+          <div class="price-note">Il formato più ordinato dai nostri clienti</div>
+        </div>
+        <div class="price-card">
+          <div class="price-size">100<small>ml</small></div>
+          <div class="price-amount">€149</div>
+          <div class="price-desc">La collezione. Per chi vuole il proprio profumo sempre disponibile, o per fare un regalo di rilievo a qualcuno di speciale.</div>
+          <div class="price-note">Confezione regalo premium inclusa</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contatti">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">Porta Atelier nel tuo atelier</span>
+        <h2>Vediamo se è la soluzione giusta per te.</h2>
+        <p>Una call con il nostro team per mostrarti l'esperienza dal vivo, capire come si integra nella tua realtà e rispondere a tutte le tue domande.</p>
+        <div class="contact-meta">
+          <div class="row">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+            <span>Personalizzazione del brand inclusa nel setup</span>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <a href="mailto:atelier@goldenhourai.it" id="atelierEmail">atelier@goldenhourai.it</a>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span>Team in Italia · Supporto in italiano</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calendly-card">
+        <div class="calendly-inline-widget" id="calendlyWidget" style="min-width:280px;height:700px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="foot-grid">
+
+        <div class="foot-brand-col">
+          <div class="foot-brand">
+            <img src="assets/goldenhour-symbol.png" alt=""/>
+            <span>Golden Hour AI</span>
+          </div>
+          <p class="foot-payoff">Reclaim your time.</p>
+          <p class="foot-desc">AI Transformation Partner per le PMI. Educhiamo, mappiamo, costruiamo — un passo alla volta, al fianco di chi guida l'azienda.</p>
+        </div>
+
+        <div>
+          <h4>Navigazione</h4>
+          <ul>
+            <li><a href="https://goldenhourai.it/#method">Metodo</a></li>
+            <li><a href="https://goldenhourai.it/#products">Prodotti</a></li>
+            <li><a href="https://goldenhourai.it/#contact">Prenota una call</a></li>
+          </ul>
+          <h4>Prodotti</h4>
+          <ul>
+            <li><a href="https://goldenhourai.it/#products">Cezànne · Hospitality</a></li>
+            <li><a href="/sostituzioni">Sostituzioni · Education</a></li>
+            <li><a href="/atelier">Atelier · Luxury &amp; Retail</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Community</h4>
+          <ul>
+            <li><span class="foot-sainet"><span class="pip"></span>SAINET — Siena AI Network</span></li>
+            <li><a href="#" id="workshopsLink">Workshop &amp; corsi</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contatti</h4>
+          <ul>
+            <li><a href="#" id="linkedinLink">LinkedIn</a></li>
+            <li>Sede legale<br/><span>Siena, Toscana — Italia</span></li>
+            <li><a href="mailto:atelier@goldenhourai.it" id="footerEmail">atelier@goldenhourai.it</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Golden Hour AI · P.IVA in fase di registrazione</span>
+        <span>Privacy · Cookie · Termini</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/config.js"></script>
+  <script>
+    // Config
+    (function() {
+      const cfg = window.SITE_CONFIG;
+      if (!cfg) return;
+      const emailEl = document.getElementById('atelierEmail');
+      if (emailEl && cfg.emailAtelier) { emailEl.href = 'mailto:' + cfg.emailAtelier; emailEl.textContent = cfg.emailAtelier; }
+      const footerEmailEl = document.getElementById('footerEmail');
+      if (footerEmailEl && cfg.emailAtelier) { footerEmailEl.href = 'mailto:' + cfg.emailAtelier; footerEmailEl.textContent = cfg.emailAtelier; }
+      const liEl = document.getElementById('linkedinLink');
+      if (liEl && cfg.linkedinUrl) liEl.href = cfg.linkedinUrl;
+      const wsEl = document.getElementById('workshopsLink');
+      if (wsEl && cfg.workshopsUrl) wsEl.href = cfg.workshopsUrl;
+    })();
+
+    // Theme toggle
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const iconLight = document.getElementById('themeIconLight');
+      const iconDark  = document.getElementById('themeIconDark');
+      const html = document.documentElement;
+
+      const saved = localStorage.getItem('gh-theme') || 'light';
+      html.setAttribute('data-theme', saved);
+      if (saved === 'dark') {
+        iconLight.style.display = 'none';
+        iconDark.style.display  = 'block';
+      }
+
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('gh-theme', next);
+        iconLight.style.display = next === 'dark' ? 'none'  : 'block';
+        iconDark.style.display  = next === 'dark' ? 'block' : 'none';
+      });
+    })();
+
+    // Calendly
+    const calendlyWidget = document.getElementById('calendlyWidget');
+    const calUrl = (window.SITE_CONFIG && window.SITE_CONFIG.calendarUrl) || 'https://calendly.com/mattiagirellini165/';
+    if (calendlyWidget) calendlyWidget.setAttribute('data-url', calUrl + '?hide_gdpr_banner=1&primary_color=186628');
+  </script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+</body>
+</html>
