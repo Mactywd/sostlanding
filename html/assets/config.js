@@ -3,7 +3,7 @@
 window.SITE_CONFIG = {
   emailMain:       'info@goldenhourai.it',
   emailSost:       'sostituzioni@goldenhourai.it',
-  calendarUrl:     'https://calendly.com/mattiagirellini165/',
+  calendarUrl:     'https://calendly.com/goldenhourai/discovery-call',
   siteRoot:        'https://goldenhourai.it',
   urlSostituzioni: '/sostituzioni',
   urlAtelier:      '/atelier',
