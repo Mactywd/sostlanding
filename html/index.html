@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Golden Hour AI — Riprenditi il tuo tempo</title>
+<title>Golden Hour AI · Riprenditi il tuo tempo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -579,6 +579,48 @@
   }
   .sched-foot strong { color: var(--forest-deep); font-weight: 600; }
 
+  /* Aurora substitutions result (replica dell'app reale) */
+  .subs-controls {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    background: var(--cream-2); border: 1px solid var(--line);
+    border-radius: var(--r-md); padding: 10px 12px; margin-bottom: 16px;
+  }
+  .subs-field { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .subs-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-3); font-weight: 600; }
+  .subs-date {
+    font-size: 12.5px; color: var(--ink); background: var(--ivory);
+    border: 1px solid var(--line-2); border-radius: var(--r-sm); padding: 5px 10px;
+  }
+  .subs-btn {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+    background: var(--forest); color: #F4FBEF;
+    border-radius: var(--r-sm); padding: 7px 18px; white-space: nowrap;
+  }
+  .subs-summary { font-size: 12px; color: var(--ink-3); letter-spacing: 0.04em; margin-bottom: 12px; }
+  .subs-cards { display: flex; flex-direction: column; gap: 10px; }
+  .subs-card { background: var(--cream-2); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .subs-card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--forest); color: #F4FBEF; padding: 7px 12px;
+  }
+  .subs-card-head .cn { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; }
+  .subs-card-head .cc { font-size: 11px; opacity: .82; }
+  .subs-card-body { padding: 2px 0; }
+  .subs-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 12px; font-size: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .subs-row:last-child { border-bottom: none; }
+  .subs-row .p { font-weight: 600; color: var(--forest-deep); min-width: 48px; }
+  .subs-row .t {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px; color: var(--ink-2);
+    background: var(--ivory); border: 1px solid var(--line-2);
+    border-radius: 4px; padding: 2px 7px; white-space: nowrap;
+  }
+  .subs-row .n { flex: 1; text-align: right; color: var(--ink); font-weight: 500; letter-spacing: 0.02em; }
+
   /* Fragrance reveal card (Atelier) */
   .frag-reveal { display: flex; flex-direction: column; gap: 14px; }
   .frag-name { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-style: italic; color: var(--ink); letter-spacing: -0.01em; }
@@ -741,6 +783,11 @@
     .sched-grid { font-size: 11px; }
     .sched-grid .h, .sched-grid .d, .sched-grid .cell { padding: 6px 4px; }
 
+    .subs-controls { flex-direction: column; align-items: stretch; gap: 10px; }
+    .subs-btn { text-align: center; }
+    .subs-row { gap: 8px; padding: 7px 10px; font-size: 11.5px; }
+    .subs-row .p { min-width: 42px; }
+
     #contact { padding: 64px 0; }
     .contact-side h2 { font-size: clamp(26px, 7vw, 32px); }
     .contact-side .sub { font-size: 15.5px; }
@@ -793,12 +840,12 @@
       <div class="hero-logo">
         <img src="assets/logo_tagline.png" alt="GoldenHour AI"/>
       </div>
-      <span class="hero-eyebrow" id="heroEyebrow" data-i18n-html="hero.eyebrow"><span class="dot"></span>AI Transformation Partner · Siena, Toscana</span>
+      <span class="hero-eyebrow" id="heroEyebrow" data-i18n-html="hero.eyebrow"><span class="dot"></span>AI per le PMI · Siena, Toscana</span>
       <h1 class="hero-title" id="heroTitle" data-i18n-html="hero.title">
         Riprenditi il tuo tempo. <span class="nl">Portiamo l'<em>AI</em> nel cuore della tua impresa.</span>
       </h1>
       <p class="hero-sub" id="heroSub" data-i18n="hero.sub">
-        Education, consulting, development. Un percorso in tre passi per portare l'AI dentro la tua PMI — senza fumo, senza scorciatoie.
+        Education, consulting, development. Un percorso in tre passi per portare l'AI dentro la tua PMI, senza fumo e senza scorciatoie.
       </p>
       <div class="cta-row">
         <a href="#contact" class="btn-gold" data-cta-label>
@@ -881,17 +928,10 @@
       <div class="product-text">
         <div class="product-vertical"><span class="sq"></span><span data-i18n="products.p1.vertical">Hospitality</span></div>
         <h3>Cezànne</h3>
-        <p class="lede" data-i18n="products.p1.lede">Il nostro AI Concierge per property manager. Gestisce le richieste degli ospiti — prima, durante e dopo il soggiorno. Risponde su WhatsApp ed email, 24/7, integrato con il tuo PMS.</p>
+        <p class="lede" data-i18n="products.p1.lede">Il nostro AI Concierge per property manager. Gestisce le richieste degli ospiti prima, durante e dopo il soggiorno. Risponde su WhatsApp ed email, 24/7, integrato con il tuo PMS.</p>
         <div class="metric-row">
           <div class="metric"><div class="v">3h <small>→ 10min</small></div><div class="l" data-i18n="products.p1.m1">DI LAVORO MANUALE / GIORNO</div></div>
           <div class="metric"><div class="v">+15<small>%</small></div><div class="l" data-i18n="products.p1.m2">CONVERSION RATE INQUIRY</div></div>
-        </div>
-        <div class="case-quote">
-          <div class="badge">"</div>
-          <div>
-            <span data-i18n="products.p1.quote">Le richieste arrivano anche di notte e nei weekend. Cezànne le gestisce tutte, e vediamo solo i casi che richiedono davvero la nostra attenzione.</span>
-            <div class="who" data-i18n="products.p1.who">Caso studio · Federico Barbi, Property Manager — Toscana</div>
-          </div>
         </div>
       </div>
 
@@ -915,8 +955,8 @@
     <div class="product reverse">
       <div class="product-text">
         <div class="product-vertical"><span class="sq"></span><span data-i18n="products.p2.vertical">Education</span></div>
-        <h3 data-i18n="products.p2.name">Sostituzioni</h3>
-        <p class="lede" data-i18n="products.p2.lede">Il nostro software di school optimization. Gestione delle sostituzioni e dei turni docenti. La vicepresidenza si libera dalle telefonate del mattino e ha tutto il quadro in un click.</p>
+        <h3 data-i18n="products.p2.name">Aurora</h3>
+        <p class="lede" data-i18n="products.p2.lede">Il nostro software di school optimization. Gestisce tutte le assenze e le gite, genera le sostituzioni della giornata e molto altro. La vicepresidenza si libera dalle telefonate del mattino e ha tutto il quadro in un click.</p>
         <div class="metric-row">
           <div class="metric"><div class="v">1h+ <small>→ 5min</small></div><div class="l" data-i18n="products.p2.m1">RISPARMIATE OGNI MATTINA</div></div>
           <div class="metric"><div class="v">&lt;10<small>sec</small></div><div class="l" data-i18n="products.p2.m2">PER GENERARE IL PIANO</div></div>
@@ -924,12 +964,12 @@
         <div class="case-quote">
           <div class="badge">"</div>
           <div>
-            <span data-i18n="products.p2.quote">Prima passavamo i primi 90 minuti di ogni giornata al telefono per coprire le assenze. Ora apriamo lo strumento, vediamo già le proposte del sistema, le approviamo, fine.</span>
-            <div class="who" data-i18n="products.p2.who">Elena Marchetti, DSGA · IIS Galileo Galilei, Bologna</div>
+            <span data-i18n="products.p2.quote">Prima passavamo i primi 90 minuti di ogni giornata al telefono per coprire le assenze. Ora apriamo Aurora, vediamo già le proposte del sistema, le approviamo, fine.</span>
+            <div class="who" data-i18n="products.p2.who">Caso studio · Sergio Valentini, Liceo Scientifico Galileo Galilei, Siena</div>
           </div>
         </div>
         <a href="/sostituzioni" class="btn-gold btn-to-product" data-config="sostituzioni" style="margin-top:16px;display:inline-flex;width:fit-content">
-          <span data-i18n="products.p2.cta">Scopri Sostituzioni</span>
+          <span data-i18n="products.p2.cta">Scopri Aurora</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
@@ -937,19 +977,55 @@
       <div class="product-visual">
         <div class="pv">
           <div class="pv-head">
-            <span class="title">Sostituzioni · Lunedì 4 maggio</span>
-            <span class="tag">3 coperte · 0 aperte</span>
+            <span class="title">Aurora · Genera Sostituzioni</span>
+            <span class="tag">Flusso eseguito</span>
           </div>
-          <div class="sched-grid">
-            <div class="h"></div><div class="d">Lun</div><div class="d">Mar</div><div class="d">Mer</div><div class="d">Gio</div><div class="d">Ven</div>
-            <div class="h">8:00</div><div class="cell">Mat</div><div class="cell sub">Storia</div><div class="cell">Ita</div><div class="cell">Mat</div><div class="cell">Ita</div>
-            <div class="h">9:00</div><div class="cell sub">Fis</div><div class="cell">Lat</div><div class="cell">Fil</div><div class="cell sub">Bio</div><div class="cell">Sto</div>
-            <div class="h">10:00</div><div class="cell">Sci</div><div class="cell">Mat</div><div class="cell">Ing</div><div class="cell">Ed.F</div><div class="cell alert">?</div>
-            <div class="h">11:00</div><div class="cell">Ing</div><div class="cell">Ita</div><div class="cell">Mat</div><div class="cell">Lat</div><div class="cell">Mat</div>
+
+          <div class="subs-controls">
+            <div class="subs-field">
+              <span class="subs-label">Data</span>
+              <span class="subs-date mono">17/07/2026</span>
+            </div>
+            <span class="subs-btn">Genera</span>
           </div>
+
+          <div class="subs-summary">3 classi · 5 sostituzioni</div>
+
+          <div class="subs-cards">
+            <div class="subs-card">
+              <div class="subs-card-head">
+                <span class="cn">3A</span>
+                <span class="cc">2 ore</span>
+              </div>
+              <div class="subs-card-body">
+                <div class="subs-row"><span class="p">2ª ora</span><span class="t">disposizione</span><span class="n">FERRARI</span></div>
+                <div class="subs-row"><span class="p">3ª ora</span><span class="t">recupero_ore</span><span class="n">BIANCHI</span></div>
+              </div>
+            </div>
+            <div class="subs-card">
+              <div class="subs-card-head">
+                <span class="cn">4B</span>
+                <span class="cc">2 ore</span>
+              </div>
+              <div class="subs-card-body">
+                <div class="subs-row"><span class="p">1ª ora</span><span class="t">gite</span><span class="n">CONTI</span></div>
+                <div class="subs-row"><span class="p">4ª ora</span><span class="t">disposizione</span><span class="n">MARCHETTI</span></div>
+              </div>
+            </div>
+            <div class="subs-card">
+              <div class="subs-card-head">
+                <span class="cn">5C</span>
+                <span class="cc">1 ora</span>
+              </div>
+              <div class="subs-card-body">
+                <div class="subs-row"><span class="p">5ª ora</span><span class="t">posticipazione</span><span class="n">ESPOSITO</span></div>
+              </div>
+            </div>
+          </div>
+
           <div class="sched-foot">
-            <span><strong>↻ AI suggerisce</strong> · Prof.ssa Bianchi disponibile per la cella aperta</span>
-            <span class="mono">conf →</span>
+            <span><strong>✓ Piano completo</strong> · nessuna ora scoperta</span>
+            <span class="mono">6.4s</span>
           </div>
         </div>
       </div>
@@ -960,10 +1036,10 @@
       <div class="product-text">
         <div class="product-vertical"><span class="sq"></span><span data-i18n="products.p3.vertical">Luxury &amp; Retail</span></div>
         <h3 data-i18n="products.p3.name">Atelier</h3>
-        <p class="lede" data-i18n="products.p3.lede">La nostra piattaforma AI per profumerie e atelier del lusso. Un'esperienza conversazionale trasforma i ricordi del cliente in una composizione olfattiva unica — senza competenze tecniche, senza personale aggiuntivo.</p>
+        <p class="lede" data-i18n="products.p3.lede">La nostra piattaforma AI per profumerie e atelier del lusso. Un'esperienza conversazionale trasforma i ricordi del cliente in una composizione olfattiva unica, senza competenze tecniche e senza personale aggiuntivo.</p>
         <div class="metric-row">
           <div class="metric"><div class="v">5<small>min</small></div><div class="l" data-i18n="products.p3.m1">DA RACCONTO A PROFILO OLFATTIVO</div></div>
-          <div class="metric"><div class="v">dal<small> €69</small></div><div class="l" data-i18n="products.p3.m2">PER BOTTIGLIA PERSONALIZZATA</div></div>
+          <div class="metric"><div class="v">3<small>formati</small></div><div class="l" data-i18n="products.p3.m2">PER OGNI BOTTIGLIA PERSONALIZZATA</div></div>
         </div>
         <div class="case-quote">
           <div class="badge">"</div>
@@ -1000,15 +1076,11 @@
                 <span class="ln">Vetiver · Sandalo · Muschio Bianco</span>
               </div>
             </div>
-            <div class="frag-bar-wrap">
-              <div class="frag-bar-label"><span>Intensità</span><span>8 / 10</span></div>
-              <div class="frag-bar-track"><div class="frag-bar-fill"></div></div>
-            </div>
             <div class="frag-desc">"Fresco e luminoso all'apertura, avvolgente e persistente nel drydown."</div>
           </div>
           <div class="sched-foot" style="margin-top:16px">
             <span>15ml · 50ml · 100ml disponibili</span>
-            <span class="mono">dal €69 →</span>
+            <span class="mono">conf →</span>
           </div>
         </div>
       </div>
@@ -1022,7 +1094,7 @@
   <div class="wrap contact-grid">
     <div class="contact-side">
       <h2 data-i18n="contact.title">Pronto a trasformare il tuo business?</h2>
-      <p class="sub" data-i18n="contact.sub">Scegli direttamente giorno e ora che ti vanno meglio — nel mio calendario, senza rimbalzi di email.</p>
+      <p class="sub" data-i18n="contact.sub">Scegli direttamente giorno e ora che ti vanno meglio, nel mio calendario, senza rimbalzi di email.</p>
 
       <ul class="contact-promises">
         <li>
@@ -1061,7 +1133,7 @@
           <span class="n">Golden Hour AI</span>
         </div>
         <div class="foot-payoff" data-i18n="foot.payoff">Reclaim your time.</div>
-        <p class="foot-desc" data-i18n="foot.desc">AI Transformation Partner per le PMI. Educhiamo, mappiamo, costruiamo — un passo alla volta, al fianco di chi guida l'azienda.</p>
+        <p class="foot-desc" data-i18n="foot.desc">Portiamo l'AI dentro le PMI. Educhiamo, mappiamo, costruiamo un passo alla volta, al fianco di chi guida l'azienda.</p>
       </div>
       <div>
         <h4 data-i18n="foot.nav">Navigazione</h4>
@@ -1073,23 +1145,21 @@
         <h4 data-i18n="foot.products" style="margin-top:24px">Prodotti</h4>
         <ul>
           <li><a href="#products">Cezànne · Hospitality</a></li>
-          <li><a href="/sostituzioni" data-i18n="foot.sost" data-config="sostituzioni">Sostituzioni · Education</a></li>
+          <li><a href="/sostituzioni" data-i18n="foot.sost" data-config="sostituzioni">Aurora · Education</a></li>
           <li><a href="/atelier" data-i18n="foot.atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.community">Community</h4>
         <ul>
-          <li><a href="#" data-config="sainet"><span class="foot-sainet"><span class="pip"></span>SAINET — Siena AI Network</span></a></li>
-          <li><a href="#" data-i18n="foot.fest" data-config="aiFestival">AI Festival Siena</a></li>
-          <li><a href="#" data-i18n="foot.workshops" data-config="workshops">Workshop & corsi</a></li>
+          <li><a href="#" data-config="sainet"><span class="foot-sainet"><span class="pip"></span>SAINET · Siena AI Network</span></a></li>
+          <li><a href="#" data-i18n="foot.workshops" data-config="workshops">Workshop</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.contacts">Contatti</h4>
         <ul>
-          <li><a href="#" data-config="linkedin">LinkedIn</a></li>
-          <li><span data-i18n="foot.legal">Sede legale</span><br/><span style="color:#8A7F6E" data-i18n="foot.legal.addr">Siena, Toscana — Italia</span></li>
+          <li><span data-i18n="foot.legal">Sede legale</span><br/><span style="color:#8A7F6E" data-i18n="foot.legal.addr">Siena, Toscana, Italia</span></li>
           <li><a href="mailto:hello@goldenhourai.it" data-config="emailMain">hello@goldenhourai.it</a></li>
         </ul>
       </div>
@@ -1139,9 +1209,9 @@
       "nav.contact": "Contatti",
       "nav.cta": "Prenota una call",
 
-      "hero.eyebrow": "<span class=\"dot\"></span>AI Transformation Partner · Siena, Toscana",
+      "hero.eyebrow": "<span class=\"dot\"></span>AI per le PMI · Siena, Toscana",
       "hero.title": "Riprenditi il tuo tempo. <span class=\"nl\">Portiamo l'<em>AI</em> nel cuore della tua impresa.</span>",
-      "hero.sub": "Education, consulting, development. Un percorso in tre passi per portare l'AI dentro la tua PMI — senza fumo, senza scorciatoie.",
+      "hero.sub": "Education, consulting, development. Un percorso in tre passi per portare l'AI dentro la tua PMI, senza fumo e senza scorciatoie.",
       "hero.ctaPrimary": "Prenota una call",
       "hero.ctaGhost": "Scopri il metodo",
       "hero.meta.workshop": "Workshop in azienda",
@@ -1174,25 +1244,23 @@
       "products.title": "Soluzioni nate da problemi reali, sui campi dei nostri clienti.",
       "products.sub": "Ogni prodotto è stato costruito risolvendo un collo di bottiglia concreto. Poi è diventato qualcosa di replicabile per tutto il settore.",
       "products.p1.vertical": "Hospitality",
-      "products.p1.lede": "Il nostro AI Concierge per property manager. Gestisce le richieste degli ospiti — prima, durante e dopo il soggiorno. Risponde su WhatsApp ed email, 24/7, integrato con il tuo PMS.",
+      "products.p1.lede": "Il nostro AI Concierge per property manager. Gestisce le richieste degli ospiti prima, durante e dopo il soggiorno. Risponde su WhatsApp ed email, 24/7, integrato con il tuo PMS.",
       "products.p1.m1": "DI LAVORO MANUALE / GIORNO",
       "products.p1.m2": "CONVERSION RATE INQUIRY",
-      "products.p1.quote": "Le richieste arrivano anche di notte e nei weekend. Cezànne le gestisce tutte, e vediamo solo i casi che richiedono davvero la nostra attenzione.",
-      "products.p1.who": "Caso studio · Federico Barbi, Property Manager — Toscana",
       "products.p2.vertical": "Education",
-      "products.p2.name": "Sostituzioni",
-      "products.p2.lede": "Il nostro software di school optimization. Gestione delle sostituzioni e dei turni docenti. La vicepresidenza si libera dalle telefonate del mattino e ha tutto il quadro in un click.",
+      "products.p2.name": "Aurora",
+      "products.p2.lede": "Il nostro software di school optimization. Gestisce tutte le assenze e le gite, genera le sostituzioni della giornata e molto altro. La vicepresidenza si libera dalle telefonate del mattino e ha tutto il quadro in un click.",
       "products.p2.m1": "RISPARMIATE OGNI MATTINA",
       "products.p2.m2": "PER GENERARE IL PIANO",
-      "products.p2.quote": "Prima passavamo i primi 90 minuti di ogni giornata al telefono per coprire le assenze. Ora apriamo lo strumento, vediamo già le proposte del sistema, le approviamo, fine.",
-      "products.p2.who": "Elena Marchetti, DSGA · IIS Galileo Galilei, Bologna",
-      "products.p2.cta": "Scopri Sostituzioni",
+      "products.p2.quote": "Prima passavamo i primi 90 minuti di ogni giornata al telefono per coprire le assenze. Ora apriamo Aurora, vediamo già le proposte del sistema, le approviamo, fine.",
+      "products.p2.who": "Caso studio · Sergio Valentini, Liceo Scientifico Galileo Galilei, Siena",
+      "products.p2.cta": "Scopri Aurora",
 
       "products.p3.vertical": "Luxury & Retail",
       "products.p3.name": "Atelier",
-      "products.p3.lede": "La nostra piattaforma AI per profumerie e atelier del lusso. Un'esperienza conversazionale trasforma i ricordi del cliente in una composizione olfattiva unica — senza competenze tecniche, senza personale aggiuntivo.",
+      "products.p3.lede": "La nostra piattaforma AI per profumerie e atelier del lusso. Un'esperienza conversazionale trasforma i ricordi del cliente in una composizione olfattiva unica, senza competenze tecniche e senza personale aggiuntivo.",
       "products.p3.m1": "DA RACCONTO A PROFILO OLFATTIVO",
-      "products.p3.m2": "PER BOTTIGLIA PERSONALIZZATA",
+      "products.p3.m2": "PER OGNI BOTTIGLIA PERSONALIZZATA",
       "products.p3.quote": "Da quando offriamo l'esperienza Atelier, i clienti tornano per i riordini e ci portano amici. Il percorso AI ha trasformato un acquisto in un ricordo.",
       "products.p3.who": "Caso studio · Note del Chianti, Toscana",
       "products.p3.cta": "Scopri Atelier",
@@ -1200,7 +1268,7 @@
       "foot.atelier": "Atelier · Luxury & Retail",
 
       "contact.title": "Pronto a trasformare il tuo business?",
-      "contact.sub": "Scegli direttamente giorno e ora che ti vanno meglio — nel mio calendario, senza rimbalzi di email.",
+      "contact.sub": "Scegli direttamente giorno e ora che ti vanno meglio, nel mio calendario, senza rimbalzi di email.",
       "contact.p1.s": "30 minuti, niente pitch.",
       "contact.p1.t": "Capiamo insieme se ha senso lavorare insieme.",
       "contact.p2.s": "Risposta entro 24 ore.",
@@ -1210,16 +1278,15 @@
       "contact.role": "Founder e CEO, Golden Hour AI · Siena",
 
       "foot.payoff": "Reclaim your time.",
-      "foot.desc": "AI Transformation Partner per le PMI. Educhiamo, mappiamo, costruiamo — un passo alla volta, al fianco di chi guida l'azienda.",
+      "foot.desc": "Portiamo l'AI dentro le PMI. Educhiamo, mappiamo, costruiamo un passo alla volta, al fianco di chi guida l'azienda.",
       "foot.nav": "Navigazione",
       "foot.products": "Prodotti",
-      "foot.sost": "Sostituzioni · Education",
+      "foot.sost": "Aurora · Education",
       "foot.community": "Community",
-      "foot.fest": "AI Festival Siena",
-      "foot.workshops": "Workshop & corsi",
+      "foot.workshops": "Workshop",
       "foot.contacts": "Contatti",
       "foot.legal": "Sede legale",
-      "foot.legal.addr": "Siena, Toscana — Italia",
+      "foot.legal.addr": "Siena, Toscana, Italia",
       "foot.copy": "© 2026 Golden Hour AI · P.IVA IT00000000000",
       "foot.legal2": "Privacy · Cookie · Termini"
     },
@@ -1230,9 +1297,9 @@
       "nav.contact": "Contact",
       "nav.cta": "Book a call",
 
-      "hero.eyebrow": "<span class=\"dot\"></span>AI Transformation Partner · Siena, Italy",
+      "hero.eyebrow": "<span class=\"dot\"></span>AI for SMBs · Siena, Italy",
       "hero.title": "Reclaim your time. <span class=\"nl\">We bring <em>AI</em> into the heart of your business.</span>",
-      "hero.sub": "Education, consulting, development. A three-step path to bring AI into your SMB — no smoke, no shortcuts.",
+      "hero.sub": "Education, consulting, development. A three-step path to bring AI into your SMB. No smoke, no shortcuts.",
       "hero.ctaPrimary": "Book a call",
       "hero.ctaGhost": "Discover the method",
       "hero.meta.workshop": "On-site workshops",
@@ -1265,25 +1332,23 @@
       "products.title": "Solutions born from real problems, on our clients' fields.",
       "products.sub": "Every product was built solving a concrete bottleneck. Then it became something replicable across the whole industry.",
       "products.p1.vertical": "Hospitality",
-      "products.p1.lede": "Our AI Concierge for property managers. It handles guest requests — before, during, and after the stay. Replies on WhatsApp and email, 24/7, integrated with your PMS.",
+      "products.p1.lede": "Our AI Concierge for property managers. It handles guest requests before, during, and after the stay. Replies on WhatsApp and email, 24/7, integrated with your PMS.",
       "products.p1.m1": "OF MANUAL WORK / DAY",
       "products.p1.m2": "INQUIRY CONVERSION RATE",
-      "products.p1.quote": "Requests come in at night and on weekends. Cezànne handles them all, and we only see the cases that truly need our attention.",
-      "products.p1.who": "Case study · Federico Barbi, Property Manager — Tuscany",
       "products.p2.vertical": "Education",
-      "products.p2.name": "Sostituzioni",
-      "products.p2.lede": "Our school-optimization software. Substitution and teacher-shift management. The deputy head's office stops handling morning phone calls and sees the full picture in one click.",
+      "products.p2.name": "Aurora",
+      "products.p2.lede": "Our school-optimization software. It handles every absence and school trip, generates the day's substitutions and much more. The deputy head's office stops handling morning phone calls and sees the full picture in one click.",
       "products.p2.m1": "SAVED EVERY MORNING",
       "products.p2.m2": "TO GENERATE THE PLAN",
-      "products.p2.quote": "We used to spend the first 90 minutes of every day on the phone covering absences. Now we open the tool, see the system's proposals, approve them, done.",
-      "products.p2.who": "Elena Marchetti, DSGA · IIS Galileo Galilei, Bologna",
-      "products.p2.cta": "Discover Sostituzioni",
+      "products.p2.quote": "We used to spend the first 90 minutes of every day on the phone covering absences. Now we open Aurora, see the system's proposals, approve them, done.",
+      "products.p2.who": "Case study · Sergio Valentini, Liceo Scientifico Galileo Galilei, Siena",
+      "products.p2.cta": "Discover Aurora",
 
       "products.p3.vertical": "Luxury & Retail",
       "products.p3.name": "Atelier",
-      "products.p3.lede": "Our AI platform for luxury perfumeries and ateliers. A conversational experience turns the customer's memories into a unique olfactory composition — no technical expertise, no extra staff.",
+      "products.p3.lede": "Our AI platform for luxury perfumeries and ateliers. A conversational experience turns the customer's memories into a unique olfactory composition. No technical expertise, no extra staff.",
       "products.p3.m1": "FROM STORY TO FRAGRANCE PROFILE",
-      "products.p3.m2": "PER PERSONALISED BOTTLE",
+      "products.p3.m2": "FOR EVERY PERSONALISED BOTTLE",
       "products.p3.quote": "Since we started offering the Atelier experience, customers come back for refills and bring friends. The AI journey turned a purchase into a memory.",
       "products.p3.who": "Case study · Note del Chianti, Tuscany",
       "products.p3.cta": "Discover Atelier",
@@ -1291,7 +1356,7 @@
       "foot.atelier": "Atelier · Luxury & Retail",
 
       "contact.title": "Ready to transform your business?",
-      "contact.sub": "Pick the day and time that suit you best — straight from my calendar, no email back-and-forth.",
+      "contact.sub": "Pick the day and time that suit you best, straight from my calendar, with no email back-and-forth.",
       "contact.p1.s": "30 minutes, no pitch.",
       "contact.p1.t": "We figure out together if it makes sense to work together.",
       "contact.p2.s": "Reply within 24 hours.",
@@ -1301,16 +1366,15 @@
       "contact.role": "Founder & CEO, Golden Hour AI · Siena",
 
       "foot.payoff": "Reclaim your time.",
-      "foot.desc": "AI Transformation Partner for SMBs. We educate, map, and build — one step at a time, alongside the people who run the company.",
+      "foot.desc": "We bring AI into SMBs. We educate, map, and build one step at a time, alongside the people who run the company.",
       "foot.nav": "Navigation",
       "foot.products": "Products",
-      "foot.sost": "Sostituzioni · Education",
+      "foot.sost": "Aurora · Education",
       "foot.community": "Community",
-      "foot.fest": "AI Festival Siena",
-      "foot.workshops": "Workshops & courses",
+      "foot.workshops": "Workshops",
       "foot.contacts": "Contact",
       "foot.legal": "Registered office",
-      "foot.legal.addr": "Siena, Tuscany — Italy",
+      "foot.legal.addr": "Siena, Tuscany, Italy",
       "foot.copy": "© 2026 Golden Hour AI · VAT IT00000000000",
       "foot.legal2": "Privacy · Cookies · Terms"
     }
@@ -1359,9 +1423,7 @@
       el.href = 'mailto:' + cfg.emailMain;
       el.textContent = cfg.emailMain;
     });
-    document.querySelectorAll('[data-config="linkedin"]').forEach(el => { el.href = cfg.linkedinUrl; });
     document.querySelectorAll('[data-config="sainet"]').forEach(el => { el.href = cfg.sainetUrl; });
-    document.querySelectorAll('[data-config="aiFestival"]').forEach(el => { el.href = cfg.aiFestivalUrl; });
     document.querySelectorAll('[data-config="workshops"]').forEach(el => { el.href = cfg.workshopsUrl; });
     document.querySelectorAll('[data-config="sostituzioni"]').forEach(el => { el.href = cfg.urlSostituzioni; });
     document.querySelectorAll('[data-config="atelier"]').forEach(el => { el.href = cfg.urlAtelier; });

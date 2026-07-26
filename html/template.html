@@ -67,18 +67,14 @@
       </div>
 
       <!-- Eyebrow tag -->
-      <span class="eyebrow">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
-        </svg>
-        [Tag descrittivo del prodotto]
-      </span>
+      <span class="eyebrow">[Categoria del prodotto]</span>
 
-      <!-- Headline: usa serif-it accent per l'enfasi -->
-      <h1>[Headline principale,] <span class="serif-it accent">in poche parole.</span></h1>
+      <!-- Titolo: il nome del prodotto. Niente corsivo colorato, niente antitesi
+           a due tempi (vedi Regole editoriali in CLAUDE.md). -->
+      <h1>[Nome prodotto]</h1>
 
       <p class="lead">
-        [Sottotitolo: descrizione del valore del prodotto in 2-3 righe. Conciso e orientato al problema risolto.]
+        [2-3 righe che dicono cosa fa il prodotto e per chi. Descrittive, non persuasive.]
       </p>
 
       <div class="hero-cta">
@@ -91,18 +87,13 @@
         <a href="#[sezione]" class="btn btn-ghost">[CTA secondaria]</a>
       </div>
 
-      <!-- Micro-copy di rassicurazione -->
+      <!-- Tre fatti verificabili sul prodotto, non slogan -->
       <div class="hero-meta">
-        <span class="check-item">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 13l4 4L19 7"/>
-          </svg>
-          [Beneficio 1]
-        </span>
+        <span>[Fatto 1]</span>
         <span class="dot"></span>
-        <span>[Beneficio 2]</span>
+        <span>[Fatto 2]</span>
         <span class="dot"></span>
-        <span>[Beneficio 3]</span>
+        <span>[Fatto 3]</span>
       </div>
 
       <!-- Hero visual: video, screenshot, mockup, ecc. -->
@@ -119,15 +110,17 @@
 
   <!-- ============================================================
        SEZIONI SPECIFICHE DEL PRODOTTO
-       (features, steps, stats, testimonials, contact, …)
+       Struttura tipica: cosa fa → come funziona → sezione specifica del
+       prodotto (contenuto verificabile, non persuasione) → contatti.
+       Niente testimonianze inventate: vedi Regole editoriali in CLAUDE.md.
        ============================================================ -->
 
   <!-- Esempio sezione features -->
   <section class="features" id="[sezione1]">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Funzionalità</span>
-        <h2>Titolo sezione,<br/><span class="serif-it accent">accento.</span></h2>
+        <span class="eyebrow">Funzioni</span>
+        <h2>[Frase dichiarativa che dice di cosa parla la sezione]</h2>
         <p>Descrizione breve della sezione.</p>
       </div>
       <!-- .features-grid, .how, .stats, ecc. → definiti in styles.css della pagina -->
@@ -148,7 +141,7 @@
             <span>Golden Hour AI</span>
           </div>
           <p class="foot-payoff">Reclaim your time.</p>
-          <p class="foot-desc">AI Transformation Partner per le PMI. Educhiamo, mappiamo, costruiamo — un passo alla volta, al fianco di chi guida l'azienda.</p>
+          <p class="foot-desc">Portiamo l'AI dentro le PMI. Educhiamo, mappiamo, costruiamo un passo alla volta, al fianco di chi guida l'azienda.</p>
         </div>
 
         <!-- Navigazione + Prodotti -->
@@ -162,7 +155,7 @@
           <h4>Prodotti</h4>
           <ul>
             <li><a href="https://goldenhourai.it/#products">Cezànne · Hospitality</a></li>
-            <li><a href="/sostituzioni">Sostituzioni · Education</a></li>
+            <li><a href="/sostituzioni">Aurora · Education</a></li>
           </ul>
         </div>
 
@@ -170,8 +163,8 @@
         <div>
           <h4>Community</h4>
           <ul>
-            <li><span class="foot-sainet"><span class="pip"></span>SAINET — Siena AI Network</span></li>
-            <li><a href="#">Workshop &amp; corsi</a></li>
+            <li><span class="foot-sainet"><span class="pip"></span>SAINET · Siena AI Network</span></li>
+            <li><a href="#">Workshop</a></li>
           </ul>
         </div>
 
@@ -179,8 +172,7 @@
         <div>
           <h4>Contatti</h4>
           <ul>
-            <li><a href="#">LinkedIn</a></li>
-            <li>Sede legale<br/><span>Siena, Toscana — Italia</span></li>
+            <li>Sede legale<br/><span>Siena, Toscana, Italia</span></li>
             <li><a href="mailto:hello@goldenhourai.it">hello@goldenhourai.it</a></li>
           </ul>
         </div>

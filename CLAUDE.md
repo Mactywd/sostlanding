@@ -49,18 +49,40 @@ One `nginx:alpine` container mounts `./html` as webroot. Traefik (external, pre-
 - CSS e JS inline nel file (non carica `shared.css`)
 - **Source of truth:** `html/index.html` (i file `Golden Hour Landing/` sono stati rimossi)
 
-### Sostituzioni landing (`html/sostituzioni/index.html`)
-- Fonts: Inter Tight (body), Source Serif 4 italic (accents)
+### Sotto-landing (`html/sostituzioni/`, `html/atelier/`)
+- `html/sostituzioni/` è la landing di **Aurora** (il path resta `/sostituzioni`)
+- Fonts: Inter Tight (body), Source Serif 4 italic (usato con parsimonia, vedi Regole editoriali)
 - Palette: green-based, dark/light theme toggle via `data-theme` attribute
-- Carica `../shared.css` + `styles.css` propri
+- Caricano `../shared.css` + il proprio `styles.css`
+- Struttura comune: hero → cosa fa → come funziona → sezione specifica del prodotto → contatti
 
 ## Key content alignment
 
-The GoldenHour main landing's sostituzioni product card (section `#products`) references the same product as the Sostituzioni landing. Keep these in sync:
-- Product name: **Sostituzioni** (not "Galileo")
+The GoldenHour main landing's education product card (section `#products`) references the same product as the `/sostituzioni` landing. Keep these in sync:
+- Product name: **Aurora** (ex "Sostituzioni"; il path resta `/sostituzioni`)
 - Metrics: **1h+ → 5min** risparmiate ogni mattina / **<10 sec** per generare il piano
-- Quote attribution: **Elena Marchetti, DSGA · IIS Galileo Galilei, Bologna**
+- Quote attribution: **Sergio Valentini, Liceo Scientifico Galileo Galilei, Siena** (placeholder, da sostituire con la citazione reale)
 - CTA button links to `/sostituzioni`
+- Lo specchietto del prodotto (`.subs-*` in `html/index.html`) replica la schermata "Genera Sostituzioni" dell'app reale (`~/coding/scuola/sostituzioni`, componente `frontend/src/components/Sostituzioni/`). Se cambia la UI dell'app, aggiornare qui.
+
+## Regole editoriali
+
+Le pagine devono **illustrare** il prodotto, non convincere. Registro da documentazione, non da brochure.
+
+- **Niente em dash (`—`) nel testo visibile** di nessuna pagina. Usare `·` come separatore, oppure `:`/virgola nella prosa. Nei commenti di codice sono ammesse.
+- **Niente titoli a due tempi in antitesi** ("Tutto il necessario, / niente di superfluo"). Un `h2` è una frase dichiarativa semplice che dice di cosa parla la sezione.
+- **Niente chiuse a effetto** ("Ha pianto.", "è stata una rivoluzione", "Il ricordo non si perde"). Se una frase esiste per l'enfasi e non per l'informazione, va tolta.
+- **Niente testimonianze inventate.** Le citazioni vanno usate solo se reali e attribuibili; finché non ci sono, la sezione non esiste. Un placeholder dichiarato (come sulla main landing) è accettabile, cinque nomi di fantasia no.
+- **Numeri veri o niente numeri.** Evitare metriche decorative (`∞`, `0 fogli Excel`).
+- Preferire il contenuto verificabile e specifico del prodotto alla persuasione: la sezione "Logica di assegnazione" di Aurora elenca l'ordine reale dei metodi del motore (vedi `~/coding/scuola/sostituzioni/schools/DEMO/policy.md`, regola G2). Se l'ordine cambia nel motore, va aggiornato anche qui.
+
+### Uso del corsivo e del colore
+
+- `.serif-it` (Source Serif 4 corsivo) è un inciso **discreto**: ammesso nel payoff del footer e nei nomi propri dentro i mockup (es. il nome del profumo). **Mai nei titoli di sezione.**
+- `.accent` è `--text-muted`, non un colore vivo. Non colorare i titoli.
+- `.eyebrow` è un'etichetta di testo maiuscoletto, non una pillola colorata.
+- Verde e oro restano per gli elementi interattivi (bottoni, link, icone), non per la tipografia dei titoli.
+- I "specchietti" prodotto (`.pv`) restano in italiano anche con lingua EN attiva: sono repliche di schermate reali, non copy di marketing. Non aggiungere `data-i18n` al loro interno.
 
 ## Deploying
 

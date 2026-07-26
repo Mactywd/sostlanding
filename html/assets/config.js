@@ -8,8 +8,6 @@ window.SITE_CONFIG = {
   urlSostituzioni: '/sostituzioni',
   urlAtelier:      '/atelier',
   emailAtelier:    'atelier@goldenhourai.it',
-  linkedinUrl:     '#',       // TODO: inserire URL LinkedIn reale
   sainetUrl:       'https://sainet.it',
-  aiFestivalUrl:   '#',       // TODO: inserire URL AI Festival Siena
   workshopsUrl:    '#',       // TODO: inserire URL workshops
 };
