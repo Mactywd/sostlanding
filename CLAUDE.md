@@ -79,7 +79,7 @@ Le pagine devono **illustrare** il prodotto, non convincere. Registro da documen
 
 ### Tipografia, corsivo e colore
 
-- **Display face: Fraunces**, variabile con assi `opsz`/`wght`/`SOFT`/`WONK`. Usata **solo** per l'`h1` dell'hero delle sotto-landing, cioè il nome del prodotto (`--font-display`, regola `.hero h1` in `shared.css`). È l'unico punto in cui la pagina alza la voce: non estenderla a `h2`, `h3` o al corpo.
+- **Display face: Playfair Display**, la stessa famiglia dei titoli della landing principale: è ciò che tiene insieme le tre pagine. Usata **solo** per l'`h1` dell'hero delle sotto-landing, cioè il nome del prodotto (`--font-display`, regola `.hero h1` in `shared.css`), a peso 700 perché lì è un wordmark. Sulla main landing resta a peso 500 per i titoli, che sono frasi. È l'unico punto in cui le sotto-landing alzano la voce: non estenderla a `h2`, `h3` o al corpo, che restano Inter Tight.
 - `.serif-it` (Source Serif 4 corsivo) è un inciso **discreto**: ammesso nel payoff del footer e nei nomi propri dentro i mockup (es. il nome del profumo). **Mai nei titoli di sezione.**
 - `.accent` è `--text-muted`, non un colore vivo. Non colorare i titoli.
 - `.eyebrow` è un'etichetta di testo maiuscoletto, non una pillola colorata.
