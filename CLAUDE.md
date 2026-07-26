@@ -88,17 +88,31 @@ Le pagine devono **illustrare** il prodotto, non convincere. Registro da documen
 
 ## Deploying
 
-```bash
-# First deploy
-docker compose up -d
+Produzione: host **gn1**, repo in `/home/gh/sites/ghlanding`, container `goldenhourai`. Il dominio sta dietro Cloudflare.
 
-# After updating html/ files
-docker compose exec web nginx -s reload
-# or full restart
-docker compose restart web
+```bash
+# 1. In locale, se hai toccato un .css
+./stamp-assets.sh          # aggiorna ?v=<hash> nei <link>, poi committa
+
+# 2. Push
+git push origin master
+
+# 3. Sul server
+ssh gn1 'cd /home/gh/sites/ghlanding && git pull --ff-only origin master'
+ssh gn1 'docker exec goldenhourai nginx -t && docker exec goldenhourai nginx -s reload'
 ```
 
-The VPS must have a pre-existing `web` Docker network and a running Traefik instance with `letsencrypt` certresolver.
+Il VPS deve avere la rete Docker `web` gia' esistente e un Traefik attivo con certresolver `letsencrypt`.
+
+### Due trappole, entrambe gia' costate un deploy rotto
+
+**1. Se cambi `nginx.conf`, il reload non basta: serve `docker compose restart web`.**
+`nginx.conf` e' montato come *singolo file*. `git pull` non modifica il file sul posto, lo sostituisce creando un nuovo inode, e il bind mount del container resta agganciato a quello vecchio. Risultato: `nginx -s reload` rilegge una config che non e' piu' quella su disco, in silenzio. `html/` invece e' montata come directory, quindi le modifiche ai contenuti passano sempre.
+Verifica: `docker exec goldenhourai stat -c %i /etc/nginx/conf.d/default.conf` deve coincidere con `stat -c %i /home/gh/sites/ghlanding/nginx.conf`.
+
+**2. Cambiando un CSS, esegui `./stamp-assets.sh` prima di committare.**
+Le pagine HTML sono servite `no-store` (sempre fresche), i CSS no. Senza una query string nuova, Cloudflare e i browser continuano a servire il CSS precedente: si ottiene **HTML nuovo con CSS vecchio**, cioe' pagine senza stile, non semplicemente pagine diverse. Lo script mette `?v=<hash del contenuto>` nei `<link>`, cambiando la chiave di cache. E' idempotente: se il CSS non e' cambiato, l'hash resta lo stesso.
+Verifica dopo il deploy: `curl -s https://goldenhourai.it/sostituzioni/ | grep stylesheet` deve mostrare gli hash correnti dei file locali.
 
 ## Email
 
