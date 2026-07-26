@@ -41,8 +41,10 @@
   --shadow-lg: 0 30px 60px -25px rgba(14,63,27,.35), 0 10px 25px -10px rgba(14,22,18,.10);
 
   /* Typography */
-  --font-sans:  "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --font-sans:    "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-serif:   "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  /* Display: solo per il nome prodotto nell'hero. Vedi .hero h1. */
+  --font-display: "Fraunces", "Source Serif 4", Georgia, serif;
 
   /* Layout */
   --container: 1180px;
@@ -261,6 +263,18 @@ p { margin: 0; color: var(--text-muted); }
   gap: 28px;
   text-align: center;
   justify-items: center;
+}
+
+/* Nome del prodotto: l'unico punto in cui la pagina alza la voce.
+   Fraunces con asse WONK attivo, il resto della tipografia resta sobrio. */
+.hero h1 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-variation-settings: "SOFT" 28, "WONK" 1;
+  font-size: clamp(58px, 10vw, 118px);
+  letter-spacing: -0.035em;
+  line-height: 0.9;
 }
 
 /* Large hero logo */

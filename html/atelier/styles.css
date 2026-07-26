@@ -232,9 +232,9 @@
 @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .features-grid { grid-template-columns: 1fr; } }
 
-/* ---------- Formati ---------- */
-.formats { background: var(--bg-alt); }
-.formats-grid {
+/* ---------- Cosa decidi tu ---------- */
+.configurable { background: var(--bg-alt); }
+.conf-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
@@ -243,29 +243,16 @@
   border-radius: var(--r-lg);
   overflow: hidden;
 }
-.format {
+.conf {
   background: var(--card);
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
-.fm-size {
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: var(--text);
-  line-height: 1;
-}
-.fm-size small {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-left: 3px;
-  letter-spacing: 0;
-}
-.format p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; margin: 0; }
-@media (max-width: 800px) { .formats-grid { grid-template-columns: 1fr; } }
+.conf h3 { font-size: 17px; font-weight: 600; color: var(--text); margin: 0; }
+.conf p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+@media (max-width: 800px) { .conf-grid { grid-template-columns: 1fr; } }
 
 /* ---------- Contact ---------- */
 .contact { background: var(--bg-alt); }

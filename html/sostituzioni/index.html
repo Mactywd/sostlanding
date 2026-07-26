@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..800,0..100,0..1&family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
 
   <link rel="stylesheet" href="../shared.css"/>
   <link rel="stylesheet" href="styles.css"/>
@@ -166,82 +166,43 @@
     </div>
   </section>
 
-  <!-- LOGICA DI ASSEGNAZIONE -->
+  <!-- LOGICA CONFIGURABILE -->
   <section class="logic" id="logica">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Logica di assegnazione</span>
-        <h2>Come viene scelto il sostituto</h2>
-        <p>Per ogni ora scoperta Aurora prova i metodi in quest'ordine e si ferma al primo applicabile. Quella qui sotto è la sequenza di un istituto superiore: ordine e condizioni si configurano scuola per scuola.</p>
+        <h2>Non esiste una regola valida per tutte le scuole</h2>
+        <p>Ogni istituto copre le assenze a modo suo, e quel modo nasce da accordi interni, contrattazione e abitudini consolidate. Aurora non impone un criterio proprio: riproduce il vostro. Ecco cosa viene definito in fase di setup.</p>
       </div>
 
-      <ol class="chain">
+      <ul class="rules">
         <li>
-          <span class="i">01</span>
-          <div>
-            <h3>Uscita anticipata</h3>
-            <p>Se dall'ora scoperta fino al termine la classe non ha altre lezioni coperte, esce prima.</p>
-          </div>
+          <h3>Quali soluzioni sono ammesse</h3>
+          <p>Spostamento di lezioni, ore a disposizione, recuperi, eccedenze retribuite, accorpamenti. Ogni scuola decide quali strade accetta e quali no.</p>
         </li>
         <li>
-          <span class="i">02</span>
-          <div>
-            <h3>Entrata posticipata</h3>
-            <p>Se le prime ore della giornata sono scoperte, la classe entra alla prima ora coperta.</p>
-          </div>
+          <h3>In che ordine tentarle</h3>
+          <p>La sequenza con cui il sistema prova le soluzioni ammesse prima di dichiarare un'ora scoperta.</p>
         </li>
         <li>
-          <span class="i">03</span>
-          <div>
-            <h3>Posticipazione</h3>
-            <p>Il docente dell'ora precedente sposta la propria lezione sull'ora scoperta.</p>
-          </div>
+          <h3>Chi può essere scelto</h3>
+          <p>Precedenze e esclusioni: docenti della stessa classe, dello stesso consiglio, di una certa area disciplinare, o categorie da non coinvolgere.</p>
         </li>
         <li>
-          <span class="i">04</span>
-          <div>
-            <h3>Anticipazione</h3>
-            <p>Il docente di un'ora successiva anticipa la propria lezione per coprire quella scoperta.</p>
-          </div>
+          <h3>Quali limiti rispettare</h3>
+          <p>Tetti giornalieri e settimanali per docente, monte ore, saldi da rispettare nella distribuzione del carico.</p>
         </li>
         <li>
-          <span class="i">05</span>
-          <div>
-            <h3>Recupero ore</h3>
-            <p>Copre l'ora un docente che ha ore da restituire alla scuola; il saldo viene aggiornato.</p>
-          </div>
+          <h3>Come trattare i casi particolari</h3>
+          <p>Compresenze, classi in uscita didattica, classi assenti per l'intera giornata, prima e ultima ora.</p>
         </li>
         <li>
-          <span class="i">06</span>
-          <div>
-            <h3>Docenti liberati da un'uscita</h3>
-            <p>Se una classe è fuori per un'uscita didattica, i suoi docenti sono disponibili a coprire.</p>
-          </div>
+          <h3>Cosa fare se non c'è copertura</h3>
+          <p>Il comportamento quando nessuna soluzione ammessa è applicabile: come e a chi segnalare l'ora rimasta scoperta.</p>
         </li>
-        <li>
-          <span class="i">07</span>
-          <div>
-            <h3>Ore a disposizione</h3>
-            <p>Si assegna un docente che in quell'ora è già a disposizione da orario.</p>
-          </div>
-        </li>
-        <li>
-          <span class="i">08</span>
-          <div>
-            <h3>Ora eccedente</h3>
-            <p>Si assegna un docente disponibile, con l'ora conteggiata come eccedenza retribuita.</p>
-          </div>
-        </li>
-        <li>
-          <span class="i">09</span>
-          <div>
-            <h3>Nessuna copertura</h3>
-            <p>Se nessun metodo è applicabile l'ora resta segnalata come scoperta, non viene nascosta.</p>
-          </div>
-        </li>
-      </ol>
+      </ul>
 
-      <p class="chain-note">All'interno di ogni metodo hanno la precedenza i docenti che insegnano già in quella classe. Un docente assegnato viene rimosso dai candidati per quell'ora, così non può risultare in due classi contemporaneamente.</p>
+      <p class="rules-note">La configurazione la scriviamo noi durante il setup, partendo da come lavorate oggi. Resta poi modificabile dall'editor visuale: quando cambiano gli accordi interni, cambiate le regole senza rifare il lavoro da capo.</p>
     </div>
   </section>
 

@@ -74,10 +74,12 @@ Le pagine devono **illustrare** il prodotto, non convincere. Registro da documen
 - **Niente chiuse a effetto** ("Ha pianto.", "è stata una rivoluzione", "Il ricordo non si perde"). Se una frase esiste per l'enfasi e non per l'informazione, va tolta.
 - **Niente testimonianze inventate.** Le citazioni vanno usate solo se reali e attribuibili; finché non ci sono, la sezione non esiste. Un placeholder dichiarato (come sulla main landing) è accettabile, cinque nomi di fantasia no.
 - **Numeri veri o niente numeri.** Evitare metriche decorative (`∞`, `0 fogli Excel`).
-- Preferire il contenuto verificabile e specifico del prodotto alla persuasione: la sezione "Logica di assegnazione" di Aurora elenca l'ordine reale dei metodi del motore (vedi `~/coding/scuola/sostituzioni/schools/DEMO/policy.md`, regola G2). Se l'ordine cambia nel motore, va aggiornato anche qui.
+- Preferire il contenuto verificabile e specifico del prodotto alla persuasione.
+- **Non presentare come fisso ciò che è configurabile.** La generazione delle sostituzioni (Aurora) e il listino/formati (Atelier) si definiscono cliente per cliente: le pagine descrivono *cosa* si configura, mai *quale* sia la configurazione. Niente ordini di priorità dichiarati, niente taglie o prezzi in vetrina.
 
-### Uso del corsivo e del colore
+### Tipografia, corsivo e colore
 
+- **Display face: Fraunces**, variabile con assi `opsz`/`wght`/`SOFT`/`WONK`. Usata **solo** per l'`h1` dell'hero delle sotto-landing, cioè il nome del prodotto (`--font-display`, regola `.hero h1` in `shared.css`). È l'unico punto in cui la pagina alza la voce: non estenderla a `h2`, `h3` o al corpo.
 - `.serif-it` (Source Serif 4 corsivo) è un inciso **discreto**: ammesso nel payoff del footer e nei nomi propri dentro i mockup (es. il nome del profumo). **Mai nei titoli di sezione.**
 - `.accent` è `--text-muted`, non un colore vivo. Non colorare i titoli.
 - `.eyebrow` è un'etichetta di testo maiuscoletto, non una pillola colorata.
