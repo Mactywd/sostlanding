@@ -36,4 +36,11 @@ for page in html/aurora/index.html html/atelier/index.html; do
   stamp "$page" "styles.css" "$(dirname "$page")/styles.css"
 done
 stamp html/template.html "../shared.css" "html/shared.css"
+
+# fonts.css e' referenziato con un path assoluto, uguale su tutte le pagine.
+# I .woff2 non hanno bisogno di versione: il nome cambia solo se cambia il
+# font, e nginx li serve immutabili.
+for page in html/index.html html/aurora/index.html html/atelier/index.html html/template.html; do
+  stamp "$page" "/assets/fonts.css" "html/assets/fonts.css"
+done
 echo "Fatto."

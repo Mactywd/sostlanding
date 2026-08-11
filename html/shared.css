@@ -385,3 +385,34 @@ section { padding: 96px 0; }
 @media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 540px) { .foot-grid { grid-template-columns: 1fr; } }
 @media (max-width: 540px) { .foot-bottom { flex-direction: column; align-items: flex-start; } }
+
+/* ---------- Segnaposto del calendario (click-to-load) ---------- */
+/* Calendly si carica solo su richiesta: finche' non si clicca, il browser non
+   contatta calendly.com, quindi non escono ne' IP ne' cookie verso un terzo.
+   Il clic e' il consenso, dato dopo aver letto cosa comporta. */
+.cal-consent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 100%;
+  padding: 40px 32px;
+  text-align: center;
+}
+.cal-consent .ico { color: var(--primary); }
+.cal-consent .t { font-size: 18px; font-weight: 500; color: var(--text); }
+.cal-consent .d {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 360px;
+  margin: 0;
+}
+.cal-consent .alt {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cal-consent .alt:hover { color: var(--text); }
