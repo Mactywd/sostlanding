@@ -5,7 +5,10 @@
 Single nginx container serving two landing pages under the same domain, managed via Docker Compose + Traefik on a VPS.
 
 - **Main:** `https://goldenhourai.it` → GoldenHour AI corporate landing
-- **Sostituzioni:** `https://goldenhourai.it/sostituzioni/` → product landing for school substitution management
+- **Aurora:** `https://goldenhourai.it/aurora/` → product landing for school substitution management
+- **Atelier:** `https://goldenhourai.it/atelier/` → product landing luxury & retail
+
+Il vecchio path `/sostituzioni` (nome del prodotto prima del rebrand) è servito da un 301 permanente verso `/aurora/`. Non rimuoverlo: esistono link esterni e risultati di ricerca che lo puntano.
 
 ## File structure
 
@@ -18,16 +21,16 @@ html/
     logo.png              # GoldenHour logo (square)
     logo_tagline.png      # Logo with tagline
     config.js             # Configurazione centralizzata (email, URL, link social)
-  sostituzioni/
-    index.html            # Sostituzioni product landing
-    styles.css            # Sostituzioni stylesheet
+  aurora/
+    index.html            # Aurora product landing
+    styles.css            # Aurora stylesheet
     assets/
       goldenhour-symbol.png
       goldenhour-logo.png
       logo_with_tagline.png
       demoshort.mp4        # Hero demo video
 
-nginx.conf                # Nginx routing: / → main, /sostituzioni/ → product
+nginx.conf                # Nginx routing: / → main, /aurora/ → product
 docker-compose.yml        # Traefik labels for goldenhourai.it
 ```
 
@@ -36,9 +39,13 @@ docker-compose.yml        # Traefik labels for goldenhourai.it
 One `nginx:alpine` container mounts `./html` as webroot. Traefik (external, pre-existing on VPS) handles TLS termination and routing by hostname.
 
 `nginx.conf` routes:
-- `/sostituzioni` → 301 → `/sostituzioni/`
-- `/sostituzioni/` → `try_files` against `html/sostituzioni/`
+- `/sostituzioni` e `/sostituzioni/<qualsiasi cosa>` → 301 permanente → `/aurora/…` (legacy, vedi sotto)
+- `/aurora` → 301 → `/aurora/`
+- `/aurora/` → `try_files` against `html/aurora/`
+- `/atelier/` → `try_files` against `html/atelier/`
 - `/` → `try_files` against `html/`
+
+Il redirect legacy è un `location ~ ^/sostituzioni/(.*)$` e **deve restare prima** dei `location` regex per `css|js` e per i media: nginx sceglie il primo regex che matcha in ordine di definizione, quindi spostandolo più in basso i vecchi URL degli asset finirebbero in 404 invece che sul redirect.
 
 ## Design system
 
@@ -49,8 +56,7 @@ One `nginx:alpine` container mounts `./html` as webroot. Traefik (external, pre-
 - CSS e JS inline nel file (non carica `shared.css`)
 - **Source of truth:** `html/index.html` (i file `Golden Hour Landing/` sono stati rimossi)
 
-### Sotto-landing (`html/sostituzioni/`, `html/atelier/`)
-- `html/sostituzioni/` è la landing di **Aurora** (il path resta `/sostituzioni`)
+### Sotto-landing (`html/aurora/`, `html/atelier/`)
 - Fonts: Inter Tight (body), Source Serif 4 italic (usato con parsimonia, vedi Regole editoriali)
 - Palette: green-based, dark/light theme toggle via `data-theme` attribute
 - Caricano `../shared.css` + il proprio `styles.css`
@@ -58,12 +64,16 @@ One `nginx:alpine` container mounts `./html` as webroot. Traefik (external, pre-
 
 ## Key content alignment
 
-The GoldenHour main landing's education product card (section `#products`) references the same product as the `/sostituzioni` landing. Keep these in sync:
-- Product name: **Aurora** (ex "Sostituzioni"; il path resta `/sostituzioni`)
+The GoldenHour main landing's education product card (section `#products`) references the same product as the `/aurora` landing. Keep these in sync:
+- Product name: **Aurora** (ex "Sostituzioni")
 - Metrics: **1h+ → 5min** risparmiate ogni mattina / **<10 sec** per generare il piano
 - Quote attribution: **Sergio Valentini, Liceo Scientifico Galileo Galilei, Siena** (placeholder, da sostituire con la citazione reale)
-- CTA button links to `/sostituzioni`
+- CTA button links to `/aurora`
 - Lo specchietto del prodotto (`.subs-*` in `html/index.html`) replica la schermata "Genera Sostituzioni" dell'app reale (`~/coding/scuola/sostituzioni`, componente `frontend/src/components/Sostituzioni/`). Se cambia la UI dell'app, aggiornare qui.
+
+### "sostituzioni" come nome comune
+
+Il rebrand riguarda il **nome del prodotto**, non la parola italiana. Nel copy delle pagine "sostituzioni" resta corretto quando indica la cosa ("genera il piano di sostituzioni della giornata", "3 classi · 5 sostituzioni"), così come restano invariati i nomi delle schermate replicate dall'app reale ("Genera Sostituzioni") e le classi CSS `.subs-*`. Non sostituire meccanicamente la parola con "Aurora".
 
 ## Regole editoriali
 
@@ -112,17 +122,23 @@ Verifica: `docker exec goldenhourai stat -c %i /etc/nginx/conf.d/default.conf` d
 
 **2. Cambiando un CSS, esegui `./stamp-assets.sh` prima di committare.**
 Le pagine HTML sono servite `no-store` (sempre fresche), i CSS no. Senza una query string nuova, Cloudflare e i browser continuano a servire il CSS precedente: si ottiene **HTML nuovo con CSS vecchio**, cioe' pagine senza stile, non semplicemente pagine diverse. Lo script mette `?v=<hash del contenuto>` nei `<link>`, cambiando la chiave di cache. E' idempotente: se il CSS non e' cambiato, l'hash resta lo stesso.
-Verifica dopo il deploy: `curl -s https://goldenhourai.it/sostituzioni/ | grep stylesheet` deve mostrare gli hash correnti dei file locali.
+Verifica dopo il deploy: `curl -s https://goldenhourai.it/aurora/ | grep stylesheet` deve mostrare gli hash correnti dei file locali.
 
 ## Email
 
-Contact address for Sostituzioni product: `sostituzioni@goldenhourai.it`
+Le email vivono in `html/assets/config.js`, non nell'HTML (vedi Rule 4).
+
+- Aurora: `aurora@goldenhourai.it` (chiave `emailAurora`) · ex `sostituzioni@goldenhourai.it`
+- Atelier: `atelier@goldenhourai.it` (chiave `emailAtelier`)
+- Generale: `info@goldenhourai.it` (chiave `emailMain`)
+
+Il vecchio indirizzo `sostituzioni@` va tenuto come alias verso `aurora@`: è pubblicato da mesi sul sito e nei contatti già presi.
 
 ## Color hierarchy
 
 ### Rule 1 — Colore primario per pagina
 - **Main landing** (`html/index.html`): **oro** come accento primario (`--gold: #D4A23B`). CTA, pulsanti, focus ring usano oro.
-- **Sub-landing** (`html/sostituzioni/` e future pagine prodotto): **verde** come accento primario (`--green: #186628` in `shared.css`). In dark mode, `shared.css` inverte automaticamente a `--gold-soft` tramite `[data-theme="dark"] { --primary: var(--gold-soft) }`.
+- **Sub-landing** (`html/aurora/`, `html/atelier/` e future pagine prodotto): **verde** come accento primario (`--green: #186628` in `shared.css`). In dark mode, `shared.css` inverte automaticamente a `--gold-soft` tramite `[data-theme="dark"] { --primary: var(--gold-soft) }`.
 
 ### Rule 2 — CTA verso sotto-landing usano il verde
 I CTA sulla main landing che **linkano a una sotto-landing** devono usare verde, non oro. In `html/index.html`, aggiungere la classe `btn-to-product` insieme a `btn-gold` per attivare l'override verde. Non usare oro per CTA verso prodotti esterni.

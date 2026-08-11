@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet"/>
 
   <link rel="stylesheet" href="../shared.css?v=23c5aed0"/>
-  <link rel="stylesheet" href="styles.css?v=84f41750"/>
+  <link rel="stylesheet" href="styles.css?v=07fc5ebb"/>
 </head>
 <body>
 
@@ -220,7 +220,7 @@
           </div>
           <div class="row">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            <a href="mailto:sostituzioni@goldenhourai.it" data-config="emailSost">sostituzioni@goldenhourai.it</a>
+            <a href="mailto:aurora@goldenhourai.it" data-config="emailAurora">aurora@goldenhourai.it</a>
           </div>
           <div class="row">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -259,7 +259,7 @@
           <h4>Prodotti</h4>
           <ul>
             <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Cezànne · Hospitality</a></li>
-            <li><a href="/sostituzioni">Aurora · Education</a></li>
+            <li><a href="/aurora">Aurora · Education</a></li>
             <li><a href="/atelier">Atelier · Luxury &amp; Retail</a></li>
           </ul>
         </div>
@@ -276,7 +276,7 @@
           <h4>Contatti</h4>
           <ul>
             <li>Sede legale<br/><span>Siena, Toscana, Italia</span></li>
-            <li><a href="mailto:sostituzioni@goldenhourai.it" data-config="emailSost">sostituzioni@goldenhourai.it</a></li>
+            <li><a href="mailto:aurora@goldenhourai.it" data-config="emailAurora">aurora@goldenhourai.it</a></li>
           </ul>
         </div>
 
@@ -294,9 +294,9 @@
     (function() {
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
-      document.querySelectorAll('[data-config="emailSost"]').forEach(el => {
-        el.href = 'mailto:' + cfg.emailSost;
-        el.textContent = cfg.emailSost;
+      document.querySelectorAll('[data-config="emailAurora"]').forEach(el => {
+        el.href = 'mailto:' + cfg.emailAurora;
+        el.textContent = cfg.emailAurora;
       });
       document.querySelectorAll('[data-config="siteRoot"]').forEach(el => {
         el.href = cfg.siteRoot + (el.dataset.configHash || '');

@@ -31,7 +31,7 @@ PY
 }
 
 echo "Marcatura asset:"
-for page in html/sostituzioni/index.html html/atelier/index.html; do
+for page in html/aurora/index.html html/atelier/index.html; do
   stamp "$page" "../shared.css" "html/shared.css"
   stamp "$page" "styles.css" "$(dirname "$page")/styles.css"
 done
