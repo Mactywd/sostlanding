@@ -146,7 +146,9 @@ Contenuto canonico, in quest'ordine di colonne:
 3. **Prodotti**: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail, Workshop
 4. **Contatti**: sede legale + `info@goldenhourai.it`
 
-Workshop sta fra i **prodotti**, non in Community: è una futura linea di attività di GoldenHour, non un'iniziativa esterna a cui si partecipa. Punta a `/workshop` (`workshopsUrl`), pagina che non esiste ancora.
+Workshop sta fra i **prodotti**, non in Community: è una futura linea di attività di GoldenHour, non un'iniziativa esterna a cui si partecipa. Oggi è **testo semplice, non un link**, perché `/workshop` non esiste ancora. Il path è già deciso e registrato in `workshopsUrl`: quando la pagina ci sarà, si rimette `<a href="/workshop" data-config="workshops">` nelle quattro pagine.
+
+Attenzione al motivo, che non è estetico: `nginx.conf` ha `try_files $uri $uri/ /index.html` più `error_page 404 /index.html`, quindi **qualsiasi URL inesistente serve la main landing con status 200**, non un 404. Un link a una pagina non ancora creata non porterebbe a un errore, porterebbe alla homepage: clic apparentemente inerte per chi naviga, contenuto duplicato su due URL per i motori di ricerca. Vale per qualsiasi link che si volesse aggiungere in anticipo su una pagina futura.
 - Riga in basso: `© 2026 Golden Hour AI · P.IVA in fase di registrazione` / EN `VAT registration pending`, e un link a `/privacy/`
 
 La riga legale dice solo **Privacy**. Diceva "Privacy · Cookie · Termini" come testo non cliccabile: tre parole che sembravano un footer legale e non portavano da nessuna parte. I Termini non servono (non si vende nulla online, non ci sono account né contenuti utente) e non c'è una cookie policy perché il sito non usa cookie.

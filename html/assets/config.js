@@ -10,5 +10,7 @@ window.SITE_CONFIG = {
   urlPrivacy:      '/privacy/',
   emailAtelier:    'atelier@goldenhourai.it',
   sainetUrl:       'https://sainet.it',
-  workshopsUrl:    '/workshop',   // la pagina non esiste ancora
+  // Path deciso ma non ancora esistente: nel footer Workshop e' testo, non un
+  // link. Quando la pagina c'e', basta rimettere l'<a data-config="workshops">.
+  workshopsUrl:    '/workshop',
 };

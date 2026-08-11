@@ -1173,7 +1173,11 @@
           <li><a href="#products">Cezànne · Hospitality</a></li>
           <li><a href="/aurora" data-i18n="foot.aurora" data-config="aurora">Aurora · Education</a></li>
           <li><a href="/atelier" data-i18n="foot.atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
-          <li><a href="/workshop" data-i18n="foot.workshops" data-config="workshops">Workshop</a></li>
+          <!-- Workshop non e' ancora una pagina. Testo semplice invece di un link:
+               /workshop oggi verrebbe servito dal catch-all di nginx, cioe' mostrerebbe
+               la homepage con status 200. Quando la pagina esiste, rimettere
+               <a href="/workshop" data-config="workshops"> qui e nelle altre pagine. -->
+          <li><span data-i18n="foot.workshops">Workshop</span></li>
         </ul>
       </div>
       <div>
