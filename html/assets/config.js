@@ -10,5 +10,5 @@ window.SITE_CONFIG = {
   urlPrivacy:      '/privacy/',
   emailAtelier:    'atelier@goldenhourai.it',
   sainetUrl:       'https://sainet.it',
-  workshopsUrl:    '#',       // TODO: inserire URL workshops
+  workshopsUrl:    '/workshop',   // la pagina non esiste ancora
 };

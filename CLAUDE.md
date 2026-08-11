@@ -140,17 +140,20 @@ Il vecchio indirizzo `sostituzioni@` va tenuto come alias verso `aurora@`: è pu
 
 Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre tre: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/template.html`.
 
-Contenuto canonico:
-- Prodotti: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail (tutti e tre, sempre)
-- Community: SAINET (link a `sainetUrl`), Workshop
-- Contatti: sede legale + `info@goldenhourai.it`
+Contenuto canonico, in quest'ordine di colonne:
+1. **Brand**: logo, payoff, descrizione
+2. **Community** (SAINET, link a `sainetUrl`) e sotto **Navigazione** (Metodo, Prodotti, Prenota una call)
+3. **Prodotti**: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail, Workshop
+4. **Contatti**: sede legale + `info@goldenhourai.it`
+
+Workshop sta fra i **prodotti**, non in Community: è una futura linea di attività di GoldenHour, non un'iniziativa esterna a cui si partecipa. Punta a `/workshop` (`workshopsUrl`), pagina che non esiste ancora.
 - Riga in basso: `© 2026 Golden Hour AI · P.IVA in fase di registrazione` / EN `VAT registration pending`, e un link a `/privacy/`
 
 La riga legale dice solo **Privacy**. Diceva "Privacy · Cookie · Termini" come testo non cliccabile: tre parole che sembravano un footer legale e non portavano da nessuna parte. I Termini non servono (non si vende nulla online, non ci sono account né contenuti utente) e non c'è una cookie policy perché il sito non usa cookie.
 
 **Niente P.IVA inventata.** Finché la registrazione non è conclusa la riga dice "in fase di registrazione". Un numero segnaposto tipo `IT00000000000` è un dato legale falso pubblicato, non un placeholder innocuo.
 
-Il blocco `applyConfig` è **lo stesso identico codice** in tutte e quattro le pagine: è generico sulle chiavi, quindi va copiato senza adattarlo. Salta gli URL a `'#'`, che sono segnaposto di link non ancora decisi (oggi: `workshopsUrl`). Usa `data-config`, mai `id`.
+Il blocco `applyConfig` è **lo stesso identico codice** in tutte e cinque le pagine (`index`, `aurora`, `atelier`, `privacy`, `template`): è generico sulle chiavi, quindi va copiato senza adattarlo. Salta gli URL a `'#'`, che sono segnaposto di link non ancora decisi. Usa `data-config`, mai `id`.
 
 ## Terze parti: la regola è zero al caricamento
 

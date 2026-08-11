@@ -71,15 +71,6 @@
   color: var(--text);
 }
 
-/* Nota di lavorazione: visibile apposta, cosi' non ci si dimentica di
-   completare i dati legali prima di considerare la pagina pubblicabile. */
-.legal .todo {
-  border-left: 2px solid var(--gold);
-  padding: 10px 0 10px 14px;
-  font-size: 14px;
-  color: var(--text-faint);
-}
-
 .legal + .site-footer .foot-bottom {
   border-top: 1px solid var(--border-soft);
 }
