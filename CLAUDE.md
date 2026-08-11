@@ -144,11 +144,36 @@ Contenuto canonico:
 - Prodotti: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail (tutti e tre, sempre)
 - Community: SAINET (link a `sainetUrl`), Workshop
 - Contatti: sede legale + `info@goldenhourai.it`
-- Riga in basso: `© 2026 Golden Hour AI · P.IVA in fase di registrazione` / EN `VAT registration pending`
+- Riga in basso: `© 2026 Golden Hour AI · P.IVA in fase di registrazione` / EN `VAT registration pending`, e un link a `/privacy/`
+
+La riga legale dice solo **Privacy**. Diceva "Privacy · Cookie · Termini" come testo non cliccabile: tre parole che sembravano un footer legale e non portavano da nessuna parte. I Termini non servono (non si vende nulla online, non ci sono account né contenuti utente) e non c'è una cookie policy perché il sito non usa cookie.
 
 **Niente P.IVA inventata.** Finché la registrazione non è conclusa la riga dice "in fase di registrazione". Un numero segnaposto tipo `IT00000000000` è un dato legale falso pubblicato, non un placeholder innocuo.
 
 Il blocco `applyConfig` è **lo stesso identico codice** in tutte e quattro le pagine: è generico sulle chiavi, quindi va copiato senza adattarlo. Salta gli URL a `'#'`, che sono segnaposto di link non ancora decisi (oggi: `workshopsUrl`). Usa `data-config`, mai `id`.
+
+## Terze parti: la regola è zero al caricamento
+
+Aprendo una pagina, il browser **non deve contattare nessun host oltre al nostro**. È la ragione per cui non serve un banner cookie, e va mantenuta.
+
+- **Font self-hosted** in `html/assets/fonts/`, dichiarati in `html/assets/fonts.css`. Non reintrodurre `fonts.googleapis.com`: ogni visita trasmetteva l'IP a Google. Per cambiare famiglie o pesi si modifica `CSS_URL` in `scripts/fetch-fonts.py` e lo si riesegue (`python3 scripts/fetch-fonts.py html/assets`), poi `./stamp-assets.sh`.
+- **Calendly a due clic.** Il widget non è nel markup: c'è un segnaposto `.cal-consent` che spiega cosa comporta caricarlo, e solo al clic il JS inietta `widget.js` e l'iframe. I cookie di Calendly non si possono negare dall'esterno (same-origin policy: `sandbox` senza `allow-same-origin` li bloccherebbe ma romperebbe il widget), quindi l'unica leva reale è non caricarlo finché non lo si chiede. `hide_gdpr_banner=1` resta perché l'informativa la dà il segnaposto, prima della richiesta invece che dopo.
+
+Verifica dopo ogni modifica, sulla pagina aperta nel browser:
+
+```js
+[...new Set(performance.getEntriesByType('resource').map(r => new URL(r.name).host))]
+```
+
+Deve contenere solo il proprio host. Se compare altro, o è tornata una dipendenza esterna o ne è stata aggiunta una nuova, e la pagina privacy non è più accurata.
+
+Nota per chi misura stili nel browser: `.btn` ha una `transition` su `background` e `color`. Se si legge `getComputedStyle` subito dopo aver cambiato `data-theme`, o se la pagina non sta compositando, si ottiene il valore di partenza e sembra che il dark mode non funzioni. Azzerare le transizioni prima di misurare.
+
+## Privacy
+
+`html/privacy/` è l'unica pagina legale. Descrive cosa fa davvero il sito, quindi **va riletta ogni volta che si tocca una terza parte o si aggiunge una raccolta di dati** (un form, un analytics, un embed): se il codice cambia e la pagina no, la pagina diventa una dichiarazione falsa.
+
+Contiene un `.todo` visibile con i dati legali ancora da inserire (denominazione esatta, indirizzo completo, P.IVA). Va tolto quando ci sono. Il testo non è stato rivisto da un legale.
 
 ## Color hierarchy
 

@@ -7,6 +7,7 @@ window.SITE_CONFIG = {
   siteRoot:        'https://goldenhourai.it',
   urlAurora:       '/aurora',
   urlAtelier:      '/atelier',
+  urlPrivacy:      '/privacy/',
   emailAtelier:    'atelier@goldenhourai.it',
   sainetUrl:       'https://sainet.it',
   workshopsUrl:    '#',       // TODO: inserire URL workshops

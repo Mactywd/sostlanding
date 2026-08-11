@@ -1,0 +1,85 @@
+/* Privacy — stili specifici della pagina.
+   Il design system condiviso (variabili, reset, navbar, footer, bottoni) è in /shared.css */
+
+.legal {
+  padding: 72px 0 96px;
+}
+
+/* Colonna stretta: e' testo da leggere, non da scorrere con gli occhi. */
+.legal .container {
+  max-width: 720px;
+}
+
+.legal h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(38px, 6vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 10px 0 20px;
+  color: var(--text);
+}
+
+.legal .lead {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+
+.legal .updated {
+  font-size: 13px;
+  color: var(--text-faint);
+  margin: 0 0 8px;
+}
+
+.legal section {
+  padding-top: 36px;
+  margin-top: 36px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.legal h2 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  color: var(--text);
+}
+
+.legal p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+
+.legal p:last-child { margin-bottom: 0; }
+
+.legal a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
+  background: var(--bg-alt);
+  color: var(--text);
+}
+
+/* Nota di lavorazione: visibile apposta, cosi' non ci si dimentica di
+   completare i dati legali prima di considerare la pagina pubblicabile. */
+.legal .todo {
+  border-left: 2px solid var(--gold);
+  padding: 10px 0 10px 14px;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+.legal + .site-footer .foot-bottom {
+  border-top: 1px solid var(--border-soft);
+}

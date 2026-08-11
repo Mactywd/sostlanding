@@ -180,7 +180,7 @@
       </div>
       <div class="foot-bottom">
         <span>© 2026 Golden Hour AI · P.IVA in fase di registrazione</span>
-        <span>Privacy · Cookie · Termini</span>
+        <span><a href="/privacy/" data-config="privacy">Privacy</a></span>
       </div>
     </div>
   </footer>
@@ -193,7 +193,7 @@
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
       // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
-      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier' };
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy' };
       Object.keys(links).forEach(name => {
         const url = cfg[links[name]];
         // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare
