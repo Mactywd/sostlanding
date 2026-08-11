@@ -1159,13 +1159,13 @@
       <div>
         <h4 data-i18n="foot.contacts">Contatti</h4>
         <ul>
-          <li><span data-i18n="foot.legal">Sede legale</span><br/><span style="color:#8A7F6E" data-i18n="foot.legal.addr">Siena, Toscana, Italia</span></li>
-          <li><a href="mailto:hello@goldenhourai.it" data-config="emailMain">hello@goldenhourai.it</a></li>
+          <li><span data-i18n="foot.legal">Sede legale</span><br/><span data-i18n="foot.legal.addr">Siena, Toscana, Italia</span></li>
+          <li><a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <span data-i18n="foot.copy">© 2026 Golden Hour AI · P.IVA IT00000000000</span>
+      <span data-i18n="foot.copy">© 2026 Golden Hour AI · P.IVA in fase di registrazione</span>
       <span data-i18n="foot.legal2">Privacy · Cookie · Termini</span>
     </div>
   </div>
@@ -1287,7 +1287,7 @@
       "foot.contacts": "Contatti",
       "foot.legal": "Sede legale",
       "foot.legal.addr": "Siena, Toscana, Italia",
-      "foot.copy": "© 2026 Golden Hour AI · P.IVA IT00000000000",
+      "foot.copy": "© 2026 Golden Hour AI · P.IVA in fase di registrazione",
       "foot.legal2": "Privacy · Cookie · Termini"
     },
     en: {
@@ -1375,7 +1375,7 @@
       "foot.contacts": "Contact",
       "foot.legal": "Registered office",
       "foot.legal.addr": "Siena, Tuscany, Italy",
-      "foot.copy": "© 2026 Golden Hour AI · VAT IT00000000000",
+      "foot.copy": "© 2026 Golden Hour AI · VAT registration pending",
       "foot.legal2": "Privacy · Cookies · Terms"
     }
   };
@@ -1416,17 +1416,33 @@
   const calendlyWidget = document.getElementById('calendlyWidget');
   if (calendlyWidget) calendlyWidget.setAttribute('data-url', CAL_URL + '?hide_gdpr_banner=1&primary_color=D4A23B');
 
+  // Stesso blocco su tutte le pagine: se cambia qui, cambia anche nelle
+  // sotto-landing e in template.html.
   function applyConfig() {
     const cfg = window.SITE_CONFIG;
     if (!cfg) return;
-    document.querySelectorAll('[data-config="emailMain"]').forEach(el => {
-      el.href = 'mailto:' + cfg.emailMain;
-      el.textContent = cfg.emailMain;
+    // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
+    const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier' };
+    Object.keys(links).forEach(name => {
+      const url = cfg[links[name]];
+      // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare
+      // l'href com'e' che promettere una destinazione che non esiste.
+      if (!url || url === '#') return;
+      document.querySelectorAll('[data-config="' + name + '"]').forEach(el => { el.href = url; });
     });
-    document.querySelectorAll('[data-config="sainet"]').forEach(el => { el.href = cfg.sainetUrl; });
-    document.querySelectorAll('[data-config="workshops"]').forEach(el => { el.href = cfg.workshopsUrl; });
-    document.querySelectorAll('[data-config="aurora"]').forEach(el => { el.href = cfg.urlAurora; });
-    document.querySelectorAll('[data-config="atelier"]').forEach(el => { el.href = cfg.urlAtelier; });
+    // Email: href e testo insieme, cosi' l'indirizzo mostrato non puo'
+    // divergere da quello che si apre nel client di posta.
+    ['emailMain', 'emailAurora', 'emailAtelier'].forEach(key => {
+      if (!cfg[key]) return;
+      document.querySelectorAll('[data-config="' + key + '"]').forEach(el => {
+        el.href = 'mailto:' + cfg[key];
+        el.textContent = cfg[key];
+      });
+    });
+    // Usato dalle sotto-landing per tornare a una sezione della main landing.
+    document.querySelectorAll('[data-config="siteRoot"]').forEach(el => {
+      el.href = cfg.siteRoot + (el.dataset.configHash || '');
+    });
   }
   applyConfig();
 })();</script>

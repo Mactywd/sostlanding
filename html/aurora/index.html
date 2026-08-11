@@ -259,15 +259,15 @@
           <h4>Prodotti</h4>
           <ul>
             <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Cezànne · Hospitality</a></li>
-            <li><a href="/aurora">Aurora · Education</a></li>
-            <li><a href="/atelier">Atelier · Luxury &amp; Retail</a></li>
+            <li><a href="/aurora" data-config="aurora">Aurora · Education</a></li>
+            <li><a href="/atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
           </ul>
         </div>
 
         <div>
           <h4>Community</h4>
           <ul>
-            <li><span class="foot-sainet"><span class="pip"></span>SAINET · Siena AI Network</span></li>
+            <li><a href="https://sainet.it" data-config="sainet"><span class="foot-sainet"><span class="pip"></span>SAINET · Siena AI Network</span></a></li>
             <li><a href="#" data-config="workshops">Workshop</a></li>
           </ul>
         </div>
@@ -276,7 +276,7 @@
           <h4>Contatti</h4>
           <ul>
             <li>Sede legale<br/><span>Siena, Toscana, Italia</span></li>
-            <li><a href="mailto:aurora@goldenhourai.it" data-config="emailAurora">aurora@goldenhourai.it</a></li>
+            <li><a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a></li>
           </ul>
         </div>
 
@@ -290,18 +290,33 @@
 
   <script src="/assets/config.js"></script>
   <script>
-    // Config
+    // Config — stesso blocco su tutte le pagine: se cambia qui, cambia anche
+    // in html/index.html, nelle altre sotto-landing e in template.html.
     (function() {
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
-      document.querySelectorAll('[data-config="emailAurora"]').forEach(el => {
-        el.href = 'mailto:' + cfg.emailAurora;
-        el.textContent = cfg.emailAurora;
+      // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier' };
+      Object.keys(links).forEach(name => {
+        const url = cfg[links[name]];
+        // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare
+        // l'href com'e' che promettere una destinazione che non esiste.
+        if (!url || url === '#') return;
+        document.querySelectorAll('[data-config="' + name + '"]').forEach(el => { el.href = url; });
       });
+      // Email: href e testo insieme, cosi' l'indirizzo mostrato non puo'
+      // divergere da quello che si apre nel client di posta.
+      ['emailMain', 'emailAurora', 'emailAtelier'].forEach(key => {
+        if (!cfg[key]) return;
+        document.querySelectorAll('[data-config="' + key + '"]').forEach(el => {
+          el.href = 'mailto:' + cfg[key];
+          el.textContent = cfg[key];
+        });
+      });
+      // Usato dalle sotto-landing per tornare a una sezione della main landing.
       document.querySelectorAll('[data-config="siteRoot"]').forEach(el => {
         el.href = cfg.siteRoot + (el.dataset.configHash || '');
       });
-      document.querySelectorAll('[data-config="workshops"]').forEach(el => { el.href = cfg.workshopsUrl; });
     })();
 
     // Theme toggle

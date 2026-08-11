@@ -148,23 +148,24 @@
         <div>
           <h4>Navigazione</h4>
           <ul>
-            <li><a href="https://goldenhourai.it/#method">Metodo</a></li>
-            <li><a href="https://goldenhourai.it/#products">Prodotti</a></li>
-            <li><a href="https://goldenhourai.it/#contact">Prenota una call</a></li>
+            <li><a href="https://goldenhourai.it/#method" data-config="siteRoot" data-config-hash="/#method">Metodo</a></li>
+            <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Prodotti</a></li>
+            <li><a href="https://goldenhourai.it/#contact" data-config="siteRoot" data-config-hash="/#contact">Prenota una call</a></li>
           </ul>
           <h4>Prodotti</h4>
           <ul>
-            <li><a href="https://goldenhourai.it/#products">Cezànne · Hospitality</a></li>
-            <li><a href="/aurora">Aurora · Education</a></li>
+            <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Cezànne · Hospitality</a></li>
+            <li><a href="/aurora" data-config="aurora">Aurora · Education</a></li>
+            <li><a href="/atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
           </ul>
         </div>
 
-        <!-- Community (senza AI Festival Siena) -->
+        <!-- Community -->
         <div>
           <h4>Community</h4>
           <ul>
-            <li><span class="foot-sainet"><span class="pip"></span>SAINET · Siena AI Network</span></li>
-            <li><a href="#">Workshop</a></li>
+            <li><a href="https://sainet.it" data-config="sainet"><span class="foot-sainet"><span class="pip"></span>SAINET · Siena AI Network</span></a></li>
+            <li><a href="#" data-config="workshops">Workshop</a></li>
           </ul>
         </div>
 
@@ -173,19 +174,49 @@
           <h4>Contatti</h4>
           <ul>
             <li>Sede legale<br/><span>Siena, Toscana, Italia</span></li>
-            <li><a href="mailto:hello@goldenhourai.it">hello@goldenhourai.it</a></li>
+            <li><a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a></li>
           </ul>
         </div>
 
       </div>
       <div class="foot-bottom">
-        <span>© 2026 Golden Hour AI · P.IVA IT00000000000</span>
+        <span>© 2026 Golden Hour AI · P.IVA in fase di registrazione</span>
         <span>Privacy · Cookie · Termini</span>
       </div>
     </div>
   </footer>
 
+  <script src="/assets/config.js"></script>
   <script>
+    // Config — stesso blocco su tutte le pagine: se cambia qui, cambia anche
+    // in html/index.html e nelle sotto-landing.
+    (function() {
+      const cfg = window.SITE_CONFIG;
+      if (!cfg) return;
+      // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier' };
+      Object.keys(links).forEach(name => {
+        const url = cfg[links[name]];
+        // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare
+        // l'href com'e' che promettere una destinazione che non esiste.
+        if (!url || url === '#') return;
+        document.querySelectorAll('[data-config="' + name + '"]').forEach(el => { el.href = url; });
+      });
+      // Email: href e testo insieme, cosi' l'indirizzo mostrato non puo'
+      // divergere da quello che si apre nel client di posta.
+      ['emailMain', 'emailAurora', 'emailAtelier'].forEach(key => {
+        if (!cfg[key]) return;
+        document.querySelectorAll('[data-config="' + key + '"]').forEach(el => {
+          el.href = 'mailto:' + cfg[key];
+          el.textContent = cfg[key];
+        });
+      });
+      // Usato dalle sotto-landing per tornare a una sezione della main landing.
+      document.querySelectorAll('[data-config="siteRoot"]').forEach(el => {
+        el.href = cfg.siteRoot + (el.dataset.configHash || '');
+      });
+    })();
+
     // Theme toggle
     (function () {
       const toggle = document.getElementById('themeToggle');

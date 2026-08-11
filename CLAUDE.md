@@ -134,6 +134,22 @@ Le email vivono in `html/assets/config.js`, non nell'HTML (vedi Rule 4).
 
 Il vecchio indirizzo `sostituzioni@` va tenuto come alias verso `aurora@`: è pubblicato da mesi sul sito e nei contatti già presi.
 
+**Dove va quale indirizzo:** nel **footer** di ogni pagina va sempre `emailMain` (`info@`), identico ovunque. Le email di prodotto (`aurora@`, `atelier@`) stanno solo nella **sezione contatti in pagina** della rispettiva sotto-landing, dove sono il canale dedicato a quel prodotto.
+
+## Footer
+
+Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre tre: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/template.html`.
+
+Contenuto canonico:
+- Prodotti: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail (tutti e tre, sempre)
+- Community: SAINET (link a `sainetUrl`), Workshop
+- Contatti: sede legale + `info@goldenhourai.it`
+- Riga in basso: `© 2026 Golden Hour AI · P.IVA in fase di registrazione` / EN `VAT registration pending`
+
+**Niente P.IVA inventata.** Finché la registrazione non è conclusa la riga dice "in fase di registrazione". Un numero segnaposto tipo `IT00000000000` è un dato legale falso pubblicato, non un placeholder innocuo.
+
+Il blocco `applyConfig` è **lo stesso identico codice** in tutte e quattro le pagine: è generico sulle chiavi, quindi va copiato senza adattarlo. Salta gli URL a `'#'`, che sono segnaposto di link non ancora decisi (oggi: `workshopsUrl`). Usa `data-config`, mai `id`.
+
 ## Color hierarchy
 
 ### Rule 1 — Colore primario per pagina
