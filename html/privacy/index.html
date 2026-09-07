@@ -160,7 +160,7 @@
     (function() {
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
-      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy' };
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', gos: 'urlGos', gosPrivacy: 'urlGosPrivacy', gosTermini: 'urlGosTermini' };
       Object.keys(links).forEach(name => {
         const url = cfg[links[name]];
         if (!url || url === '#') return;

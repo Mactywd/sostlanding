@@ -7,6 +7,7 @@ Single nginx container serving two landing pages under the same domain, managed 
 - **Main:** `https://goldenhourai.it` → GoldenHour AI corporate landing
 - **Aurora:** `https://goldenhourai.it/aurora/` → product landing for school substitution management
 - **Atelier:** `https://goldenhourai.it/atelier/` → product landing luxury & retail
+- **GoldenHour OS:** `https://goldenhourai.it/gos/` → product landing della piattaforma, con le proprie pagine legali sotto `/gos/privacy/` e `/gos/termini/`
 
 Il vecchio path `/sostituzioni` (nome del prodotto prima del rebrand) è servito da un 301 permanente verso `/aurora/`. Non rimuoverlo: esistono link esterni e risultati di ricerca che lo puntano.
 
@@ -29,6 +30,15 @@ html/
       goldenhour-logo.png
       logo_with_tagline.png
       demoshort.mp4        # Hero demo video
+  gos/
+    index.html            # GoldenHour OS product landing
+    styles.css            # GoldenHour OS stylesheet
+    legal.css             # Aggiunte alle pagine legali (liste, tabelle, riquadro bozza)
+    privacy/index.html    # Privacy del prodotto (diversa da /privacy/, che copre il sito)
+    termini/index.html    # Condizioni d'uso del prodotto
+    assets/
+      goldenhour-symbol.png
+      logo_with_tagline.png
 
 nginx.conf                # Nginx routing: / → main, /aurora/ → product
 docker-compose.yml        # Traefik labels for goldenhourai.it
@@ -146,6 +156,8 @@ Contenuto canonico, in quest'ordine di colonne:
 3. **Prodotti**: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail, Workshop
 4. **Contatti**: sede legale + `info@goldenhourai.it`
 
+GoldenHour OS **non** è nella colonna Prodotti. La pagina esiste ed è pubblica (serve anche alla verifica OAuth di Google, che richiede una homepage dell'app sullo stesso dominio con il link alla privacy), ma il prodotto non è ancora in vendita al pubblico: metterlo in vetrina insieme ad Aurora e Atelier prometterebbe qualcosa che oggi non si può comprare. Quando lo sarà, la voce va aggiunta in tutte e cinque le pagine insieme.
+
 Workshop sta fra i **prodotti**, non in Community: è una futura linea di attività di GoldenHour, non un'iniziativa esterna a cui si partecipa. Oggi è **testo semplice, non un link**, perché `/workshop` non esiste ancora. Il path è già deciso e registrato in `workshopsUrl`: quando la pagina ci sarà, si rimette `<a href="/workshop" data-config="workshops">` nelle quattro pagine.
 
 Attenzione al motivo, che non è estetico: `nginx.conf` ha `try_files $uri $uri/ /index.html` più `error_page 404 /index.html`, quindi **qualsiasi URL inesistente serve la main landing con status 200**, non un 404. Un link a una pagina non ancora creata non porterebbe a un errore, porterebbe alla homepage: clic apparentemente inerte per chi naviga, contenuto duplicato su due URL per i motori di ricerca. Vale per qualsiasi link che si volesse aggiungere in anticipo su una pagina futura.
@@ -174,11 +186,21 @@ Deve contenere solo il proprio host. Se compare altro, o è tornata una dipenden
 
 Nota per chi misura stili nel browser: `.btn` ha una `transition` su `background` e `color`. Se si legge `getComputedStyle` subito dopo aver cambiato `data-theme`, o se la pagina non sta compositando, si ottiene il valore di partenza e sembra che il dark mode non funzioni. Azzerare le transizioni prima di misurare.
 
-## Privacy
+## Pagine legali
 
-`html/privacy/` è l'unica pagina legale. Descrive cosa fa davvero il sito, quindi **va riletta ogni volta che si tocca una terza parte o si aggiunge una raccolta di dati** (un form, un analytics, un embed): se il codice cambia e la pagina no, la pagina diventa una dichiarazione falsa.
+Ce ne sono tre, e coprono due cose diverse. Non vanno confuse.
 
-Contiene un `.todo` visibile con i dati legali ancora da inserire (denominazione esatta, indirizzo completo, P.IVA). Va tolto quando ci sono. Il testo non è stato rivisto da un legale.
+`html/privacy/` riguarda **il sito**: cosa succede aprendo goldenhourai.it e scrivendo a un nostro indirizzo. Descrive cosa fa davvero il sito, quindi **va riletta ogni volta che si tocca una terza parte o si aggiunge una raccolta di dati** (un form, un analytics, un embed): se il codice cambia e la pagina no, la pagina diventa una dichiarazione falsa.
+
+`html/gos/privacy/` e `html/gos/termini/` riguardano **il prodotto** GoldenHour OS, cioè i dati delle aziende clienti che passano dentro al sistema. Il footer del sito continua a linkare solo `/privacy/`: quelle due sono documenti contrattuali del prodotto, non informative di navigazione, e si raggiungono da `/gos/`.
+
+Nota storica: questo file diceva che i Termini non servivano, "non si vende nulla online, non ci sono account né contenuti utente". Era vero del sito e resta vero del sito. Non è più vero del prodotto, che ha clienti, credenziali di terzi collegate e output su cui qualcuno prende decisioni.
+
+Le tre pagine hanno un blocco visibile con quello che manca ancora: `.todo` sulla privacy del sito (denominazione esatta, indirizzo completo, P.IVA), `.nota-bozza` sulle due del prodotto. Vanno tolti quando i punti che elencano sono chiusi, non prima: sono deliberatamente vistosi perché una pagina legale pubblicata con dentro un segnaposto è peggio di una pagina assente. Nessuno dei tre testi è stato rivisto da un legale.
+
+Le due pagine del prodotto caricano `shared.css`, poi `privacy/styles.css` (gli stili del testo lungo, riusati) e infine `gos/legal.css`, che aggiunge solo liste, tabelle e il riquadro di bozza. Toccando `privacy/styles.css` si toccano anche loro.
+
+`/gos/` non ha un `location` in `nginx.conf` e non ne ha bisogno: `location /` fa `try_files $uri $uri/`, che serve `html/gos/index.html` e reindirizza `/gos` a `/gos/`. È lo stesso motivo per cui `/privacy/` funziona senza un blocco proprio. Meglio così: cambiare `nginx.conf` costringe a `docker compose restart web` per via del bind mount su file singolo (vedi sopra).
 
 ## Color hierarchy
 

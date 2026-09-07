@@ -8,6 +8,9 @@ window.SITE_CONFIG = {
   urlAurora:       '/aurora',
   urlAtelier:      '/atelier',
   urlPrivacy:      '/privacy/',
+  urlGos:          '/gos/',
+  urlGosPrivacy:   '/gos/privacy/',
+  urlGosTermini:   '/gos/termini/',
   emailAtelier:    'atelier@goldenhourai.it',
   sainetUrl:       'https://sainet.it',
   // Path deciso ma non ancora esistente: nel footer Workshop e' testo, non un

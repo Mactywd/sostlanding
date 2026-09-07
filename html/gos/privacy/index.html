@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy di GoldenHour OS · GoldenHour AI</title>
+  <meta name="description" content="Quali dati tratta GoldenHour OS, chi li elabora, per quanto tempo e con quali diritti."/>
+  <meta name="robots" content="index, follow"/>
+
+  <link rel="icon" href="/assets/logo.png" type="image/png"/>
+
+  <link rel="preload" href="/assets/fonts.css?v=7cda0fc2" as="style"/>
+  <link href="/assets/fonts.css?v=7cda0fc2" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="/shared.css?v=8922ee96"/>
+  <!-- La pagina legale del sito ha gia' gli stili del testo lungo: li
+       riusiamo invece di riscriverli, e legal.css aggiunge solo cio' che
+       li manca (liste, tabelle, riquadro di bozza). -->
+  <link rel="stylesheet" href="/privacy/styles.css?v=55e34710"/>
+  <link rel="stylesheet" href="../legal.css?v=c2fd02c8"/>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container row">
+      <a href="/" class="brand" aria-label="GoldenHour AI · Privacy di GoldenHour OS">
+        <span>GoldenHour AI</span>
+        <span class="sep">/</span>
+        <span class="product">Privacy · GoldenHour OS</span>
+      </a>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+          <svg id="themeIconLight" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg id="themeIconDark" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="/gos/" data-config="gos" class="btn btn-ghost btn-sm">GoldenHour OS</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="legal">
+    <div class="container">
+
+      <!-- ═══════════════════════════════════════════════════════════════════
+           BOZZA · NON PUBBLICARE CON QUESTO RIQUADRO ANCORA PRESENTE.
+           Va rimosso solo dopo aver chiuso i punti che elenca. Sono
+           sostanziali: senza, questa pagina dichiara cose non vere.
+           ═══════════════════════════════════════════════════════════════ -->
+      <div class="nota-bozza">
+        <strong>Bozza · da chiudere prima della pubblicazione</strong>
+        <ol>
+          <li><b>Il §5 descrive lo stato di destinazione, non quello attuale.</b>
+              Oggi le istanze GOS girano sul profilo <code>claude-subscription</code>
+              (abbonamento Claude), non sulle condizioni commerciali Anthropic.
+              Finché non si passa al profilo <code>claude-api</code> con contratto
+              commerciale, il §5 non è veritiero e il documento non va pubblicato.</li>
+          <li><b>Denominazione legale, sede e P.IVA</b> vanno inseriti al posto dei
+              segnaposto, come già annotato nella privacy del sito.</li>
+          <li><b>Revisione legale</b> prima della pubblicazione.</li>
+        </ol>
+      </div>
+
+      <span class="eyebrow">Informativa</span>
+      <h1>Privacy di GoldenHour OS</h1>
+      <p class="lead">
+        Questa pagina riguarda <strong>GoldenHour OS</strong>, il sistema che
+        forniamo alle aziende clienti. È un documento diverso dalla
+        <a href="/privacy/" data-config="privacy">privacy del sito</a>, che copre soltanto le pagine di
+        goldenhourai.it. Le condizioni d'uso stanno invece nei
+        <a href="/gos/termini/" data-config="gosTermini">termini di GoldenHour OS</a>. Anche questa è
+        scritta per essere letta, non per essere accettata.
+      </p>
+      <p class="updated">Ultimo aggiornamento: 7 settembre 2026</p>
+
+      <section>
+        <h2>1. A chi si rivolge, e perché è insolita</h2>
+        <p>
+          GoldenHour OS non è un servizio per il pubblico. Lo forniamo a un'azienda
+          cliente, che lo usa nel proprio lavoro, spesso a sua volta per servire i
+          propri clienti. I dati che passano nel sistema quindi non sono nostri e
+          quasi mai riguardano chi legge questa pagina: sono dati dell'azienda che ha
+          acquistato il servizio.
+        </p>
+        <p>
+          Questo cambia i ruoli rispetto a un servizio ordinario, ed è il punto da cui
+          discende tutto il resto.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Chi decide e chi esegue</h2>
+        <p>
+          La catena ha tre anelli, e vale la pena leggerla per intero perché ognuno
+          risponde di cose diverse.
+        </p>
+        <table class="ruoli">
+          <thead>
+            <tr><th>Soggetto</th><th>Ruolo</th><th>Cosa significa</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>L'azienda cliente</td>
+              <td>Titolare del trattamento</td>
+              <td>Decide quali dati immettere e a quale scopo. I dati sono suoi.</td>
+            </tr>
+            <tr>
+              <td>Golden Hour AI</td>
+              <td>Responsabile del trattamento</td>
+              <td>Tratta quei dati per conto del cliente e solo secondo le sue istruzioni, in forza di un accordo scritto ex art. 28 GDPR.</td>
+            </tr>
+            <tr>
+              <td>I fornitori elencati al §5</td>
+              <td>Sub-responsabili</td>
+              <td>Elaborano per nostro conto la parte di trattamento che gli affidiamo, ciascuno con un proprio accordo.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Quando il cliente è a sua volta un'agenzia che usa il sistema per i propri
+          clienti finali, il rapporto fra l'agenzia e i suoi clienti è governato dai
+          contratti fra loro, non da questo documento. Noi restiamo responsabili
+          rispetto al nostro cliente diretto.
+        </p>
+        <p>
+          Titolare del trattamento per quanto ci riguarda è
+          <strong>[DENOMINAZIONE LEGALE]</strong>, con sede in
+          <strong>[INDIRIZZO]</strong>, P.IVA <strong>[P.IVA]</strong>.
+          Per qualsiasi richiesta:
+          <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>3. Quali dati passano nel sistema</h2>
+        <p>
+          Due categorie, con caratteristiche molto diverse.
+        </p>
+        <p>
+          <strong>Dati che il cliente immette.</strong> Documenti caricati, contenuti di
+          conversazioni sui canali collegati, file di configurazione, richieste scritte
+          all'assistente. Qui possono esserci dati personali: nomi, indirizzi email,
+          contatti, informazioni su singole persone. La scelta di immetterli è del
+          cliente, che risponde di averne titolo.
+        </p>
+        <p>
+          <strong>Dati letti dalle piattaforme pubblicitarie.</strong> Quando il cliente
+          collega un account Google Ads o Meta, leggiamo esclusivamente
+          <em>statistiche aggregate di campagna</em>: nome e stato della campagna, data,
+          spesa, impression, click, conversioni e valore delle conversioni, più la
+          valuta e il fuso orario dell'account. Nient'altro.
+        </p>
+        <p>
+          Vale la pena essere espliciti su cosa questo esclude: da quel canale
+          <strong>non</strong> leggiamo elenchi di utenti, liste di pubblico, dati di
+          contatto, identificativi pubblicitari, dati di pagamento o informazioni sui
+          clienti dell'inserzionista. Le statistiche di campagna non identificano
+          nessuna persona fisica.
+        </p>
+      </section>
+
+      <section>
+        <h2>4. Dati ottenuti tramite le API di Google</h2>
+        <p>
+          Se il cliente collega un account Google Ads, l'accesso avviene tramite il
+          consenso OAuth di Google, con un'utenza a cui l'inserzionista ha concesso il
+          ruolo di <em>sola lettura</em> sul proprio account. Il livello di permesso è
+          applicato da Google, non dal nostro software: non possiamo creare, modificare
+          o sospendere campagne, né accedere ai metodi di pagamento.
+        </p>
+        <p>
+          I dati ottenuti tramite le API di Google sono usati per un solo scopo:
+          produrre, per il cliente che ha autorizzato l'accesso, i report e i controlli
+          che ha richiesto. In particolare:
+        </p>
+        <ul>
+          <li>non vengono venduti, ceduti o comunicati a terzi;</li>
+          <li>non vengono usati per pubblicità, profilazione o marketing;</li>
+          <li>non vengono usati per addestrare modelli di intelligenza artificiale, nostri o di terzi;</li>
+          <li>non vengono uniti a dati di altri clienti né usati per finalità diverse da quelle per cui l'accesso è stato concesso.</li>
+        </ul>
+        <p>
+          L'inserzionista può revocare l'accesso in qualsiasi momento e in due modi
+          indipendenti, entrambi immediatamente efficaci: rimuovendo la nostra utenza
+          dal proprio account Google Ads, oppure revocando l'autorizzazione dell'app da
+          <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com</a>.
+          Dopo la revoca il sistema smette di leggere e lo segnala come errore di
+          accesso, senza tentare strade alternative.
+        </p>
+        <p>
+          Lo stesso vale per Meta, dove l'accesso avviene con un token di sistema
+          emesso dal cliente e revocabile dal suo Business Manager.
+        </p>
+      </section>
+
+      <section>
+        <h2>5. Chi elabora i dati per nostro conto</h2>
+        <p>
+          Il sistema si appoggia a un modello linguistico per interpretare le richieste
+          e produrre i testi. Il contenuto della sessione, cioè quello che il cliente
+          scrive e i dati che il sistema recupera per rispondere, viene inviato al
+          fornitore del modello.
+        </p>
+        <table class="ruoli">
+          <thead>
+            <tr><th>Fornitore</th><th>Cosa fa</th><th>Dove</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Anthropic</td>
+              <td>Elaborazione del modello linguistico, sotto condizioni commerciali che escludono l'uso dei dati per l'addestramento e prevedono una conservazione minima.</td>
+              <td>Stati Uniti, con clausole contrattuali standard</td>
+            </tr>
+            <tr>
+              <td>Hetzner</td>
+              <td>Server su cui gira il sistema e su cui risiedono i dati del cliente.</td>
+              <td>Unione Europea</td>
+            </tr>
+            <tr>
+              <td>Cloudflare</td>
+              <td>Distribuzione e protezione del traffico verso l'interfaccia web.</td>
+              <td>Rete distribuita</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Questo elenco è la fonte di verità: se aggiungiamo o sostituiamo un
+          fornitore, aggiorniamo questa pagina e ne informiamo il cliente prima che il
+          cambiamento abbia effetto, così che possa opporsi. Nessun fornitore entra in
+          produzione senza un accordo sul trattamento dei dati già in essere.
+        </p>
+        <p>
+          <strong>Nessun dato del cliente viene usato per addestrare modelli</strong>,
+          né da noi né dai fornitori. È una condizione contrattuale, non una policy che
+          possiamo cambiare unilateralmente.
+        </p>
+      </section>
+
+      <section>
+        <h2>6. Per quanto conserviamo</h2>
+        <p>
+          I dati che il cliente immette nel sistema restano disponibili per la durata
+          del rapporto e, salvo diversa istruzione scritta, per un massimo di
+          <strong>24 mesi</strong> dalla loro creazione. Alla cessazione del contratto
+          restituiamo o cancelliamo i dati, a scelta del cliente, entro trenta giorni.
+        </p>
+        <p>
+          I log tecnici (accessi, errori, consumi) non contengono il contenuto delle
+          conversazioni e sono conservati per il tempo necessario alla sicurezza e alla
+          fatturazione.
+        </p>
+      </section>
+
+      <section>
+        <h2>7. Sicurezza</h2>
+        <ul>
+          <li>Le credenziali degli account collegati sono <strong>cifrate a riposo</strong> e non sono più leggibili dall'interfaccia dopo l'inserimento.</li>
+          <li>Ogni utente lavora in uno spazio isolato: i dati di una sessione non sono raggiungibili da un'altra.</li>
+          <li>Le azioni con effetti verso l'esterno, come inviare un messaggio o scrivere su un sistema di terzi, richiedono l'approvazione esplicita di una persona prima di essere eseguite.</li>
+          <li>Le comunicazioni con i fornitori avvengono su canali cifrati; le chiavi non risiedono nel codice.</li>
+          <li>In caso di violazione dei dati informiamo il cliente senza ingiustificato ritardo, così che possa adempiere ai propri obblighi di notifica entro 72 ore.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>8. Trasferimenti fuori dall'Unione Europea</h2>
+        <p>
+          I dati risiedono su server nell'Unione Europea. L'elaborazione del modello
+          linguistico avviene però negli Stati Uniti: il trasferimento è coperto dalle
+          clausole contrattuali standard approvate dalla Commissione Europea, incluse
+          nell'accordo con il fornitore. Lo dichiariamo qui perché il cliente, in quanto
+          titolare, deve poterlo riportare nella propria informativa.
+        </p>
+      </section>
+
+      <section>
+        <h2>9. Diritti delle persone interessate</h2>
+        <p>
+          Chi voglia esercitare i propri diritti su dati trattati attraverso GoldenHour
+          OS deve rivolgersi <strong>all'azienda cliente</strong>, che è il titolare del
+          trattamento e l'unico soggetto che può decidere sulla richiesta. Noi
+          assistiamo il titolare nel dare seguito a quelle richieste, come previsto
+          dall'accordo fra noi.
+        </p>
+        <p>
+          Se non sai a quale azienda rivolgerti, scrivici a
+          <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>:
+          ti indirizziamo noi, senza accedere ai tuoi dati per farlo.
+        </p>
+        <p>
+          Resta impregiudicato il diritto di presentare reclamo al
+          <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>10. Modifiche</h2>
+        <p>
+          Se cambiamo qualcosa di sostanziale, un fornitore, una finalità o un tempo di
+          conservazione, aggiorniamo questa pagina e ne diamo comunicazione al cliente
+          prima che il cambiamento produca effetti. La data in alto dice sempre quando
+          è stata toccata l'ultima volta.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="foot-bottom">
+        <span>© 2026 Golden Hour AI · P.IVA in fase di registrazione</span>
+        <span><a href="/privacy/" data-config="privacy">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/config.js"></script>
+  <script>
+    // Config — stesso blocco su tutte le pagine: se cambia qui, cambia anche
+    // in html/index.html, nelle sotto-landing e in template.html.
+    (function() {
+      const cfg = window.SITE_CONFIG;
+      if (!cfg) return;
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', gos: 'urlGos', gosPrivacy: 'urlGosPrivacy', gosTermini: 'urlGosTermini' };
+      Object.keys(links).forEach(name => {
+        const url = cfg[links[name]];
+        if (!url || url === '#') return;
+        document.querySelectorAll('[data-config="' + name + '"]').forEach(el => { el.href = url; });
+      });
+      ['emailMain', 'emailAurora', 'emailAtelier'].forEach(key => {
+        if (!cfg[key]) return;
+        document.querySelectorAll('[data-config="' + key + '"]').forEach(el => {
+          el.href = 'mailto:' + cfg[key];
+          el.textContent = cfg[key];
+        });
+      });
+      document.querySelectorAll('[data-config="siteRoot"]').forEach(el => {
+        el.href = cfg.siteRoot + (el.dataset.configHash || '');
+      });
+    })();
+
+    // Theme toggle
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const iconLight = document.getElementById('themeIconLight');
+      const iconDark  = document.getElementById('themeIconDark');
+      const html = document.documentElement;
+
+      const saved = localStorage.getItem('gh-theme') || 'light';
+      html.setAttribute('data-theme', saved);
+      if (saved === 'dark') {
+        iconLight.style.display = 'none';
+        iconDark.style.display  = 'block';
+      }
+
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('gh-theme', next);
+        iconLight.style.display = next === 'dark' ? 'none'  : 'block';
+        iconDark.style.display  = next === 'dark' ? 'block' : 'none';
+      });
+    })();
+  </script>
+</body>
+</html>

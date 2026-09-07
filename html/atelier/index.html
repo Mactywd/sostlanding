@@ -322,7 +322,7 @@
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
       // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
-      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy' };
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', gos: 'urlGos', gosPrivacy: 'urlGosPrivacy', gosTermini: 'urlGosTermini' };
       Object.keys(links).forEach(name => {
         const url = cfg[links[name]];
         // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare
