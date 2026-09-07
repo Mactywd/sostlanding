@@ -93,7 +93,7 @@ Le pagine devono **illustrare** il prodotto, non convincere. Registro da documen
 - **Niente titoli a due tempi in antitesi** ("Tutto il necessario, / niente di superfluo"). Un `h2` è una frase dichiarativa semplice che dice di cosa parla la sezione.
 - **Niente chiuse a effetto** ("Ha pianto.", "è stata una rivoluzione", "Il ricordo non si perde"). Se una frase esiste per l'enfasi e non per l'informazione, va tolta.
 - **Niente testimonianze inventate.** Le citazioni vanno usate solo se reali e attribuibili; finché non ci sono, la sezione non esiste. Un placeholder dichiarato (come sulla main landing) è accettabile, cinque nomi di fantasia no.
-- **Numeri veri o niente numeri.** Evitare metriche decorative (`∞`, `0 fogli Excel`).
+- **Numeri veri o niente numeri.** Evitare metriche decorative (`∞`, `0 fogli Excel`). È il motivo per cui la scheda di GoldenHour OS su `html/index.html` non ha `.metric-row` né `.case-quote`: non ci sono ancora numeri misurati né una citazione reale e attribuibile, e una scheda più corta è preferibile a due metriche inventate. Quando ci saranno, si aggiungono.
 - Preferire il contenuto verificabile e specifico del prodotto alla persuasione.
 - **Non presentare come fisso ciò che è configurabile.** La generazione delle sostituzioni (Aurora) e il listino/formati (Atelier) si definiscono cliente per cliente: le pagine descrivono *cosa* si configura, mai *quale* sia la configurazione. Niente ordini di priorità dichiarati, niente taglie o prezzi in vetrina.
 
@@ -148,15 +148,15 @@ Il vecchio indirizzo `sostituzioni@` va tenuto come alias verso `aurora@`: è pu
 
 ## Footer
 
-Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre tre: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/template.html`.
+Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre quattro: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/gos/`, `html/template.html`. Le due pagine legali sotto `/gos/` hanno solo la riga in basso, come `/privacy/`: quelle non contano.
+
+GoldenHour OS è nella colonna Prodotti come gli altri, ma è l'unica voce che non è un verticale: è la piattaforma su cui gli altri stanno. Per questo l'etichetta è `· Piattaforma` e la scheda sulla main landing è l'ultima delle quattro.
 
 Contenuto canonico, in quest'ordine di colonne:
 1. **Brand**: logo, payoff, descrizione
 2. **Community** (SAINET, link a `sainetUrl`) e sotto **Navigazione** (Metodo, Prodotti, Prenota una call)
-3. **Prodotti**: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail, Workshop
+3. **Prodotti**: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail, GoldenHour OS · Piattaforma, Workshop
 4. **Contatti**: sede legale + `info@goldenhourai.it`
-
-GoldenHour OS **non** è nella colonna Prodotti. La pagina esiste ed è pubblica (serve anche alla verifica OAuth di Google, che richiede una homepage dell'app sullo stesso dominio con il link alla privacy), ma il prodotto non è ancora in vendita al pubblico: metterlo in vetrina insieme ad Aurora e Atelier prometterebbe qualcosa che oggi non si può comprare. Quando lo sarà, la voce va aggiunta in tutte e cinque le pagine insieme.
 
 Workshop sta fra i **prodotti**, non in Community: è una futura linea di attività di GoldenHour, non un'iniziativa esterna a cui si partecipa. Oggi è **testo semplice, non un link**, perché `/workshop` non esiste ancora. Il path è già deciso e registrato in `workshopsUrl`: quando la pagina ci sarà, si rimette `<a href="/workshop" data-config="workshops">` nelle quattro pagine.
 
