@@ -143,29 +143,49 @@
           cliente, che risponde di averne titolo.
         </p>
         <p>
-          <strong>Dati letti dalle piattaforme pubblicitarie.</strong> Quando il cliente
-          collega un account Google Ads o Meta, leggiamo esclusivamente
-          <em>statistiche aggregate di campagna</em>: nome e stato della campagna, data,
-          spesa, impression, click, conversioni e valore delle conversioni, più la
-          valuta e il fuso orario dell'account. Nient'altro.
+          <strong>Dati letti dai sistemi collegati.</strong> Attraverso i connettori, il
+          sistema legge i dati dei sistemi che il cliente decide di collegare. Quali
+          siano dipende dal connettore attivo e dal lavoro richiesto: il criterio è
+          sempre il minimo che serve a produrre quel risultato, con il permesso più
+          basso che lo consente. Un connettore non attivo è un sistema che il software
+          non vede.
         </p>
         <p>
-          Vale la pena essere espliciti su cosa questo esclude: da quel canale
-          <strong>non</strong> leggiamo elenchi di utenti, liste di pubblico, dati di
-          contatto, identificativi pubblicitari, dati di pagamento o informazioni sui
-          clienti dell'inserzionista. Le statistiche di campagna non identificano
-          nessuna persona fisica.
+          Quel perimetro non è uguale per tutti i clienti, quindi non lo si può
+          elencare una volta per sempre in questa pagina: è definito nel contratto e
+          nell'accordo sul trattamento, e il cliente lo conosce prima di collegare
+          qualcosa. Dove una piattaforma richiede una dichiarazione puntuale, la
+          dichiarazione sta qui: è il caso del paragrafo che segue.
         </p>
       </section>
 
+      <!-- Questo paragrafo NON va generalizzato insieme agli altri. E' la
+           dichiarazione che la verifica OAuth di Google pretende: deve dire
+           quali dati l'app ottiene dalle API di Google e cosa ne fa, in modo
+           puntuale. Un testo generico qui fa fallire la verifica. -->
       <section>
         <h2>4. Dati ottenuti tramite le API di Google</h2>
+        <p>
+          Questo paragrafo è volutamente più circostanziato degli altri: riguarda un
+          connettore specifico, e le condizioni d'uso delle API di Google richiedono
+          che sia dichiarato per esteso.
+        </p>
         <p>
           Se il cliente collega un account Google Ads, l'accesso avviene tramite il
           consenso OAuth di Google, con un'utenza a cui l'inserzionista ha concesso il
           ruolo di <em>sola lettura</em> sul proprio account. Il livello di permesso è
           applicato da Google, non dal nostro software: non possiamo creare, modificare
           o sospendere campagne, né accedere ai metodi di pagamento.
+        </p>
+        <p>
+          Da quell'account leggiamo esclusivamente <em>statistiche aggregate di
+          campagna</em>: nome, identificativo e stato della campagna, data, spesa,
+          impression, click, conversioni e valore delle conversioni, più la valuta e il
+          fuso orario dell'account. Nient'altro. In particolare <strong>non</strong>
+          leggiamo elenchi di utenti, liste di pubblico, dati di contatto,
+          identificativi pubblicitari, dati di pagamento o informazioni sui clienti
+          dell'inserzionista. Le statistiche di campagna non identificano nessuna
+          persona fisica.
         </p>
         <p>
           I dati ottenuti tramite le API di Google sono usati per un solo scopo:

@@ -109,14 +109,14 @@
 @media (max-width: 900px) { .steps { grid-template-columns: 1fr; } }
 
 /* ---------- Perimetro dei dati ----------
-   Due colonne affiancate: cosa entra e cosa non entra. Non e' una sequenza,
-   quindi niente numerazione (vedi Regole editoriali in CLAUDE.md). */
+   Tre principi affiancati, non una sequenza: niente numerazione
+   (vedi Regole editoriali in CLAUDE.md). */
 .perimetro { background: var(--bg); }
 .perimetro-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 .perimetro-col {
   background: var(--card);
@@ -125,34 +125,16 @@
   padding: 30px 32px;
 }
 .perimetro-col h3 {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
-  margin: 0 0 4px;
-  display: flex; align-items: center; gap: 9px;
+  margin: 0 0 10px;
 }
-.perimetro-col h3 svg { flex-shrink: 0; }
-.perimetro-col .si svg { color: var(--green); }
-[data-theme="dark"] .perimetro-col .si svg { color: var(--gold-soft); }
-.perimetro-col .no svg { color: var(--text-faint); }
-.perimetro-col > p {
-  font-size: 14px;
-  color: var(--text-faint);
-  margin: 0 0 18px;
-}
-.perimetro-col ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--border-soft);
-}
-.perimetro-col li {
-  font-size: 15px;
-  line-height: 1.5;
+.perimetro-col p {
+  font-size: 15.5px;
+  line-height: 1.55;
   color: var(--text-muted);
-  padding: 11px 0;
-  border-bottom: 1px solid var(--border-soft);
+  margin: 0;
 }
-.perimetro-col li:last-child { border-bottom: 0; padding-bottom: 0; }
 .perimetro-note {
   margin: 28px auto 0;
   max-width: 68ch;
@@ -166,9 +148,12 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-@media (max-width: 820px) { .perimetro-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .perimetro-grid { grid-template-columns: 1fr; } }
 
-/* ---------- Contatti ---------- */
+/* ---------- Contatti ----------
+   Stessa impaginazione di aurora e atelier: testo a sinistra, card del
+   calendario a destra. Il widget Calendly non e' nel markup, ci arriva
+   solo dopo il clic (vedi il blocco JS in index.html). */
 .contact {
   background: var(--bg-alt);
   border-top: 1px solid var(--border-soft);
@@ -176,17 +161,24 @@
 [data-theme="dark"] .contact {
   background: color-mix(in oklab, var(--green-deep) 25%, var(--bg));
 }
-.contact .section-head { margin-bottom: 28px; }
-.contact-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  align-items: start;
 }
+.contact-info { padding-top: 8px; }
+.contact-info h2 { margin-bottom: 18px; text-align: left; margin-top: 18px; }
+.contact-info > p { font-size: 17px; max-width: 38ch; }
+.contact-meta { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+.contact-meta .row { display: flex; gap: 12px; align-items: center; font-size: 14.5px; color: var(--text-muted); }
+.contact-meta .row svg { color: var(--green); flex-shrink: 0; }
+[data-theme="dark"] .contact-meta .row svg { color: var(--gold-soft); }
+
 .contact-legal {
-  margin: 30px auto 0;
-  max-width: 60ch;
-  text-align: center;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
   font-size: 14.5px;
   line-height: 1.7;
   color: var(--text-muted);
@@ -195,6 +187,20 @@
   color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.calendly-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.calendly-inline-widget iframe { display: block; }
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .calendly-inline-widget { height: 600px !important; }
 }
 
 /* ---------- Animazioni ---------- */
