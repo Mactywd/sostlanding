@@ -17,6 +17,8 @@ Il vecchio path `/sostituzioni` (nome del prodotto prima del rebrand) è servito
 html/
   index.html              # GoldenHour AI main landing (standalone, production-ready)
   404.html                # Pagina di errore, servita da error_page (noindex)
+  robots.txt              # Tutto indicizzabile + rimando alla sitemap
+  sitemap.xml             # Sette URL scritti a mano: aggiornare <lastmod> a mano
   shared.css              # Design system condiviso (token, navbar, footer, pulsanti)
   assets/
     logo.png              # GoldenHour logo (square)
@@ -149,6 +151,12 @@ Verifica dopo il deploy: `curl -s https://goldenhourai.it/aurora/ | grep stylesh
 ```
 
 Cambiare il termine significa cambiarlo in tre posti: lo script, il commento in `nginx.conf` e il testo di `html/privacy/`. Se divergono, l'informativa diventa una dichiarazione falsa.
+
+### Sitemap e verifica OAuth
+
+`html/sitemap.xml` elenca sette URL e ha le `<lastmod>` scritte a mano: vanno aggiornate quando il contenuto di una pagina cambia davvero. Una data ferma e' meglio di una sbagliata, perche' Google smette di fidarsi di `lastmod` se lo trova inattendibile. Gli URL elencati devono rispondere **200, mai 301**: niente varianti senza slash finale.
+
+Il §4 di `html/gos/privacy/` contiene la dichiarazione **Limited Use** con il richiamo esplicito alla Google API Services User Data Policy, in italiano e in inglese. Non e' prosa: e' la formula che la verifica OAuth di Google cerca, e senza quella la richiesta viene respinta. Non riscriverla ne' accorciarla.
 
 ## Email
 

@@ -1,0 +1,10 @@
+# goldenhourai.it
+# Il sito e' interamente pubblico: non ci sono aree riservate da escludere.
+# /404.html non e' elencata qui perche' porta gia' <meta name="robots"
+# content="noindex">, che e' la sede giusta per una pagina che i crawler
+# raggiungono solo per errore.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://goldenhourai.it/sitemap.xml
