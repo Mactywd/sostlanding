@@ -41,25 +41,6 @@
   <main class="legal">
     <div class="container">
 
-      <!-- ═══════════════════════════════════════════════════════════════════
-           BOZZA · NON PUBBLICARE CON QUESTO RIQUADRO ANCORA PRESENTE.
-           Va rimosso solo dopo aver chiuso i punti che elenca. Sono
-           sostanziali: senza, questa pagina dichiara cose non vere.
-           ═══════════════════════════════════════════════════════════════ -->
-      <div class="nota-bozza">
-        <strong>Bozza · da chiudere prima della pubblicazione</strong>
-        <ol>
-          <li><b>Il §5 descrive lo stato di destinazione, non quello attuale.</b>
-              Oggi le istanze GOS girano sul profilo <code>claude-subscription</code>
-              (abbonamento Claude), non sulle condizioni commerciali Anthropic.
-              Finché non si passa al profilo <code>claude-api</code> con contratto
-              commerciale, il §5 non è veritiero e il documento non va pubblicato.</li>
-          <li><b>Denominazione legale, sede e P.IVA</b> vanno inseriti al posto dei
-              segnaposto, come già annotato nella privacy del sito.</li>
-          <li><b>Revisione legale</b> prima della pubblicazione.</li>
-        </ol>
-      </div>
-
       <span class="eyebrow">Informativa</span>
       <h1>Privacy di GoldenHour OS</h1>
       <p class="lead">
@@ -70,7 +51,7 @@
         <a href="/gos/termini/" data-config="gosTermini">termini di GoldenHour OS</a>. Anche questa è
         scritta per essere letta, non per essere accettata.
       </p>
-      <p class="updated">Ultimo aggiornamento: 7 settembre 2026</p>
+      <p class="updated">Ultimo aggiornamento: 21 settembre 2026</p>
 
       <section>
         <h2>1. A chi si rivolge, e perché è insolita</h2>
@@ -123,8 +104,9 @@
         </p>
         <p>
           Titolare del trattamento per quanto ci riguarda è
-          <strong>[DENOMINAZIONE LEGALE]</strong>, con sede in
-          <strong>[INDIRIZZO]</strong>, P.IVA <strong>[P.IVA]</strong>.
+          <strong>Simone Mattera</strong>, con sede in
+          <strong>SP 111/A 1, loc. Monteaperti, 53019 Castelnuovo Berardenga (SI)</strong>, P.IVA <strong>01556970521</strong>,
+          che opera con il marchio Golden Hour AI.
           Per qualsiasi richiesta:
           <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>.
         </p>
@@ -220,15 +202,25 @@
           scrive e i dati che il sistema recupera per rispondere, viene inviato al
           fornitore del modello.
         </p>
+        <p>
+          <strong>Oggi il fornitore del modello non è ancora scelto, e nel sistema non
+          ci sono dati di clienti.</strong> Siamo in una fase di valutazione in cui
+          confrontiamo più modelli su dati di prova nostri: per farlo le richieste
+          passano da OpenRouter, che le instrada verso i fornitori dei modelli in
+          esame. Nessun dato di un cliente segue quel percorso, perché nessun cliente
+          è ancora in produzione. Quando il modello sarà scelto, il fornitore verrà
+          nominato nella tabella qui sotto e l'accordo sul trattamento firmato
+          <em>prima</em> che il primo dato di un cliente entri nel sistema.
+        </p>
         <table class="ruoli">
           <thead>
             <tr><th>Fornitore</th><th>Cosa fa</th><th>Dove</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td>Anthropic</td>
-              <td>Elaborazione del modello linguistico, sotto condizioni commerciali che escludono l'uso dei dati per l'addestramento e prevedono una conservazione minima.</td>
-              <td>Stati Uniti, con clausole contrattuali standard</td>
+              <td>Da nominare</td>
+              <td>Elaborazione del modello linguistico. Il fornitore è in corso di scelta: il nome compare qui, con l'accordo sul trattamento già firmato, prima dell'ingresso del primo cliente.</td>
+              <td>Dichiarato qui alla scelta</td>
             </tr>
             <tr>
               <td>Hetzner</td>
@@ -240,6 +232,11 @@
               <td>Distribuzione e protezione del traffico verso l'interfaccia web.</td>
               <td>Rete distribuita</td>
             </tr>
+            <tr>
+              <td>Calendly</td>
+              <td>Calendario per fissare gli appuntamenti. Si carica solo dopo un clic esplicito: finché non lo si chiede, il browser non lo contatta.</td>
+              <td>Stati Uniti, con clausole contrattuali standard</td>
+            </tr>
           </tbody>
         </table>
         <p>
@@ -250,8 +247,9 @@
         </p>
         <p>
           <strong>Nessun dato del cliente viene usato per addestrare modelli</strong>,
-          né da noi né dai fornitori. È una condizione contrattuale, non una policy che
-          possiamo cambiare unilateralmente.
+          né da noi né dai fornitori. È un criterio di selezione prima ancora che una
+          policy: un fornitore che non lo garantisce per contratto non entra in
+          produzione.
         </p>
       </section>
 
@@ -285,10 +283,17 @@
         <h2>8. Trasferimenti fuori dall'Unione Europea</h2>
         <p>
           I dati risiedono su server nell'Unione Europea. L'elaborazione del modello
-          linguistico avviene però negli Stati Uniti: il trasferimento è coperto dalle
-          clausole contrattuali standard approvate dalla Commissione Europea, incluse
-          nell'accordo con il fornitore. Lo dichiariamo qui perché il cliente, in quanto
-          titolare, deve poterlo riportare nella propria informativa.
+          linguistico avverrà con ogni probabilità negli Stati Uniti: quando il
+          fornitore sarà scelto (§5), il trasferimento sarà coperto dalle clausole
+          contrattuali standard approvate dalla Commissione Europea, incluse
+          nell'accordo con lui, e la sede di elaborazione sarà dichiarata nella tabella
+          del §5. Lo scriviamo qui perché il cliente, in quanto titolare, deve poterlo
+          riportare nella propria informativa: un fornitore che non consenta di
+          dichiararlo in questi termini non entra in produzione.
+        </p>
+        <p>
+          Calendly, usato per fissare gli appuntamenti, tratta negli Stati Uniti i dati
+          di chi prenota, anch'esso in forza delle clausole contrattuali standard.
         </p>
       </section>
 
@@ -328,7 +333,7 @@
   <footer class="site-footer">
     <div class="container">
       <div class="foot-bottom">
-        <span>© 2026 Golden Hour AI · P.IVA in fase di registrazione</span>
+        <span>© 2026 Golden Hour AI · Simone Mattera · P.IVA 01556970521</span>
         <span><a href="/privacy/" data-config="privacy">Privacy</a></span>
       </div>
     </div>

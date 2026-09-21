@@ -17,7 +17,6 @@ Il vecchio path `/sostituzioni` (nome del prodotto prima del rebrand) è servito
 html/
   index.html              # GoldenHour AI main landing (standalone, production-ready)
   shared.css              # Design system condiviso (token, navbar, footer, pulsanti)
-  template.html           # Template base per nuove sotto-landing
   assets/
     logo.png              # GoldenHour logo (square)
     logo_tagline.png      # Logo with tagline
@@ -148,7 +147,7 @@ Il vecchio indirizzo `sostituzioni@` va tenuto come alias verso `aurora@`: è pu
 
 ## Footer
 
-Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre quattro: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/gos/`, `html/template.html`. Le due pagine legali sotto `/gos/` hanno solo la riga in basso, come `/privacy/`: quelle non contano.
+Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre quattro: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/gos/`, `template.html`. Le due pagine legali sotto `/gos/` hanno solo la riga in basso, come `/privacy/`: quelle non contano.
 
 GoldenHour OS è nella colonna Prodotti come gli altri, ma è l'unica voce che non è un verticale: è la piattaforma su cui gli altri stanno. Per questo l'etichetta è `· Piattaforma` e la scheda sulla main landing è l'ultima delle quattro.
 
@@ -196,7 +195,9 @@ Ce ne sono tre, e coprono due cose diverse. Non vanno confuse.
 
 Nota storica: questo file diceva che i Termini non servivano, "non si vende nulla online, non ci sono account né contenuti utente". Era vero del sito e resta vero del sito. Non è più vero del prodotto, che ha clienti, credenziali di terzi collegate e output su cui qualcuno prende decisioni.
 
-Le tre pagine hanno un blocco visibile con quello che manca ancora: `.todo` sulla privacy del sito (denominazione esatta, indirizzo completo, P.IVA), `.nota-bozza` sulle due del prodotto. Vanno tolti quando i punti che elencano sono chiusi, non prima: sono deliberatamente vistosi perché una pagina legale pubblicata con dentro un segnaposto è peggio di una pagina assente. Nessuno dei tre testi è stato rivisto da un legale.
+Le tre pagine sono complete e riviste da un legale (21 settembre 2026). I riquadri `.nota-bozza` che elencavano i punti aperti sono stati rimossi; lo stile resta in `gos/legal.css` per riusarlo se una pagina futura nasce come bozza. La regola che li giustificava vale ancora: **una pagina legale pubblicata con dentro un segnaposto e' peggio di una pagina assente**, quindi se si aggiunge una sezione incompleta si rimette il riquadro invece di pubblicarla monca.
+
+Il titolare e' **Simone Mattera**, persona fisica con P.IVA: «Golden Hour AI» e' solo il marchio, non una ditta registrata. Quando nascera' la societa', i dati legali vanno cambiati in nove footer piu' le due informative, e i contratti gia' firmati non passano da soli al nuovo soggetto.
 
 Le due pagine del prodotto caricano `shared.css`, poi `privacy/styles.css` (gli stili del testo lungo, riusati) e infine `gos/legal.css`, che aggiunge solo liste, tabelle e il riquadro di bozza. Toccando `privacy/styles.css` si toccano anche loro.
 
@@ -218,7 +219,7 @@ Tutte le pagine supportano dark/light tramite attributo `data-theme` su `<html>`
 Tutti i link, email e URL esterni vivono in `html/assets/config.js` (`window.SITE_CONFIG`). Non hardcodare email, URL Calendly, link LinkedIn o path di sotto-landing direttamente nell'HTML. Aggiungere `data-config="<chiave>"` agli elementi e popolarli via `applyConfig()` in ogni pagina.
 
 ### Rule 5 — Nuove sotto-landing
-1. Partire da `html/template.html`.
+1. Partire da `template.html`, che sta nella radice del repo e **non** dentro `html/`: e' uno scheletro di sviluppo con segnaposto al posto dei dati legali, quindi non deve essere servito. `html/` contiene solo cio' che e' pubblico.
 2. Caricare `shared.css` e `/assets/config.js`.
 3. Usare `--primary: var(--green)` (default in `shared.css`) come accento primario della pagina.
 4. Aggiungere voce corrispondente in `SITE_CONFIG` per URL e email del prodotto.
