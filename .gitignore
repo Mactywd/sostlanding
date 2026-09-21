@@ -1,5 +1,6 @@
 .claude/
 html/_*.html
+logs/
 
 # Note di lavoro interne: non vanno su un repo pubblico.
 DA-COMPILARE.md

@@ -16,6 +16,7 @@ Il vecchio path `/sostituzioni` (nome del prodotto prima del rebrand) è servito
 ```
 html/
   index.html              # GoldenHour AI main landing (standalone, production-ready)
+  404.html                # Pagina di errore, servita da error_page (noindex)
   shared.css              # Design system condiviso (token, navbar, footer, pulsanti)
   assets/
     logo.png              # GoldenHour logo (square)
@@ -41,6 +42,9 @@ html/
 
 nginx.conf                # Nginx routing: / → main, /aurora/ → product
 docker-compose.yml        # Traefik labels for goldenhourai.it
+template.html             # Scheletro per nuove sotto-landing. Fuori da html/: non va servito
+scripts/rotate-logs.sh    # Rotazione log a 30 giorni, da cron sull'host
+logs/                     # Log di nginx sul server (gitignored, creata dal bind mount)
 ```
 
 ## Architecture
@@ -119,19 +123,32 @@ git push origin master
 # 3. Sul server
 ssh gn1 'cd /home/gh/sites/ghlanding && git pull --ff-only origin master'
 ssh gn1 'docker exec goldenhourai nginx -t && docker exec goldenhourai nginx -s reload'
+
+# 3-bis. Solo se hai toccato nginx.conf o docker-compose.yml (vedi trappola 1)
+ssh gn1 'cd /home/gh/sites/ghlanding && docker compose up -d'
 ```
 
 Il VPS deve avere la rete Docker `web` gia' esistente e un Traefik attivo con certresolver `letsencrypt`.
 
 ### Due trappole, entrambe gia' costate un deploy rotto
 
-**1. Se cambi `nginx.conf`, il reload non basta: serve `docker compose restart web`.**
+**1. Se cambi `nginx.conf`, il reload non basta: serve `docker compose up -d`.**
 `nginx.conf` e' montato come *singolo file*. `git pull` non modifica il file sul posto, lo sostituisce creando un nuovo inode, e il bind mount del container resta agganciato a quello vecchio. Risultato: `nginx -s reload` rilegge una config che non e' piu' quella su disco, in silenzio. `html/` invece e' montata come directory, quindi le modifiche ai contenuti passano sempre.
-Verifica: `docker exec goldenhourai stat -c %i /etc/nginx/conf.d/default.conf` deve coincidere con `stat -c %i /home/gh/sites/ghlanding/nginx.conf`.
+Verifica: `docker exec goldenhourai stat -c %i /etc/nginx/conf.d/default.conf` deve coincidere con `stat -c %i /home/gh/sites/ghlanding/nginx.conf`. `up -d` invece di `restart` perche' ricrea il container: serve se e' cambiato anche `docker-compose.yml`, e va bene in entrambi i casi.
 
 **2. Cambiando un CSS, esegui `./stamp-assets.sh` prima di committare.**
 Le pagine HTML sono servite `no-store` (sempre fresche), i CSS no. Senza una query string nuova, Cloudflare e i browser continuano a servire il CSS precedente: si ottiene **HTML nuovo con CSS vecchio**, cioe' pagine senza stile, non semplicemente pagine diverse. Lo script mette `?v=<hash del contenuto>` nei `<link>`, cambiando la chiave di cache. E' idempotente: se il CSS non e' cambiato, l'hash resta lo stesso.
 Verifica dopo il deploy: `curl -s https://goldenhourai.it/aurora/ | grep stylesheet` deve mostrare gli hash correnti dei file locali.
+
+### Log
+
+`./logs` e' montata su `/var/log/nginx`. Senza quel mount i log finirebbero nel json-file di Docker, che qui non aveva rotazione e cresceva senza limite. **La privacy dichiara 30 giorni**, e a farli rispettare e' `scripts/rotate-logs.sh` dalla crontab dell'utente `gh`:
+
+```
+17 4 * * * /home/gh/sites/ghlanding/scripts/rotate-logs.sh >/dev/null 2>&1
+```
+
+Cambiare il termine significa cambiarlo in tre posti: lo script, il commento in `nginx.conf` e il testo di `html/privacy/`. Se divergono, l'informativa diventa una dichiarazione falsa.
 
 ## Email
 
@@ -159,12 +176,12 @@ Contenuto canonico, in quest'ordine di colonne:
 
 Workshop sta fra i **prodotti**, non in Community: è una futura linea di attività di GoldenHour, non un'iniziativa esterna a cui si partecipa. Oggi è **testo semplice, non un link**, perché `/workshop` non esiste ancora. Il path è già deciso e registrato in `workshopsUrl`: quando la pagina ci sarà, si rimette `<a href="/workshop" data-config="workshops">` nelle quattro pagine.
 
-Attenzione al motivo, che non è estetico: `nginx.conf` ha `try_files $uri $uri/ /index.html` più `error_page 404 /index.html`, quindi **qualsiasi URL inesistente serve la main landing con status 200**, non un 404. Un link a una pagina non ancora creata non porterebbe a un errore, porterebbe alla homepage: clic apparentemente inerte per chi naviga, contenuto duplicato su due URL per i motori di ricerca. Vale per qualsiasi link che si volesse aggiungere in anticipo su una pagina futura.
-- Riga in basso: `© 2026 Golden Hour AI · P.IVA in fase di registrazione` / EN `VAT registration pending`, e un link a `/privacy/`
+Fino al 21 settembre 2026 `nginx.conf` aveva `try_files $uri $uri/ /index.html` piu' `error_page 404 /index.html`: **qualsiasi URL inesistente serviva la main landing con status 200**. Ha tenuto nascosto per settimane il fatto che `/gos/` non fosse deployato — l'URL rispondeva 200, solo con la pagina sbagliata. Ora i `try_files` finiscono in `=404` e `error_page` serve `html/404.html`, quindi un link rotto si vede. Resta comunque preferibile non pubblicare link verso pagine che non esistono ancora.
+- Riga in basso: `© 2026 Golden Hour AI · Simone Mattera · P.IVA 01556970521` / EN `… · VAT 01556970521`, e un link a `/privacy/`
 
 La riga legale dice solo **Privacy**. Diceva "Privacy · Cookie · Termini" come testo non cliccabile: tre parole che sembravano un footer legale e non portavano da nessuna parte. I Termini non servono (non si vende nulla online, non ci sono account né contenuti utente) e non c'è una cookie policy perché il sito non usa cookie.
 
-**Niente P.IVA inventata.** Finché la registrazione non è conclusa la riga dice "in fase di registrazione". Un numero segnaposto tipo `IT00000000000` è un dato legale falso pubblicato, non un placeholder innocuo.
+**La riga legale e' un obbligo di legge** (art. 7 D.lgs. 70/2003), non una nota di stile: identifica chi fornisce il servizio. Va tenuta allineata in tutte e nove le occorrenze, comprese le due stringhe i18n IT/EN in `html/index.html` e `template.html`. L'indirizzo completo sta nelle informative, non nel footer. Mai un numero segnaposto tipo `IT00000000000`: sarebbe un dato legale falso pubblicato.
 
 Il blocco `applyConfig` è **lo stesso identico codice** in tutte e cinque le pagine (`index`, `aurora`, `atelier`, `privacy`, `template`): è generico sulle chiavi, quindi va copiato senza adattarlo. Salta gli URL a `'#'`, che sono segnaposto di link non ancora decisi. Usa `data-config`, mai `id`.
 

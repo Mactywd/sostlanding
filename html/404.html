@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagina non trovata · GoldenHour AI</title>
+  <meta name="description" content="La pagina richiesta non esiste."/>
+  <meta name="robots" content="noindex, follow"/>
+
+  <link rel="icon" href="/assets/logo.png" type="image/png"/>
+
+  <link rel="preload" href="/assets/fonts.css?v=7cda0fc2" as="style"/>
+  <link href="/assets/fonts.css?v=7cda0fc2" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="/shared.css?v=8922ee96"/>
+  <style>
+    .notfound {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .notfound .container { max-width: 620px; }
+    .notfound h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 44px);
+      line-height: 1.15;
+      margin: 12px 0 18px;
+      color: var(--text);
+    }
+    .notfound p {
+      color: var(--text-muted);
+      font-size: 17px;
+      line-height: 1.7;
+      margin: 0 0 28px;
+    }
+    .notfound .links { display: flex; flex-wrap: wrap; gap: 12px; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container row">
+      <a href="/" class="brand" aria-label="GoldenHour AI">
+        <span>GoldenHour AI</span>
+      </a>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+          <svg id="themeIconLight" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg id="themeIconDark" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="/" class="btn btn-ghost btn-sm">Torna al sito</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="notfound">
+    <div class="container">
+      <span class="eyebrow">Errore 404</span>
+      <h1>Questa pagina non esiste</h1>
+      <p>
+        Il link potrebbe essere vecchio, oppure contenere un refuso. Da qui puoi
+        tornare al sito o andare direttamente a uno dei prodotti.
+      </p>
+      <div class="links">
+        <a href="/" class="btn btn-primary btn-sm">Home</a>
+        <a href="/aurora/" class="btn btn-ghost btn-sm" data-config="aurora">Aurora</a>
+        <a href="/atelier/" class="btn btn-ghost btn-sm" data-config="atelier">Atelier</a>
+        <a href="/gos/" class="btn btn-ghost btn-sm" data-config="gos">GoldenHour OS</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/config.js"></script>
+  <script>
+    // Config — stesso blocco delle altre pagine, ridotto ai soli link usati qui.
+    (function () {
+      const cfg = window.SITE_CONFIG;
+      if (cfg) {
+        const links = { aurora: 'urlAurora', atelier: 'urlAtelier', gos: 'urlGos' };
+        Object.keys(links).forEach(name => {
+          const url = cfg[links[name]];
+          if (!url || url === '#') return;
+          document.querySelectorAll('[data-config="' + name + '"]').forEach(el => { el.href = url; });
+        });
+      }
+    })();
+
+    // Theme toggle
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const iconLight = document.getElementById('themeIconLight');
+      const iconDark  = document.getElementById('themeIconDark');
+      const html = document.documentElement;
+
+      const saved = localStorage.getItem('gh-theme') || 'light';
+      html.setAttribute('data-theme', saved);
+      if (saved === 'dark') {
+        iconLight.style.display = 'none';
+        iconDark.style.display  = 'block';
+      }
+
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('gh-theme', next);
+        iconLight.style.display = next === 'dark' ? 'none'  : 'block';
+        iconDark.style.display  = next === 'dark' ? 'block' : 'none';
+      });
+    })();
+  </script>
+
+</body>
+</html>

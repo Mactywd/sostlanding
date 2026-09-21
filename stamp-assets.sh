@@ -37,6 +37,9 @@ for page in html/aurora/index.html html/atelier/index.html; do
 done
 stamp template.html "../shared.css" "html/shared.css"
 
+# La 404 sta nella radice del webroot e carica solo shared.css.
+stamp html/404.html "/shared.css" "html/shared.css"
+
 # La privacy sta in una sottocartella ma referenzia shared.css dalla radice.
 stamp html/privacy/index.html "/shared.css" "html/shared.css"
 stamp html/privacy/index.html "styles.css" "html/privacy/styles.css"
@@ -57,7 +60,8 @@ done
 # I .woff2 non hanno bisogno di versione: il nome cambia solo se cambia il
 # font, e nginx li serve immutabili.
 for page in html/index.html html/aurora/index.html html/atelier/index.html template.html \
-            html/privacy/index.html html/gos/index.html html/gos/privacy/index.html html/gos/termini/index.html; do
+            html/404.html html/privacy/index.html html/gos/index.html \
+            html/gos/privacy/index.html html/gos/termini/index.html; do
   stamp "$page" "/assets/fonts.css" "html/assets/fonts.css"
 done
 echo "Fatto."
