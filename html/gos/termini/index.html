@@ -46,7 +46,7 @@
         goldenhourai.it. Il trattamento dei dati è descritto nella
         <a href="/gos/privacy/" data-config="gosPrivacy">privacy di GoldenHour OS</a>.
       </p>
-      <p class="updated">Ultimo aggiornamento: 21 settembre 2026</p>
+      <p class="updated">Ultimo aggiornamento: 29 settembre 2026</p>
 
       <section>
         <h2>1. Chi siamo</h2>
@@ -98,12 +98,33 @@
           È il principio su cui il prodotto è costruito, e da cui discende il §8.
         </p>
         <p>
-          Ogni azione con effetti verso l'esterno, come inviare un messaggio, scrivere
-          su un sistema di terzi o comunicare qualcosa a qualcuno, è sottoposta
-          all'<strong>approvazione esplicita di una persona</strong> prima di essere
-          eseguita. Il sistema propone; una persona del cliente decide se eseguire. Non
-          esiste una modalità in cui il software agisce all'esterno di propria
-          iniziativa senza che qualcuno lo abbia autorizzato.
+          Quando il sistema sta per compiere, attraverso i sistemi che il cliente ha
+          collegato, un'azione con effetti verso l'esterno (inviare un'email o un
+          messaggio, caricare o condividere un file, creare un evento o un'attività su
+          un sistema di terzi), l'azione si ferma e attende l'<strong>approvazione
+          esplicita di una persona</strong> del cliente. Il sistema propone; una persona
+          decide se eseguire. È il comportamento predefinito del servizio, e vale anche
+          per le attività pianificate.
+        </p>
+        <p>
+          Se nessuno decide entro un tempo stabilito, oggi trenta minuti, la richiesta
+          scade e l'azione <strong>non viene eseguita</strong>. Nel dubbio il sistema si
+          ferma: un errore nel controllo equivale a un rifiuto, non a un via libera.
+          Leggere dati dai sistemi collegati, invece, non richiede approvazione.
+        </p>
+        <p>
+          <strong>Un'eccezione, dichiarata.</strong> Gli <em>avvisi</em> che il sistema
+          genera quando un dato supera una soglia stabilita dal cliente partono senza
+          un'approvazione caso per caso: un avviso che attende una conferma di notte
+          arriverebbe quando non serve più. L'autorizzazione è data una volta, in
+          anticipo, quando il cliente sceglie le soglie e i canali che devono ricevere
+          gli avvisi. Il sistema può scrivere solo su quei canali, non su altri, e solo
+          l'avviso: qualunque altro messaggio segue la regola generale.
+        </p>
+        <p>
+          L'approvazione è applicata alle azioni che passano dai sistemi collegati,
+          perché è lì che stanno le credenziali e gli account del cliente. È questo il
+          perimetro dell'impegno.
         </p>
         <p>
           Ne segue che il contenuto prodotto dal sistema è una <em>proposta</em>, non un
@@ -185,8 +206,9 @@
         </p>
         <p>
           <strong>Cosa resta a carico del cliente.</strong> Le decisioni prese sulla base
-          dell'output del sistema, e le azioni approvate ed eseguite dalle persone del
-          cliente ai sensi del §4. Non rispondiamo delle conseguenze di un contenuto che
+          dell'output del sistema, le azioni approvate ed eseguite dalle persone del
+          cliente ai sensi del §4, e gli avvisi che il cliente ha autorizzato in
+          anticipo scegliendone soglie e canali. Non rispondiamo delle conseguenze di un contenuto che
           una persona del cliente ha letto, approvato e inviato: l'approvazione è il
           momento in cui la responsabilità passa.
         </p>
