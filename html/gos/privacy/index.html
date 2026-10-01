@@ -51,7 +51,7 @@
         <a href="/gos/termini/" data-config="gosTermini">termini di GoldenHour OS</a>. Anche questa è
         scritta per essere letta, non per essere accettata.
       </p>
-      <p class="updated">Ultimo aggiornamento: 21 settembre 2026</p>
+      <p class="updated">Ultimo aggiornamento: 1 ottobre 2026</p>
 
       <section>
         <h2>1. A chi si rivolge, e perché è insolita</h2>
@@ -92,7 +92,7 @@
             <tr>
               <td>I fornitori elencati al §5</td>
               <td>Sub-responsabili</td>
-              <td>Elaborano per nostro conto la parte di trattamento che gli affidiamo, ciascuno con un proprio accordo.</td>
+              <td>Elaborano per nostro conto la parte di trattamento che gli affidiamo. I fornitori che eseguono il modello linguistico sono sub-responsabili di OpenRouter, che li vincola a obblighi di protezione non inferiori ai propri.</td>
             </tr>
           </tbody>
         </table>
@@ -214,14 +214,25 @@
           fornitore del modello.
         </p>
         <p>
-          <strong>Oggi il fornitore del modello non è ancora scelto, e nel sistema non
-          ci sono dati di clienti.</strong> Siamo in una fase di valutazione in cui
-          confrontiamo più modelli su dati di prova nostri: per farlo le richieste
-          passano da OpenRouter, che le instrada verso i fornitori dei modelli in
-          esame. Nessun dato di un cliente segue quel percorso, perché nessun cliente
-          è ancora in produzione. Quando il modello sarà scelto, il fornitore verrà
-          nominato nella tabella qui sotto e l'accordo sul trattamento firmato
-          <em>prima</em> che il primo dato di un cliente entri nel sistema.
+          Il modello oggi è <strong>DeepSeek V4.1 Flash</strong>, e le richieste gli
+          arrivano attraverso <strong>OpenRouter</strong>, una piattaforma statunitense
+          che per ogni richiesta sceglie uno fra più fornitori che eseguono quel
+          modello. È una soluzione transitoria, propria di questa fase iniziale, in cui
+          stiamo individuando il modello più adatto al lavoro: scelto quello, passeremo
+          a un fornitore diretto, e questa pagina lo dirà prima che il cambiamento
+          abbia effetto.
+        </p>
+        <p>
+          Su ogni richiesta il nostro sistema impone a OpenRouter di <strong>escludere
+          i fornitori che usano i dati per addestrare modelli</strong>. Il vincolo sta
+          nel codice, non in un'impostazione che si può dimenticare. Fra i fornitori
+          ammessi, alcuni non conservano nulla dopo aver risposto; altri conservano il
+          contenuto per un periodo limitato, secondo la propria policy, per esempio per
+          prevenire abusi. Quale fornitore elabora una certa richiesta lo decide
+          OpenRouter al momento, in base a disponibilità e costo: per questo la tabella
+          non nomina un singolo fornitore ma dice quali sono ammessi e dove possono
+          trovarsi. L'elenco aggiornato, con la policy di ciascuno, è
+          <a href="https://openrouter.ai/deepseek/deepseek-v4.1-flash/providers" target="_blank" rel="noopener">pubblicato da OpenRouter</a>.
         </p>
         <table class="ruoli">
           <thead>
@@ -229,9 +240,14 @@
           </thead>
           <tbody>
             <tr>
-              <td>Da nominare</td>
-              <td>Elaborazione del modello linguistico. Il fornitore è in corso di scelta: il nome compare qui, con l'accordo sul trattamento già firmato, prima dell'ingresso del primo cliente.</td>
-              <td>Dichiarato qui alla scelta</td>
+              <td>OpenRouter, Inc.</td>
+              <td>Instrada ogni richiesta al modello linguistico verso un fornitore che lo esegue.</td>
+              <td>Stati Uniti</td>
+            </tr>
+            <tr>
+              <td>I fornitori del modello scelti da OpenRouter</td>
+              <td>Eseguono il modello linguistico. Sono ammessi solo quelli che non usano i dati per l'addestramento; alcuni conservano il contenuto per un periodo limitato. Sono sub-responsabili di OpenRouter.</td>
+              <td>Per lo più Stati Uniti; anche Spagna, Singapore, Indonesia e Cina. Alcuni non dichiarano la sede</td>
             </tr>
             <tr>
               <td>Hetzner</td>
@@ -253,14 +269,16 @@
         <p>
           Questo elenco è la fonte di verità: se aggiungiamo o sostituiamo un
           fornitore, aggiorniamo questa pagina e ne informiamo il cliente prima che il
-          cambiamento abbia effetto, così che possa opporsi. Nessun fornitore entra in
-          produzione senza un accordo sul trattamento dei dati già in essere.
+          cambiamento abbia effetto, così che possa opporsi. Fa eccezione l'insieme dei fornitori del modello dietro OpenRouter, che può
+          cambiare senza preavviso: lì il nostro impegno riguarda il modello, i criteri
+          di ammissione e i paesi dichiarati in tabella, e se cambiamo uno di questi
+          aggiorniamo la pagina prima.
         </p>
         <p>
           <strong>Nessun dato del cliente viene usato per addestrare modelli</strong>,
-          né da noi né dai fornitori. È un criterio di selezione prima ancora che una
-          policy: un fornitore che non lo garantisce per contratto non entra in
-          produzione.
+          né da noi né dai fornitori. Lo garantiamo in due modi indipendenti: ogni
+          richiesta esclude per costruzione i fornitori che addestrano, e il nostro
+          account OpenRouter ha disattivato l'uso dei dati per l'addestramento.
         </p>
       </section>
 
@@ -284,7 +302,7 @@
         <ul>
           <li>Le credenziali degli account collegati sono <strong>cifrate a riposo</strong> e non sono più leggibili dall'interfaccia dopo l'inserimento.</li>
           <li>Ogni utente lavora in uno spazio isolato: i dati di una sessione non sono raggiungibili da un'altra.</li>
-          <li>Le azioni con effetti verso l'esterno, come inviare un messaggio o scrivere su un sistema di terzi, richiedono l'approvazione esplicita di una persona prima di essere eseguite.</li>
+          <li>Le azioni con effetti verso l'esterno, come inviare un messaggio o scrivere su un sistema di terzi, richiedono l'approvazione esplicita di una persona prima di essere eseguite, con le sole eccezioni dichiarate nei <a href="/gos/termini/" data-config="gosTermini">termini</a> (§4).</li>
           <li>Le comunicazioni con i fornitori avvengono su canali cifrati; le chiavi non risiedono nel codice.</li>
           <li>In caso di violazione dei dati informiamo il cliente senza ingiustificato ritardo, così che possa adempiere ai propri obblighi di notifica entro 72 ore.</li>
         </ul>
@@ -293,14 +311,13 @@
       <section>
         <h2>8. Trasferimenti fuori dall'Unione Europea</h2>
         <p>
-          I dati risiedono su server nell'Unione Europea. L'elaborazione del modello
-          linguistico avverrà con ogni probabilità negli Stati Uniti: quando il
-          fornitore sarà scelto (§5), il trasferimento sarà coperto dalle clausole
-          contrattuali standard approvate dalla Commissione Europea, incluse
-          nell'accordo con lui, e la sede di elaborazione sarà dichiarata nella tabella
-          del §5. Lo scriviamo qui perché il cliente, in quanto titolare, deve poterlo
-          riportare nella propria informativa: un fornitore che non consenta di
-          dichiararlo in questi termini non entra in produzione.
+          I dati risiedono su server nell'Unione Europea. Escono dall'Unione per
+          l'elaborazione del modello linguistico (§5). Vanno prima a OpenRouter, negli
+          Stati Uniti. Da lì raggiungono il fornitore che esegue il modello, che può
+          trovarsi negli Stati Uniti, a Singapore, in Indonesia o in Cina, oltre che
+          nell'Unione: OpenRouter lo vincola, come proprio sub-responsabile, a obblighi
+          non inferiori ai propri. Lo scriviamo per esteso perché il cliente, in quanto
+          titolare, deve poterlo riportare nella propria informativa.
         </p>
         <p>
           Calendly, usato per fissare gli appuntamenti, tratta negli Stati Uniti i dati
