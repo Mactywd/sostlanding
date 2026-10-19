@@ -248,8 +248,8 @@
         </div>
         <p class="quiz-privacy">
           Le risposte restano nel vostro browser e non vengono salvate. Se
-          prenotate, un loro riassunto (per esempio «Slack · 10–49 persone ·
-          Notion») arriva a Calendly insieme alla prenotazione.
+          aprite il calendario per prenotare, un loro riassunto (per esempio
+          «Slack · 10–49 persone · Notion») arriva a Calendly.
         </p>
       </div>
 
@@ -306,7 +306,7 @@
             <div class="cal-consent">
               <svg class="ico" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
               <div class="t">Prenota una call</div>
-              <p class="d">Il calendario è ospitato da Calendly. Caricandolo, il browser si collega a calendly.com, che riceve il tuo indirizzo IP e imposta i propri cookie. Finché non lo carichi, verso Calendly non parte nessuna richiesta.</p>
+              <p class="d">Il calendario è ospitato da Calendly. Caricandolo, il browser si collega a calendly.com, che riceve il vostro indirizzo IP e imposta i propri cookie. Al calendario passano anche il riassunto delle risposte al questionario, senza dati personali, e i parametri della campagna da cui siete arrivati. Finché non lo caricate, verso Calendly non parte nessuna richiesta.</p>
               <button type="button" class="btn btn-primary" id="calLoad">Mostra il calendario</button>
               <a class="alt" id="calDirect" href="#" target="_blank" rel="noopener">Oppure aprilo su calendly.com</a>
             </div>
@@ -462,7 +462,8 @@
       // personalizzata, a2 la seconda e cosi' via (documentazione di
       // Calendly, «pre-fill invitee information»). Va controllato
       // sull'evento quale domanda riempie. null = non mandare niente
-      // (e allora va tolta anche la frase in .quiz-privacy).
+      // (e allora vanno tolte anche le frasi sul riassunto in .quiz-privacy
+      // e nel segnaposto .cal-consent).
       parametroCalendly: 'a1',
     };
 
@@ -549,7 +550,12 @@
         // visibility e non hidden: il bottone tiene il suo posto e
         // «Avanti» non salta da una parte all'altra.
         back.style.visibility = i === 0 ? 'hidden' : 'visible';
-        next.hidden = !d.multipla;
+        // Nelle domande a scelta singola il primo clic porta avanti da solo;
+        // «Avanti» compare quando la domanda ha gia' una risposta (dopo
+        // «Indietro»), cosi' non serve ricliccare la scelta fatta.
+        next.hidden = !d.multipla && risposte[i].length === 0;
+        if (d.multipla) opzioni.setAttribute('aria-describedby', 'quizHint');
+        else opzioni.removeAttribute('aria-describedby');
         opzioni.innerHTML = '';
         d.risposte.forEach((r, k) => {
           const b = document.createElement('button');
@@ -565,7 +571,7 @@
       }
 
       function aggiornaAvanti() {
-        if (domande[corrente].multipla) next.disabled = risposte[corrente].length === 0;
+        next.disabled = risposte[corrente].length === 0;
       }
 
       function scegli(k) {
@@ -632,9 +638,19 @@
           p.set('primary_color', '186628');
         }
         if (QUESTIONARIO.parametroCalendly) p.set(QUESTIONARIO.parametroCalendly, riassunto());
+        // Solo i cinque UTM, e solo valori brevi e "puliti": lettere, cifre,
+        // '-', '_', '.', al massimo 100 caratteri. Un valore diverso (spazi,
+        // testo libero, un'email incollata nel link) non si inoltra.
+        //
+        // Attenzione: widget.js di Calendly copia da solo nell'iframe gli
+        // utm_* (e salesforce_uuid) dell'indirizzo di questa pagina, ma i
+        // parametri di data-url vincono sui suoi. Per il widget quindi un
+        // valore scartato si riscrive vuoto, altrimenti passerebbe lo stesso.
         const qui = new URLSearchParams(location.search);
-        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
-          if (qui.get(k)) p.set(k, qui.get(k));
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'salesforce_uuid'].forEach(k => {
+          const v = qui.get(k);
+          if (v && k !== 'salesforce_uuid' && /^[A-Za-z0-9._-]{1,100}$/.test(v)) p.set(k, v);
+          else if (widget && qui.has(k)) p.set(k, '');
         });
         // encodeURIComponent e non p.toString(): quello scrive gli spazi come
         // «+», mentre la documentazione di Calendly usa %20.
