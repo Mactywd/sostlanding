@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GoldenHour OS · GoldenHour AI</title>
-  <meta name="description" content="Il sistema assistito che si collega ai vostri sistemi, elabora i dati che contengono e porta a termine i processi lunghi e ripetitivi al posto di chi li fa a mano."/>
+  <title>Luce · l'assistente AI in Slack per le PMI · GoldenHour AI</title>
+  <meta name="description" content="Luce è un assistente AI che lavora dentro Slack, per le piccole e medie imprese. Risponde nei canali, prepara report e file, conosce l'azienda dalla knowledge base su Notion e usa le vostre app con i permessi che decidete voi."/>
   <meta name="robots" content="index, follow"/>
+
+  <!-- Open Graph: l'anteprima quando il link si condivide in chat o sui social.
+       Gli URL devono essere assoluti. -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="it_IT"/>
+  <meta property="og:site_name" content="GoldenHour AI"/>
+  <meta property="og:title" content="Luce · l'assistente AI in Slack per le PMI"/>
+  <meta property="og:description" content="Un assistente AI che lavora dentro Slack: risponde nei canali, prepara report e file, conosce l'azienda dalla knowledge base su Notion e usa le vostre app con i permessi che decidete voi."/>
+  <meta property="og:url" content="https://goldenhourai.it/gos/"/>
+  <meta property="og:image" content="https://goldenhourai.it/gos/assets/logo_with_tagline.png"/>
 
   <link rel="icon" href="assets/goldenhour-symbol.png" type="image/png"/>
 
@@ -15,24 +25,22 @@
   <!-- Design system condiviso (dal parent della cartella del prodotto) -->
   <link rel="stylesheet" href="../shared.css?v=8922ee96"/>
   <!-- Stili specifici della pagina -->
-  <link rel="stylesheet" href="styles.css?v=2285e44e"/>
+  <link rel="stylesheet" href="styles.css?v=787fafcd"/>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container row">
 
-      <a href="/" class="brand" aria-label="GoldenHour AI · GoldenHour OS">
+      <a href="/" class="brand" aria-label="GoldenHour AI · Luce">
         <span>GoldenHour AI</span>
         <span class="sep">/</span>
-        <span class="product">GoldenHour OS</span>
+        <span class="product">Luce</span>
       </a>
 
       <nav class="nav-links" aria-label="Navigazione principale">
         <a href="#cosa-fa">Cosa fa</a>
-        <a href="#funzionamento">Come funziona</a>
-        <a href="#dati">Dati</a>
-        <a href="#contatti">Contatti</a>
+        <a href="#pilota">Il pilota</a>
       </nav>
 
       <div class="header-actions">
@@ -45,7 +53,7 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
-        <a href="#contatti" class="btn btn-primary btn-sm">Scrivici</a>
+        <a href="#pilota" class="btn btn-primary btn-sm">Prenota una call</a>
       </div>
     </div>
   </header>
@@ -60,49 +68,51 @@
         <img src="assets/logo_with_tagline.png" alt="GoldenHour AI"/>
       </div>
 
-      <span class="eyebrow">Piattaforma</span>
+      <span class="eyebrow">Assistente AI per le PMI</span>
 
-      <h1>GoldenHour OS</h1>
+      <h1>Luce</h1>
 
       <p class="lead">
-        Un assistente che lavora dentro l'azienda. Si collega ai sistemi che già
-        usate, elabora i dati che contengono e porta a termine i processi lunghi
-        e ripetitivi che oggi qualcuno fa a mano.
+        Un assistente AI che lavora dentro Slack, per le piccole e medie imprese.
+        Risponde nei vostri canali, prepara report e file, conosce l'azienda
+        dalla knowledge base su Notion e usa le vostre app solo con i permessi
+        che decidete voi.
       </p>
 
       <div class="hero-cta">
-        <a href="#contatti" class="btn btn-primary">
-          Prenota una call
+        <a href="#pilota" class="btn btn-primary">
+          Verifica se si può partire
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M13 6l6 6-6 6"/>
           </svg>
         </a>
-        <a href="#funzionamento" class="btn btn-ghost">Come funziona</a>
+        <a href="#cosa-fa" class="btn btn-ghost">Cosa fa</a>
       </div>
 
       <div class="hero-meta">
-        <span>Si collega ai sistemi che già usate</span>
+        <span>Lavora dentro Slack</span>
         <span class="dot"></span>
-        <span>Approvazione umana per ogni azione esterna</span>
+        <span>Knowledge base su Notion</span>
         <span class="dot"></span>
-        <span>Un'istanza separata per ogni cliente</span>
+        <span>Permessi decisi azione per azione</span>
       </div>
 
     </div>
   </section>
 
   <!-- ============================================================
-       COSA FA
+       COSA FA — solo quello che Luce fa gia' oggi. Prima di
+       aggiungere un blocco, controllare che la funzione sia in
+       produzione (backlog del repo gos, sezione «Fatti»).
        ============================================================ -->
   <section class="features" id="cosa-fa">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Funzioni</span>
-        <h2>Il lavoro che toglie di mezzo</h2>
+        <span class="eyebrow">Cosa fa</span>
+        <h2>Cosa fa Luce oggi</h2>
         <p>
-          I connettori portano dentro i dati, le skill descrivono i processi
-          macchinosi che li attraversano. Quello che oggi occupa ore di
-          raccolta, riconciliazione e riscrittura diventa una richiesta.
+          Luce sta nei canali Slack che scegliete e lavora con quello che gli
+          date: la knowledge base, i file, le app collegate.
         </p>
       </div>
 
@@ -111,47 +121,31 @@
         <div class="feature">
           <div class="ico">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/>
-              <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
           </div>
-          <h3>Si collega ai vostri sistemi</h3>
+          <h3>Risponde nei canali Slack</h3>
           <p>
-            I connettori portano i dati dentro al sistema da dove già stanno:
-            niente esportazioni, niente copia e incolla, niente fogli di
-            raccordo tenuti in piedi a mano. Il collegamento si fa una volta e
-            da lì in poi i dati arrivano da soli.
+            Lo si menziona in un canale o in un thread e risponde lì. Ricorda
+            quello che vi siete detti nel thread, quindi una correzione si chiede
+            nello stesso posto. Può anche ripetere un lavoro a orari fissi, per
+            esempio un riepilogo ogni lunedì alle 9.
           </p>
         </div>
 
         <div class="feature">
           <div class="ico">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 3v18h18"/>
-              <path d="M7 15l4-5 3 3 5-7"/>
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
             </svg>
           </div>
-          <h3>Raccoglie ed elabora</h3>
+          <h3>Conosce l'azienda</h3>
           <p>
-            Mette insieme dati che arrivano da connettori diversi, li rende
-            confrontabili e ne ricava quello che serve leggere. I calcoli
-            nascono in un punto solo del sistema, così due documenti non possono
-            arrivare a due numeri diversi sulla stessa cosa.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2l2.4 5.2 5.6.7-4.1 3.9 1 5.6L12 14.8 7.1 17.4l1-5.6L4 7.9l5.6-.7z"/>
-            </svg>
-          </div>
-          <h3>Skill sui processi macchinosi</h3>
-          <p>
-            Le procedure lunghe e sempre uguali diventano skill: istruzioni
-            scritte su misura per come lavora quell'azienda, che il sistema
-            segue passo per passo. Stanno in file leggibili, che il cliente
-            controlla e può correggere.
+            Ha una knowledge base su Notion: il Contesto, con l'azienda, le
+            persone e le regole, e una sezione per ogni area di lavoro, con gli
+            Output e le Fonti. Per archiviare un file basta la reazione 📥 su
+            Slack, per un fatto nuovo «ricordati che…».
           </p>
         </div>
 
@@ -162,11 +156,11 @@
               <path d="M14 2v6h6M9 14h6M9 18h4"/>
             </svg>
           </div>
-          <h3>Prepara i testi</h3>
+          <h3>Prepara report e file</h3>
           <p>
-            Report, sintesi e comunicazioni già scritte, pronte da rileggere.
-            Restano bozze finché qualcuno non le approva: il sistema non manda
-            niente per conto proprio.
+            Report e analisi in PDF, Excel, CSV o HTML, allegati al thread. Si
+            salvano da soli nella knowledge base, nella sezione del canale, e si
+            ritrovano chiedendoli: «mi rimandi il report di settembre?».
           </p>
         </div>
 
@@ -177,190 +171,149 @@
               <path d="M9 12l2 2 4-4"/>
             </svg>
           </div>
-          <h3>Sorveglia e segnala</h3>
+          <h3>Usa le vostre app, con i vostri permessi</h3>
           <p>
-            I controlli li definisce il cliente, non noi: cosa vale la pena
-            tenere d'occhio, su quale periodo, con quale margine. Il sistema li
-            ripete e segnala quello che esce dai limiti, senza che qualcuno
-            debba ricordarsi di guardare.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="8" height="8" rx="2"/>
-              <rect x="13" y="3" width="8" height="8" rx="2"/>
-              <rect x="3" y="13" width="8" height="8" rx="2"/>
-              <rect x="13" y="13" width="8" height="8" rx="2"/>
-            </svg>
-          </div>
-          <h3>Sta per conto suo</h3>
-          <p>
-            Ogni cliente ha la propria istanza, con i propri dati e le proprie
-            credenziali. Non c'è un archivio comune: i dati di un cliente non
-            sono raggiungibili dall'istanza di un altro.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       COME FUNZIONA
-       ============================================================ -->
-  <section class="how" id="funzionamento">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Avvio</span>
-        <h2>Dalla scelta dei connettori al primo risultato</h2>
-        <p>
-          Non c'è un progetto di mesi davanti. Si sceglie da dove partire, si
-          configura il minimo indispensabile e si comincia a usarlo.
-        </p>
-      </div>
-
-      <div class="steps">
-
-        <div class="step">
-          <span class="num">01</span>
-          <h3>Si scelgono connettori e skill</h3>
-          <p>
-            Quali sistemi collegare e quali processi far prendere in carico. Si
-            parte da quelli che pesano di più sulle giornate. Gli altri si
-            aggiungono quando serve, senza rifare quello che è già in piedi.
-          </p>
-        </div>
-
-        <div class="step">
-          <span class="num">02</span>
-          <h3>Una configurazione minima</h3>
-          <p>
-            Le poche cose che il sistema non può indovinare da solo: chi sono i
-            clienti, quali numeri contano, chi può approvare cosa. Stanno in
-            file di testo che si leggono e si correggono, non in un pannello di
-            impostazioni da imparare.
-          </p>
-        </div>
-
-        <div class="step">
-          <span class="num">03</span>
-          <h3>Si usa</h3>
-          <p>
-            Le richieste si scrivono in italiano. Il sistema recupera i dati,
-            esegue la procedura e prepara la risposta. Se qualcosa deve uscire
-            verso l'esterno, resta ferma in attesa che una persona la legga e la
-            approvi.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       DATI — il principio, non l'elenco. Cosa entra dipende dai
-       connettori attivi su quell'istanza, e cambia da cliente a
-       cliente: un elenco qui invecchierebbe subito e prometterebbe
-       un perimetro che non e' quello di tutti. Il dettaglio, quando
-       serve dichiararlo (per esempio alla verifica OAuth di Google),
-       sta in /gos/privacy/.
-       ============================================================ -->
-  <section class="perimetro" id="dati">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Dati</span>
-        <h2>Il perimetro lo decide il cliente</h2>
-        <p>
-          Il sistema vede quello che gli viene collegato e nient'altro. Quali
-          sistemi, con quali permessi e per quanto tempo sono decisioni del
-          cliente, non nostre.
-        </p>
-      </div>
-
-      <div class="perimetro-grid">
-
-        <div class="perimetro-col">
-          <h3>Si collega solo quello che serve</h3>
-          <p>
-            Un connettore si attiva quando c'è un lavoro che lo richiede. Quelli
-            che non servono restano spenti, e un sistema non collegato è un
-            sistema che il software non vede.
-          </p>
-        </div>
-
-        <div class="perimetro-col">
-          <h3>Con i permessi minimi</h3>
-          <p>
-            Dove al lavoro basta leggere, chiediamo un accesso in sola lettura.
-            Il livello di permesso è applicato dalla piattaforma che lo concede,
-            non dal nostro software: non è una promessa, è un limite tecnico.
-          </p>
-        </div>
-
-        <div class="perimetro-col">
-          <h3>E si revoca da dove è stato dato</h3>
-          <p>
-            Chi ha concesso un accesso può toglierlo in qualsiasi momento dalla
-            piattaforma stessa, senza passare da noi. Da quel momento il sistema
-            smette di leggere e lo dichiara come errore di accesso.
+            Le app dell'azienda si collegano una volta. Per ogni azione si sceglie
+            se Luce può farla da solo, se deve chiedere conferma o se non può
+            farla. Di serie le letture partono da sole, mentre modifiche e invii
+            aspettano che qualcuno li approvi.
           </p>
         </div>
 
       </div>
 
-      <p class="perimetro-note">
-        I dati restano nell'istanza del cliente e non vengono uniti a quelli di
-        altri clienti, non vengono venduti e non vengono usati per addestrare
-        modelli. Chi tratta cosa, con quali ruoli e per quanto tempo è scritto
-        nella <a href="/gos/privacy/" data-config="gosPrivacy">privacy di GoldenHour OS</a>.
+      <p class="note-dati">
+        Ogni azienda ha la propria istanza di Luce, con i propri dati e le
+        proprie credenziali, separata da quelle degli altri clienti. I dati non
+        vengono venduti e non vengono usati per addestrare modelli. I dettagli
+        sono nella <a href="/gos/privacy/" data-config="gosPrivacy">privacy di
+        GoldenHour OS</a>, la piattaforma su cui Luce è costruito.
       </p>
     </div>
   </section>
 
   <!-- ============================================================
-       CONTATTI — Calendly a due clic, come su aurora e atelier.
-       Il widget NON e' nel markup: vedi il blocco JS in fondo e la
-       regola "zero terze parti al caricamento" in CLAUDE.md.
+       IL PILOTA — questionario e prenotazione.
+       Senza JavaScript si vede solo il blocco <noscript>; con
+       JavaScript compare il questionario (#quiz) e, a seconda
+       dell'esito, #esitoNo oppure #esitoSi con il Calendly a due clic.
+       Domande e regole stanno nell'oggetto QUESTIONARIO in fondo.
        ============================================================ -->
-  <section class="contact" id="contatti">
-    <div class="container contact-grid">
-      <div class="contact-info">
-        <span class="eyebrow">Contatti</span>
-        <h2>Se volete vederlo sui vostri dati</h2>
-        <p>Mezz'ora per capire quali processi vi costano più tempo oggi e quali di quelli il sistema può prendere in carico. Se non è lo strumento giusto per voi, lo diciamo.</p>
-        <div class="contact-meta">
-          <div class="row">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l1.5 3.5L20 9l-3.5 1.5L15 14l-1.5-3.5L10 9l3.5-1.5L15 4z"/><path d="M3 21l9-9"/></svg>
-            <span>Mezz'ora, senza presentazione commerciale</span>
-          </div>
-          <div class="row">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>
-          </div>
-          <div class="row">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            <span>Supporto in italiano · team in Italia</span>
-          </div>
-        </div>
-        <p class="contact-legal">
-          <a href="/gos/privacy/" data-config="gosPrivacy">Privacy di GoldenHour OS</a> ·
-          <a href="/gos/termini/" data-config="gosTermini">Termini di GoldenHour OS</a>
+  <section class="pilota" id="pilota">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Il pilota</span>
+        <h2>Cinque domande prima della call</h2>
+        <p>
+          Luce si prova con un pilota: lo installiamo nel vostro Slack e lo
+          seguiamo insieme a una persona del vostro team. Le domande dicono se ci
+          sono le condizioni per partire. Se ci sono, prenotate una call di
+          mezz'ora.
         </p>
       </div>
 
-      <div class="calendly-card">
-        <div id="calendlyWidget" style="min-width:280px;height:700px;">
-          <div class="cal-consent">
-            <svg class="ico" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-            <div class="t">Prenota una call</div>
-            <p class="d">Il calendario è ospitato da Calendly. Caricandolo, il browser si collega a calendly.com, che riceve il tuo indirizzo IP e imposta i propri cookie. Finché non lo carichi, verso Calendly non parte nessuna richiesta.</p>
-            <button type="button" class="btn btn-primary" id="calLoad">Mostra il calendario</button>
-            <a class="alt" id="calDirect" href="#" target="_blank" rel="noopener">Oppure aprilo su calendly.com</a>
+      <noscript>
+        <!-- Copia a mano delle regole di QUESTIONARIO: se cambiano le
+             regole, va cambiato anche questo elenco. Il link a Calendly
+             e' scritto qui perche' senza JavaScript config.js non gira. -->
+        <div class="quiz">
+          <h3 class="quiz-q">Prima di prenotare</h3>
+          <p>Il pilota può partire se:</p>
+          <ul class="quiz-req">
+            <li>il team lavora ogni giorno su Slack;</li>
+            <li>in azienda lavorano da 2 a 249 persone;</li>
+            <li>una persona segue il pilota, circa un'ora a settimana;</li>
+            <li>per installare Luce possiamo entrare nel vostro Slack come amministratori.</li>
+          </ul>
+          <div class="quiz-nav">
+            <a class="btn btn-primary" href="https://calendly.com/goldenhourai/discovery-call" target="_blank" rel="noopener">Prenota su calendly.com</a>
+          </div>
+        </div>
+      </noscript>
+
+      <!-- Questionario: riempito dallo script, una domanda alla volta. -->
+      <div class="quiz" id="quiz" hidden>
+        <div class="quiz-top">
+          <span class="quiz-step" id="quizStep"></span>
+          <div class="quiz-bar" id="quizBar" role="progressbar" aria-label="Avanzamento del questionario" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+            <span id="quizBarFill"></span>
+          </div>
+        </div>
+        <h3 class="quiz-q" id="quizQ" tabindex="-1"></h3>
+        <p class="quiz-hint" id="quizHint" hidden>Potete scegliere più risposte.</p>
+        <div class="quiz-options" id="quizOptions" role="group" aria-labelledby="quizQ"></div>
+        <div class="quiz-nav">
+          <button type="button" class="btn btn-ghost btn-sm" id="quizBack">Indietro</button>
+          <button type="button" class="btn btn-primary btn-sm" id="quizNext" hidden>Avanti</button>
+        </div>
+        <p class="quiz-privacy">
+          Le risposte restano nel vostro browser e non vengono salvate. Se
+          prenotate, un loro riassunto (per esempio «Slack · 10–49 persone ·
+          Notion») arriva a Calendly insieme alla prenotazione.
+        </p>
+      </div>
+
+      <!-- Esito «non passa» -->
+      <div class="quiz quiz-esito" id="esitoNo" hidden>
+        <h3 class="quiz-q" id="esitoNoTitolo" tabindex="-1">Per ora non possiamo partire</h3>
+        <p id="esitoNoTesto"></p>
+        <p>
+          Se cambia qualcosa, o volete sapere quando Luce potrà lavorare anche
+          nel vostro caso, scriveteci a
+          <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>:
+          vi avvisiamo noi.
+        </p>
+        <div class="quiz-nav">
+          <button type="button" class="btn btn-ghost btn-sm" id="esitoNoBack">Rivedi le risposte</button>
+        </div>
+      </div>
+
+      <!-- Esito «passa»: la prenotazione. Calendly a due clic, come su
+           aurora: il widget NON e' nel markup, lo aggiunge lo script solo
+           dopo il clic su «Mostra il calendario» (vedi la regola "zero
+           terze parti al caricamento" in CLAUDE.md). -->
+      <div class="contact-grid" id="esitoSi" hidden>
+        <div class="contact-info">
+          <span class="eyebrow">Prenota</span>
+          <h3 class="esito-titolo" id="esitoSiTitolo" tabindex="-1">Si può partire</h3>
+          <p>
+            Prenotate una call di mezz'ora. Ci raccontate cosa fa l'azienda e
+            quale lavoro vorreste delegare, e vi diciamo come partirebbe il
+            pilota. Se Luce non è lo strumento giusto per voi, lo diciamo.
+          </p>
+          <div class="contact-meta">
+            <div class="row">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l1.5 3.5L20 9l-3.5 1.5L15 14l-1.5-3.5L10 9l3.5-1.5L15 4z"/><path d="M3 21l9-9"/></svg>
+              <span>Mezz'ora, senza presentazione commerciale</span>
+            </div>
+            <div class="row">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>
+            </div>
+            <div class="row">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span>Supporto in italiano · team in Italia</span>
+            </div>
+          </div>
+          <p class="contact-legal">
+            <a href="/gos/privacy/" data-config="gosPrivacy">Privacy di GoldenHour OS</a> ·
+            <a href="/gos/termini/" data-config="gosTermini">Termini di GoldenHour OS</a>
+          </p>
+        </div>
+
+        <div class="calendly-card">
+          <div id="calendlyWidget" style="min-width:280px;height:700px;">
+            <div class="cal-consent">
+              <svg class="ico" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              <div class="t">Prenota una call</div>
+              <p class="d">Il calendario è ospitato da Calendly. Caricandolo, il browser si collega a calendly.com, che riceve il tuo indirizzo IP e imposta i propri cookie. Finché non lo carichi, verso Calendly non parte nessuna richiesta.</p>
+              <button type="button" class="btn btn-primary" id="calLoad">Mostra il calendario</button>
+              <a class="alt" id="calDirect" href="#" target="_blank" rel="noopener">Oppure aprilo su calendly.com</a>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -424,6 +377,95 @@
 
   <script src="/assets/config.js"></script>
   <script>
+    // ================================================================
+    // QUESTIONARIO — domande e regole, tutte qui.
+    //
+    // Per cambiarle non serve toccare il resto dello script:
+    // - testo:      la domanda, come la legge il visitatore.
+    // - multipla:   true se si possono scegliere piu' risposte.
+    // - risposte:   le scelte possibili, nell'ordine in cui compaiono.
+    //     testo:     come compare sul bottone.
+    //     breve:     come compare nel riassunto che va a Calendly
+    //                (niente dati personali: solo categorie).
+    //     passa:     false se quella risposta chiude il questionario.
+    //     esclusiva: (solo nelle domande multiple) se la scegli, toglie
+    //                le altre, come «nessuno di questi».
+    // - seNonPassa: la frase per chi non passa, che spiega il requisito.
+    //
+    // Fonte: docs/pilota/domande-pilota.md nel repo gos, parte «Qualifica».
+    // E' una proposta da rivedere con Simone. Se cambiano le regole, va
+    // cambiato anche l'elenco nel <noscript> della sezione #pilota.
+    // ================================================================
+    const QUESTIONARIO = {
+      domande: [
+        {
+          testo: 'Su quale chat lavora il vostro team ogni giorno?',
+          risposte: [
+            { testo: 'Slack', breve: 'Slack', passa: true },
+            { testo: 'Microsoft Teams', breve: 'Teams', passa: false },
+            { testo: 'Google Chat', breve: 'Google Chat', passa: false },
+            { testo: 'WhatsApp o email', breve: 'WhatsApp o email', passa: false },
+            { testo: 'Altro', breve: 'altra chat', passa: false },
+          ],
+          seNonPassa: 'Per ora Luce lavora solo dentro Slack. Con Teams o con altre chat non possiamo ancora partire. Grazie del tempo che ci avete dedicato.',
+        },
+        {
+          testo: 'Quante persone lavorano in azienda?',
+          risposte: [
+            { testo: 'Solo io', breve: '1 persona', passa: false },
+            { testo: 'Da 2 a 9', breve: '2–9 persone', passa: true },
+            { testo: 'Da 10 a 49', breve: '10–49 persone', passa: true },
+            { testo: 'Da 50 a 249', breve: '50–249 persone', passa: true },
+            { testo: '250 o più', breve: '250+ persone', passa: false },
+          ],
+          seNonPassa: 'Il pilota di Luce è pensato per piccole e medie imprese con un team che lavora insieme in Slack. Per ora non è la soluzione giusta per voi.',
+        },
+        {
+          testo: 'Chi seguirebbe il pilota da parte vostra (circa un\'ora a settimana)?',
+          risposte: [
+            { testo: 'Il titolare', breve: 'lo segue il titolare', passa: true },
+            { testo: 'Un responsabile di reparto', breve: 'lo segue un responsabile', passa: true },
+            { testo: 'Una persona del team', breve: 'lo segue una persona del team', passa: true },
+            { testo: 'Nessuno, per ora', breve: 'nessuno lo segue', passa: false },
+          ],
+          seNonPassa: 'Il pilota funziona se una persona lo segue: prova Luce, ci dice cosa va e cosa no. Quando avete qualcuno, ripassate da qui.',
+        },
+        {
+          // Non esclude nessuno: serve a preparare la call (quali app mostrare).
+          testo: 'Quali di questi strumenti usate?',
+          multipla: true,
+          risposte: [
+            { testo: 'Notion', breve: 'Notion', passa: true },
+            { testo: 'Google Workspace (Gmail, Drive, Calendar)', breve: 'Google Workspace', passa: true },
+            { testo: 'Microsoft 365 (Outlook, OneDrive)', breve: 'Microsoft 365', passa: true },
+            { testo: 'Un gestionale o un CRM', breve: 'gestionale o CRM', passa: true },
+            { testo: 'Piattaforme di pubblicità (Google Ads, Meta)', breve: 'pubblicità', passa: true },
+            { testo: 'Un e-commerce', breve: 'e-commerce', passa: true },
+            { testo: 'Nessuno di questi', breve: 'nessuno strumento della lista', passa: true, esclusiva: true },
+          ],
+          seNonPassa: '',
+        },
+        {
+          testo: 'Per installare Luce entriamo nel vostro Slack come amministratori. Si può?',
+          risposte: [
+            { testo: 'Sì', breve: 'admin Slack: sì', passa: true },
+            { testo: 'Devo chiederlo', breve: 'admin Slack: da chiedere', passa: true },
+            { testo: 'No', breve: 'admin Slack: no', passa: false },
+          ],
+          seNonPassa: 'Per installare Luce dobbiamo entrare nel vostro Slack come amministratori, almeno il giorno dell\'installazione. Senza questo passo non possiamo partire.',
+        },
+      ],
+
+      // Il riassunto delle risposte (es. «Slack · 10–49 persone · Notion»)
+      // va a Calendly in questo parametro dell'indirizzo, che riempie la
+      // risposta a una domanda dell'evento: a1 e' la prima domanda
+      // personalizzata, a2 la seconda e cosi' via (documentazione di
+      // Calendly, «pre-fill invitee information»). Va controllato
+      // sull'evento quale domanda riempie. null = non mandare niente
+      // (e allora va tolta anche la frase in .quiz-privacy).
+      parametroCalendly: 'a1',
+    };
+
     // Config — stesso blocco su tutte le pagine: se cambia qui, cambia anche
     // in html/index.html e nelle sotto-landing.
     (function() {
@@ -476,24 +518,145 @@
       });
     })();
 
-    // Calendly a due clic. Il widget non e' nella pagina: al posto suo c'e' un
-    // segnaposto che dice cosa succede caricandolo. Finche' non si clicca, il
-    // browser non contatta calendly.com, quindi niente IP e niente cookie verso
-    // un terzo. Il clic e' il consenso, ed e' per questo che possiamo passare
-    // hide_gdpr_banner: l'informativa l'ha gia' data il segnaposto.
+    // Questionario e prenotazione. Tutto nel browser: le risposte non vanno
+    // da nessuna parte, salvo il riassunto che passa a Calendly se, dopo
+    // aver passato il questionario, si sceglie di caricare il calendario.
     (function () {
-      const holder = document.getElementById('calendlyWidget');
-      const btn = document.getElementById('calLoad');
-      const direct = document.getElementById('calDirect');
-      const calUrl = (window.SITE_CONFIG && window.SITE_CONFIG.calendarUrl) || 'https://calendly.com/goldenhourai/discovery-call';
-      if (direct) direct.href = calUrl;
-      if (!holder || !btn) return;
-      btn.addEventListener('click', () => {
+      const domande = QUESTIONARIO.domande;
+      const $ = id => document.getElementById(id);
+      const quiz = $('quiz'), step = $('quizStep'), bar = $('quizBar'), fill = $('quizBarFill');
+      const titolo = $('quizQ'), hint = $('quizHint'), opzioni = $('quizOptions');
+      const back = $('quizBack'), next = $('quizNext');
+      const esitoNo = $('esitoNo'), esitoSi = $('esitoSi');
+      if (!quiz || !domande.length) return;
+
+      // risposte[i] = indici delle risposte scelte alla domanda i.
+      const risposte = domande.map(() => []);
+      let corrente = 0;
+
+      function mostra(i, focus) {
+        corrente = i;
+        const d = domande[i];
+        quiz.hidden = false;
+        esitoNo.hidden = true;
+        esitoSi.hidden = true;
+        step.textContent = 'Domanda ' + (i + 1) + ' di ' + domande.length;
+        bar.setAttribute('aria-valuemax', domande.length);
+        bar.setAttribute('aria-valuenow', i + 1);
+        fill.style.width = ((i + 1) / domande.length * 100) + '%';
+        titolo.textContent = d.testo;
+        hint.hidden = !d.multipla;
+        // visibility e non hidden: il bottone tiene il suo posto e
+        // «Avanti» non salta da una parte all'altra.
+        back.style.visibility = i === 0 ? 'hidden' : 'visible';
+        next.hidden = !d.multipla;
+        opzioni.innerHTML = '';
+        d.risposte.forEach((r, k) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'quiz-opt' + (d.multipla ? ' multi' : '');
+          b.textContent = r.testo;
+          b.setAttribute('aria-pressed', risposte[i].includes(k) ? 'true' : 'false');
+          b.addEventListener('click', () => scegli(k));
+          opzioni.appendChild(b);
+        });
+        aggiornaAvanti();
+        if (focus) titolo.focus();
+      }
+
+      function aggiornaAvanti() {
+        if (domande[corrente].multipla) next.disabled = risposte[corrente].length === 0;
+      }
+
+      function scegli(k) {
+        const d = domande[corrente];
+        if (!d.multipla) {
+          risposte[corrente] = [k];
+          avanza();
+          return;
+        }
+        let scelte = risposte[corrente];
+        if (scelte.includes(k)) {
+          scelte = scelte.filter(x => x !== k);
+        } else if (d.risposte[k].esclusiva) {
+          scelte = [k];
+        } else {
+          scelte = scelte.filter(x => !d.risposte[x].esclusiva).concat(k);
+        }
+        risposte[corrente] = scelte;
+        opzioni.querySelectorAll('.quiz-opt').forEach((b, j) => {
+          b.setAttribute('aria-pressed', scelte.includes(j) ? 'true' : 'false');
+        });
+        aggiornaAvanti();
+      }
+
+      function avanza() {
+        const d = domande[corrente];
+        const bocciata = risposte[corrente].find(k => d.risposte[k].passa === false);
+        if (bocciata !== undefined) return nonPassa(d);
+        if (corrente + 1 < domande.length) return mostra(corrente + 1, true);
+        passa();
+      }
+
+      function nonPassa(d) {
+        quiz.hidden = true;
+        $('esitoNoTesto').textContent = d.seNonPassa;
+        esitoNo.hidden = false;
+        $('esitoNoTitolo').focus();
+      }
+
+      function passa() {
+        quiz.hidden = true;
+        esitoSi.hidden = false;
+        $('calDirect').href = indirizzoCalendly(false);
+        $('esitoSiTitolo').focus();
+        esitoSi.scrollIntoView({ block: 'start' });
+      }
+
+      // «Slack · 10–49 persone · lo segue il titolare · Notion, e-commerce · admin Slack: sì»
+      function riassunto() {
+        return domande.map((d, i) => risposte[i].map(k => d.risposte[k].breve || d.risposte[k].testo).join(', '))
+          .filter(Boolean).join(' · ');
+      }
+
+      // L'indirizzo di Calendly con il riassunto e gli UTM con cui si e'
+      // arrivati sulla pagina, cosi' su Calendly si vede da quale annuncio
+      // nasce una prenotazione. Nessun dato personale.
+      function indirizzoCalendly(widget) {
+        const base = (window.SITE_CONFIG && window.SITE_CONFIG.calendarUrl) || 'https://calendly.com/goldenhourai/discovery-call';
+        const p = new URLSearchParams();
+        if (widget) {
+          // Il clic e' il consenso, per questo si puo' nascondere il banner
+          // GDPR di Calendly: l'informativa l'ha gia' data il segnaposto.
+          p.set('hide_gdpr_banner', '1');
+          p.set('primary_color', '186628');
+        }
+        if (QUESTIONARIO.parametroCalendly) p.set(QUESTIONARIO.parametroCalendly, riassunto());
+        const qui = new URLSearchParams(location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
+          if (qui.get(k)) p.set(k, qui.get(k));
+        });
+        // encodeURIComponent e non p.toString(): quello scrive gli spazi come
+        // «+», mentre la documentazione di Calendly usa %20.
+        const q = [...p].map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+        return q ? base + '?' + q : base;
+      }
+
+      back.addEventListener('click', () => { if (corrente > 0) mostra(corrente - 1, true); });
+      next.addEventListener('click', avanza);
+      $('esitoNoBack').addEventListener('click', () => mostra(corrente, true));
+
+      // Calendly a due clic. Il widget non e' nella pagina: al posto suo c'e'
+      // un segnaposto che dice cosa succede caricandolo. Finche' non si
+      // clicca, il browser non contatta calendly.com, quindi niente IP e
+      // niente cookie verso un terzo.
+      const holder = $('calendlyWidget'), load = $('calLoad');
+      load.addEventListener('click', () => {
         holder.innerHTML = '';
         const w = document.createElement('div');
         w.className = 'calendly-inline-widget';
         w.style.cssText = 'min-width:280px;height:700px;';
-        w.setAttribute('data-url', calUrl + '?hide_gdpr_banner=1&primary_color=186628');
+        w.setAttribute('data-url', indirizzoCalendly(true));
         holder.appendChild(w);
         // widget.js inizializza i .calendly-inline-widget che trova al
         // caricamento, quindi va aggiunto dopo che il div e' nel DOM.
@@ -502,6 +665,8 @@
         s.async = true;
         document.body.appendChild(s);
       }, { once: true });
+
+      mostra(0, false);
     })();
   </script>
 </body>
