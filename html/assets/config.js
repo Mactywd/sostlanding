@@ -8,9 +8,14 @@ window.SITE_CONFIG = {
   urlAurora:       '/aurora',
   urlAtelier:      '/atelier',
   urlPrivacy:      '/privacy/',
-  urlGos:          '/gos/',
-  urlGosPrivacy:   '/gos/privacy/',
-  urlGosTermini:   '/gos/termini/',
+  urlLuce:         '/luce/',
+  urlLucePrivacy:  '/luce/privacy/',
+  urlLuceTermini:  '/luce/termini/',
+  // Alias dei vecchi nomi (Luce si chiamava GoldenHour OS, a /gos/): una
+  // pagina rimasta in cache che legge ancora queste chiavi va su /luce/.
+  urlGos:          '/luce/',
+  urlGosPrivacy:   '/luce/privacy/',
+  urlGosTermini:   '/luce/termini/',
   emailAtelier:    'atelier@goldenhourai.it',
   sainetUrl:       'https://sainet.it',
   // Path deciso ma non ancora esistente: nel footer Workshop e' testo, non un

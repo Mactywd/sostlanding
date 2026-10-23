@@ -164,7 +164,7 @@
             <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Cezànne · Hospitality</a></li>
             <li><a href="/aurora" data-config="aurora">Aurora · Education</a></li>
             <li><a href="/atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
-            <li><a href="/gos/" data-config="gos">GoldenHour OS · Piattaforma</a></li>
+            <li><a href="/luce/" data-config="luce">Luce</a></li>
             <!-- Workshop non e' ancora una pagina: testo semplice, non link.
                  Vedi il commento in html/index.html. -->
             <li><span>Workshop</span></li>
@@ -196,7 +196,7 @@
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
       // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
-      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', gos: 'urlGos', gosPrivacy: 'urlGosPrivacy', gosTermini: 'urlGosTermini' };
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', luce: 'urlLuce', lucePrivacy: 'urlLucePrivacy', luceTermini: 'urlLuceTermini' };
       Object.keys(links).forEach(name => {
         const url = cfg[links[name]];
         // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare

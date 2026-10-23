@@ -1,13 +1,82 @@
-/* Luce (pagina /gos/) — stili specifici della pagina.
+/* Luce (pagina /luce/) — stili specifici della pagina.
    Il design system condiviso (variabili, reset, navbar, footer, bottoni) è in ../shared.css
    Le convenzioni (hero-cta, hero-meta, features, contact) sono le stesse
-   di aurora/ e atelier/: una sotto-landing deve somigliare alle sorelle. */
+   di aurora/ e atelier/: una sotto-landing deve somigliare alle sorelle.
+
+   COLORI DI LUCE, campionati dal video della campagna (2026-10-23, ffmpeg,
+   fotogrammi a 0, 3, 7, 11, 15, 20, 25, 30 e 34 s; media dei pixel della
+   zona). Valgono anche per la web app.
+     Verde notte    #283723  sfondo scuro delle prime scene («2 ORE di copia e incolla»)
+     Crema          #FBF5DF  sfondo chiaro delle scene con il logo
+     Crema calda    #F8DEA0  alone del sole dietro il logo
+     Oro            #F2B62E  cifre «02:00:00», «2 ORE», pallini, scritta «Luce»
+     Verde collina  #54923A  verde chiaro della collina, parte in luce
+     Verde bosco    #2F5F2E  collina in ombra, tasto «Prenota una demo», «9.» e quadrante
+     Verde pallido  #EBF3E6  sfondo delle scene con il telefono e l'orologio
+     Inchiostro     #22291F  testo scuro delle scene chiare («Pronto alle 9.»)
+
+   Come li usa questa pagina: crema come sfondo, verde pallido per la
+   sezione del pilota, verde bosco per bottoni e link (accento primario
+   delle sotto-landing, vedi CLAUDE.md), oro come accento in scuro, verde
+   notte come base del tema scuro. I titoli restano nel colore del testo. */
+
+/* Token della pagina: sovrascrivono quelli di shared.css. Il blocco scuro
+   viene dopo e ridefinisce TUTTI i token del blocco chiaro: a parita' di
+   specificita' vince l'ultimo, quindi un token chiaro non ridefinito qui
+   sotto resterebbe attivo anche in scuro. */
+:root {
+  --bg:           #FBF5DF;  /* crema */
+  --bg-alt:       #EBF3E6;  /* verde pallido */
+  --card:         #FFFDF7;
+  --text:         #22291F;  /* inchiostro */
+  --text-muted:   #535E4E;
+  --text-faint:   #879180;
+  --border:       #DCDEC8;
+  --border-soft:  #ECEBD6;
+  --gold:         #F2B62E;  /* oro */
+  --gold-deep:    #A87916;  /* oro scurito, leggibile sulla crema */
+  --gold-soft:    #F2B62E;
+  --green:        #2F5F2E;  /* verde bosco */
+  --green-deep:   #283723;  /* verde notte */
+  --green-light:  #EBF3E6;
+  --hill:         #54923A;  /* verde collina */
+  --phone:        #22291F;
+  --primary:       var(--green);
+  --primary-hover: var(--green-deep);
+  --shadow:    0 8px 30px -10px rgba(40,55,35,.20), 0 2px 6px rgba(34,41,31,.05);
+  --shadow-lg: 0 30px 60px -25px rgba(40,55,35,.40), 0 10px 25px -10px rgba(34,41,31,.12);
+}
+[data-theme="dark"] {
+  --bg:           #1D2819;
+  --bg-alt:       #222E1E;
+  --card:         #283723;  /* verde notte */
+  --text:         #FBF5DF;  /* crema */
+  --text-muted:   #BFC4AE;
+  --text-faint:   #858F7C;
+  --border:       #3A4A34;
+  --border-soft:  #2E3C2A;
+  --gold:         #F8DEA0;  /* crema calda: hover dei bottoni oro */
+  --gold-deep:    #F2B62E;
+  --gold-soft:    #F2B62E;  /* oro */
+  --green:        #54923A;
+  --green-deep:   #2F5F2E;
+  --green-light:  #2E3C2A;
+  --hill:         #54923A;
+  --phone:        #121A10;
+  --primary:       var(--gold-soft);
+  --primary-hover: var(--gold);
+  --shadow:    0 8px 30px -10px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.4);
+  --shadow-lg: 0 30px 60px -25px rgba(0,0,0,.7), 0 10px 25px -10px rgba(0,0,0,.5);
+}
 
 /* .btn e altri elementi hanno un display proprio, che vincerebbe
    sull'attributo hidden: lo script nasconde e mostra i blocchi con hidden. */
 [hidden] { display: none !important; }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero ----------
+   Su telefono una colonna, nell'ordine del markup: titolo, testo, video,
+   bottoni. Da 900 px due colonne: il testo a sinistra, il video nella
+   cornice del telefono a destra, alto quanto tutto il blocco di testo. */
 .hero h1 { max-width: 16ch; text-wrap: balance; }
 .hero .lead {
   max-width: 58ch;
@@ -34,6 +103,64 @@
   width: 4px; height: 4px;
   border-radius: 999px;
   background: var(--border);
+}
+
+.hero-video {
+  margin: 8px 0 0;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+/* La cornice del telefono: le proporzioni sono quelle del video (478x850),
+   piu' il bordo. */
+.phone {
+  width: 100%;
+  padding: 9px;
+  background: var(--phone);
+  border-radius: 46px;
+  box-shadow: var(--shadow-lg);
+}
+[data-theme="dark"] .phone { box-shadow: var(--shadow-lg), 0 0 0 1px var(--border); }
+.phone video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 478 / 850;
+  object-fit: cover;
+  border-radius: 37px;
+  background: #283723; /* verde notte, il colore del primo fotogramma */
+}
+.audio-toggle { background: var(--card); }
+.audio-toggle svg { flex-shrink: 0; }
+.audio-toggle[aria-pressed="true"] { border-color: var(--primary); }
+
+@media (min-width: 900px) {
+  .hero { padding-top: 64px; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    /* Le due righe 1fr, sopra e sotto il testo, prendono l'altezza in piu'
+       del video: cosi' il testo resta compatto e centrato in verticale. */
+    grid-template-rows: 1fr auto auto auto auto auto 1fr;
+    column-gap: 72px;
+    row-gap: 24px;
+    text-align: left;
+    justify-items: start;
+  }
+  .hero-grid > * { grid-column: 1; }
+  .hero-grid > .eyebrow    { grid-row: 2; }
+  .hero-grid > h1          { grid-row: 3; }
+  .hero-grid > .lead       { grid-row: 4; }
+  .hero-grid > .hero-cta   { grid-row: 5; }
+  .hero-grid > .hero-meta  { grid-row: 6; }
+  .hero-grid > .hero-video {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    margin: 0;
+  }
+  .hero-cta, .hero-meta { justify-content: flex-start; }
 }
 
 /* ---------- Cosa fa ---------- */

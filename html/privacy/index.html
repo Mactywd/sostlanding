@@ -182,7 +182,7 @@
     (function() {
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
-      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', gos: 'urlGos', gosPrivacy: 'urlGosPrivacy', gosTermini: 'urlGosTermini' };
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', luce: 'urlLuce', lucePrivacy: 'urlLucePrivacy', luceTermini: 'urlLuceTermini' };
       Object.keys(links).forEach(name => {
         const url = cfg[links[name]];
         if (!url || url === '#') return;

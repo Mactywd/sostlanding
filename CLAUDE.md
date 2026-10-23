@@ -7,9 +7,11 @@ Single nginx container serving two landing pages under the same domain, managed 
 - **Main:** `https://goldenhourai.it` → GoldenHour AI corporate landing
 - **Aurora:** `https://goldenhourai.it/aurora/` → product landing for school substitution management
 - **Atelier:** `https://goldenhourai.it/atelier/` → product landing luxury & retail
-- **GoldenHour OS:** `https://goldenhourai.it/gos/` → product landing della piattaforma, con le proprie pagine legali sotto `/gos/privacy/` e `/gos/termini/`
+- **Luce:** `https://goldenhourai.it/luce/` → landing di Luce, l'assistente AI in Slack (è la pagina dell'annuncio: video, questionario e prenotazione), con le proprie pagine legali sotto `/luce/privacy/` e `/luce/termini/`
 
 Il vecchio path `/sostituzioni` (nome del prodotto prima del rebrand) è servito da un 301 permanente verso `/aurora/`. Non rimuoverlo: esistono link esterni e risultati di ricerca che lo puntano.
+
+Allo stesso modo `/gos/` e tutto quello che sta sotto (Luce si chiamava GoldenHour OS fino al 2026-10-23) rispondono 301 verso lo stesso percorso sotto `/luce/`. Non rimuoverlo: la schermata di consenso di Google cita `/gos/privacy/` e `/gos/termini/`.
 
 ## File structure
 
@@ -32,17 +34,19 @@ html/
       goldenhour-logo.png
       logo_with_tagline.png
       demoshort.mp4        # Hero demo video
-  gos/
-    index.html            # GoldenHour OS product landing
-    styles.css            # GoldenHour OS stylesheet
+  luce/
+    index.html            # Landing di Luce (video, cosa fa, questionario, Calendly a due clic)
+    styles.css            # Stili di Luce: in testa i colori campionati dal video
     legal.css             # Aggiunte alle pagine legali (liste, tabelle, riquadro bozza)
     privacy/index.html    # Privacy del prodotto (diversa da /privacy/, che copre il sito)
     termini/index.html    # Condizioni d'uso del prodotto
     assets/
       goldenhour-symbol.png
       logo_with_tagline.png
+      luce-demo.mp4         # Video dell'annuncio (H.264 + AAC, faststart, ~3 MB)
+      luce-demo-poster.jpg  # Primo fotogramma, mostrato prima che il video parta
 
-nginx.conf                # Nginx routing: / → main, /aurora/ → product
+nginx.conf                # Nginx routing: / → main, /aurora/ e /luce/ → prodotti, 301 legacy
 docker-compose.yml        # Traefik labels for goldenhourai.it
 template.html             # Scheletro per nuove sotto-landing. Fuori da html/: non va servito
 scripts/rotate-logs.sh    # Rotazione log a 30 giorni, da cron sull'host
@@ -55,12 +59,17 @@ One `nginx:alpine` container mounts `./html` as webroot. Traefik (external, pre-
 
 `nginx.conf` routes:
 - `/sostituzioni` e `/sostituzioni/<qualsiasi cosa>` → 301 permanente → `/aurora/…` (legacy, vedi sotto)
+- `/gos` e `/gos/<qualsiasi cosa>` → 301 permanente → `/luce/…`, con la query string (legacy, vedi sotto)
+- `/luce` → 301 → `/luce/` (con la query string: gli `utm_*` dell'annuncio non si perdono)
+- `/luce/` → `try_files` against `html/luce/`
 - `/aurora` → 301 → `/aurora/`
 - `/aurora/` → `try_files` against `html/aurora/`
 - `/atelier/` → `try_files` against `html/atelier/`
 - `/` → `try_files` against `html/`
 
-Il redirect legacy è un `location ~ ^/sostituzioni/(.*)$` e **deve restare prima** dei `location` regex per `css|js` e per i media: nginx sceglie il primo regex che matcha in ordine di definizione, quindi spostandolo più in basso i vecchi URL degli asset finirebbero in 404 invece che sul redirect.
+I redirect legacy sono `location ~ ^/sostituzioni/(.*)$` e `location ~ ^/gos/(.*)$` e **devono restare prima** dei `location` regex per `css|js` e per i media: nginx sceglie il primo regex che matcha in ordine di definizione, quindi spostandoli più in basso i vecchi URL degli asset finirebbero in 404 invece che sul redirect.
+
+Il video di Luce (`html/luce/assets/luce-demo.mp4`) passa dal `location` dei media, non da `/luce/`: è servito con cache di un anno (`immutable`) e con le richieste `Range` (206). **Se si sostituisce il video, si cambia anche il nome del file** (e il `src` nella pagina), altrimenti Cloudflare e i browser continuano a servire quello vecchio.
 
 ## Design system
 
@@ -71,11 +80,12 @@ Il redirect legacy è un `location ~ ^/sostituzioni/(.*)$` e **deve restare prim
 - CSS e JS inline nel file (non carica `shared.css`)
 - **Source of truth:** `html/index.html` (i file `Golden Hour Landing/` sono stati rimossi)
 
-### Sotto-landing (`html/aurora/`, `html/atelier/`)
+### Sotto-landing (`html/aurora/`, `html/atelier/`, `html/luce/`)
 - Fonts: Inter Tight (body), Source Serif 4 italic (usato con parsimonia, vedi Regole editoriali)
 - Palette: green-based, dark/light theme toggle via `data-theme` attribute
 - Caricano `../shared.css` + il proprio `styles.css`
 - Struttura comune: hero → cosa fa → come funziona → sezione specifica del prodotto → contatti
+- **Luce** ridefinisce i token di `shared.css` in testa a `html/luce/styles.css` con i colori del video dell'annuncio (crema, verde pallido, verde bosco, oro, verde notte per il tema scuro): l'elenco con i valori campionati sta nel commento in cima al file e vale anche per la web app. L'hero ha due colonne da 900 px in su (testo a sinistra, video nella cornice del telefono a destra); su telefono il video sta sotto il testo dell'hero.
 
 ## Key content alignment
 
@@ -98,7 +108,7 @@ Le pagine devono **illustrare** il prodotto, non convincere. Registro da documen
 - **Niente titoli a due tempi in antitesi** ("Tutto il necessario, / niente di superfluo"). Un `h2` è una frase dichiarativa semplice che dice di cosa parla la sezione.
 - **Niente chiuse a effetto** ("Ha pianto.", "è stata una rivoluzione", "Il ricordo non si perde"). Se una frase esiste per l'enfasi e non per l'informazione, va tolta.
 - **Niente testimonianze inventate.** Le citazioni vanno usate solo se reali e attribuibili; finché non ci sono, la sezione non esiste. Un placeholder dichiarato (come sulla main landing) è accettabile, cinque nomi di fantasia no.
-- **Numeri veri o niente numeri.** Evitare metriche decorative (`∞`, `0 fogli Excel`). È il motivo per cui la scheda di GoldenHour OS su `html/index.html` non ha `.metric-row` né `.case-quote`: non ci sono ancora numeri misurati né una citazione reale e attribuibile, e una scheda più corta è preferibile a due metriche inventate. Quando ci saranno, si aggiungono.
+- **Numeri veri o niente numeri.** Evitare metriche decorative (`∞`, `0 fogli Excel`). È il motivo per cui la scheda di Luce su `html/index.html` non ha `.metric-row` né `.case-quote`: non ci sono ancora numeri misurati né una citazione reale e attribuibile, e una scheda più corta è preferibile a due metriche inventate. Quando ci saranno, si aggiungono.
 - Preferire il contenuto verificabile e specifico del prodotto alla persuasione.
 - **Non presentare come fisso ciò che è configurabile.** La generazione delle sostituzioni (Aurora) e il listino/formati (Atelier) si definiscono cliente per cliente: le pagine descrivono *cosa* si configura, mai *quale* sia la configurazione. Niente ordini di priorità dichiarati, niente taglie o prezzi in vetrina.
 
@@ -156,7 +166,7 @@ Cambiare il termine significa cambiarlo in tre posti: lo script, il commento in 
 
 `html/sitemap.xml` elenca sette URL e ha le `<lastmod>` scritte a mano: vanno aggiornate quando il contenuto di una pagina cambia davvero. Una data ferma e' meglio di una sbagliata, perche' Google smette di fidarsi di `lastmod` se lo trova inattendibile. Gli URL elencati devono rispondere **200, mai 301**: niente varianti senza slash finale.
 
-Il §4 di `html/gos/privacy/` contiene la dichiarazione **Limited Use** con il richiamo esplicito alla Google API Services User Data Policy, in italiano e in inglese. Non e' prosa: e' la formula che la verifica OAuth di Google cerca, e senza quella la richiesta viene respinta. Non riscriverla ne' accorciarla.
+Il §4 di `html/luce/privacy/` contiene la dichiarazione **Limited Use** con il richiamo esplicito alla Google API Services User Data Policy, in italiano e in inglese. Non e' prosa: e' la formula che la verifica OAuth di Google cerca, e senza quella la richiesta viene respinta. Non riscriverla ne' accorciarla.
 
 ## Email
 
@@ -172,26 +182,26 @@ Il vecchio indirizzo `sostituzioni@` va tenuto come alias verso `aurora@`: è pu
 
 ## Footer
 
-Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre quattro: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/gos/`, `template.html`. Le due pagine legali sotto `/gos/` hanno solo la riga in basso, come `/privacy/`: quelle non contano.
+Il footer è **identico su tutte le pagine** per contenuto: stesse voci, stessi link, stessa riga in basso. Il markup differisce (la main landing ha CSS e i18n propri, le sotto-landing usano `shared.css`), il contenuto no. Toccando il footer di una pagina, allinea le altre quattro: `html/index.html`, `html/aurora/`, `html/atelier/`, `html/luce/`, `template.html`. Le due pagine legali sotto `/luce/` hanno solo la riga in basso, come `/privacy/`: quelle non contano.
 
-GoldenHour OS è nella colonna Prodotti come gli altri, ma è l'unica voce che non è un verticale: è la piattaforma su cui gli altri stanno. Per questo l'etichetta è `· Piattaforma` e la scheda sulla main landing è l'ultima delle quattro.
+Luce è nella colonna Prodotti come gli altri, senza etichetta: fino al 2026-10-23 la voce era «GoldenHour OS · Piattaforma». Sulla main landing la sua scheda è l'ultima delle quattro, con l'etichetta «Assistente AI».
 
 Contenuto canonico, in quest'ordine di colonne:
 1. **Brand**: logo, payoff, descrizione
 2. **Community** (SAINET, link a `sainetUrl`) e sotto **Navigazione** (Metodo, Prodotti, Prenota una call)
-3. **Prodotti**: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail, GoldenHour OS · Piattaforma, Workshop
+3. **Prodotti**: Cezànne · Hospitality, Aurora · Education, Atelier · Luxury & Retail, Luce, Workshop
 4. **Contatti**: sede legale + `info@goldenhourai.it`
 
 Workshop sta fra i **prodotti**, non in Community: è una futura linea di attività di GoldenHour, non un'iniziativa esterna a cui si partecipa. Oggi è **testo semplice, non un link**, perché `/workshop` non esiste ancora. Il path è già deciso e registrato in `workshopsUrl`: quando la pagina ci sarà, si rimette `<a href="/workshop" data-config="workshops">` nelle quattro pagine.
 
-Fino al 21 settembre 2026 `nginx.conf` aveva `try_files $uri $uri/ /index.html` piu' `error_page 404 /index.html`: **qualsiasi URL inesistente serviva la main landing con status 200**. Ha tenuto nascosto per settimane il fatto che `/gos/` non fosse deployato — l'URL rispondeva 200, solo con la pagina sbagliata. Ora i `try_files` finiscono in `=404` e `error_page` serve `html/404.html`, quindi un link rotto si vede. Resta comunque preferibile non pubblicare link verso pagine che non esistono ancora.
+Fino al 21 settembre 2026 `nginx.conf` aveva `try_files $uri $uri/ /index.html` piu' `error_page 404 /index.html`: **qualsiasi URL inesistente serviva la main landing con status 200**. Ha tenuto nascosto per settimane il fatto che `/gos/` (oggi `/luce/`) non fosse deployato — l'URL rispondeva 200, solo con la pagina sbagliata. Ora i `try_files` finiscono in `=404` e `error_page` serve `html/404.html`, quindi un link rotto si vede. Resta comunque preferibile non pubblicare link verso pagine che non esistono ancora.
 - Riga in basso: `© 2026 Golden Hour AI · Simone Mattera · P.IVA 01556970521` / EN `… · VAT 01556970521`, e un link a `/privacy/`
 
 La riga legale dice solo **Privacy**. Diceva "Privacy · Cookie · Termini" come testo non cliccabile: tre parole che sembravano un footer legale e non portavano da nessuna parte. I Termini non servono (non si vende nulla online, non ci sono account né contenuti utente) e non c'è una cookie policy perché il sito non usa cookie.
 
 **La riga legale e' un obbligo di legge** (art. 7 D.lgs. 70/2003), non una nota di stile: identifica chi fornisce il servizio. Va tenuta allineata in tutte e nove le occorrenze, comprese le due stringhe i18n IT/EN in `html/index.html` e `template.html`. L'indirizzo completo sta nelle informative, non nel footer. Mai un numero segnaposto tipo `IT00000000000`: sarebbe un dato legale falso pubblicato.
 
-Il blocco `applyConfig` è **lo stesso identico codice** in tutte e cinque le pagine (`index`, `aurora`, `atelier`, `privacy`, `template`): è generico sulle chiavi, quindi va copiato senza adattarlo. Salta gli URL a `'#'`, che sono segnaposto di link non ancora decisi. Usa `data-config`, mai `id`.
+Il blocco `applyConfig` è **lo stesso identico codice** in tutte le pagine (`index`, `aurora`, `atelier`, `privacy`, `template`, `luce` e le sue due pagine legali; la 404 ne ha una versione ridotta): è generico sulle chiavi, quindi va copiato senza adattarlo. Salta gli URL a `'#'`, che sono segnaposto di link non ancora decisi. Usa `data-config`, mai `id`.
 
 ## Terze parti: la regola è zero al caricamento
 
@@ -216,23 +226,23 @@ Ce ne sono tre, e coprono due cose diverse. Non vanno confuse.
 
 `html/privacy/` riguarda **il sito**: cosa succede aprendo goldenhourai.it e scrivendo a un nostro indirizzo. Descrive cosa fa davvero il sito, quindi **va riletta ogni volta che si tocca una terza parte o si aggiunge una raccolta di dati** (un form, un analytics, un embed): se il codice cambia e la pagina no, la pagina diventa una dichiarazione falsa.
 
-`html/gos/privacy/` e `html/gos/termini/` riguardano **il prodotto** GoldenHour OS, cioè i dati delle aziende clienti che passano dentro al sistema. Il footer del sito continua a linkare solo `/privacy/`: quelle due sono documenti contrattuali del prodotto, non informative di navigazione, e si raggiungono da `/gos/`.
+`html/luce/privacy/` e `html/luce/termini/` riguardano **il prodotto** Luce (fino al 2026-10-23 «GoldenHour OS», a `/gos/`), cioè i dati delle aziende clienti che passano dentro al sistema. Il footer del sito continua a linkare solo `/privacy/`: quelle due sono documenti contrattuali del prodotto, non informative di navigazione, e si raggiungono da `/luce/`. Nel rebranding è cambiato solo il nome del prodotto, il resto del testo no.
 
 Nota storica: questo file diceva che i Termini non servivano, "non si vende nulla online, non ci sono account né contenuti utente". Era vero del sito e resta vero del sito. Non è più vero del prodotto, che ha clienti, credenziali di terzi collegate e output su cui qualcuno prende decisioni.
 
-Le tre pagine sono complete e riviste da un legale (21 settembre 2026). I riquadri `.nota-bozza` che elencavano i punti aperti sono stati rimossi; lo stile resta in `gos/legal.css` per riusarlo se una pagina futura nasce come bozza. La regola che li giustificava vale ancora: **una pagina legale pubblicata con dentro un segnaposto e' peggio di una pagina assente**, quindi se si aggiunge una sezione incompleta si rimette il riquadro invece di pubblicarla monca.
+Le tre pagine sono complete e riviste da un legale (21 settembre 2026). I riquadri `.nota-bozza` che elencavano i punti aperti sono stati rimossi; lo stile resta in `luce/legal.css` per riusarlo se una pagina futura nasce come bozza. La regola che li giustificava vale ancora: **una pagina legale pubblicata con dentro un segnaposto e' peggio di una pagina assente**, quindi se si aggiunge una sezione incompleta si rimette il riquadro invece di pubblicarla monca.
 
 Il titolare e' **Simone Mattera**, persona fisica con P.IVA: «Golden Hour AI» e' solo il marchio, non una ditta registrata. Quando nascera' la societa', i dati legali vanno cambiati in nove footer piu' le due informative, e i contratti gia' firmati non passano da soli al nuovo soggetto.
 
-Le due pagine del prodotto caricano `shared.css`, poi `privacy/styles.css` (gli stili del testo lungo, riusati) e infine `gos/legal.css`, che aggiunge solo liste, tabelle e il riquadro di bozza. Toccando `privacy/styles.css` si toccano anche loro.
+Le due pagine del prodotto caricano `shared.css`, poi `privacy/styles.css` (gli stili del testo lungo, riusati) e infine `luce/legal.css`, che aggiunge solo liste, tabelle e il riquadro di bozza. Toccando `privacy/styles.css` si toccano anche loro.
 
-`/gos/` non ha un `location` in `nginx.conf` e non ne ha bisogno: `location /` fa `try_files $uri $uri/`, che serve `html/gos/index.html` e reindirizza `/gos` a `/gos/`. È lo stesso motivo per cui `/privacy/` funziona senza un blocco proprio. Meglio così: cambiare `nginx.conf` costringe a `docker compose restart web` per via del bind mount su file singolo (vedi sopra).
+`/luce/` ha un `location` proprio in `nginx.conf` (con `/luce` → `/luce/` che tiene la query string), come `/aurora/`. `/privacy/` invece non ne ha bisogno: `location /` fa `try_files $uri $uri/`. Ricorda che cambiare `nginx.conf` costringe a `docker compose up -d` per via del bind mount su file singolo (vedi sopra).
 
 ## Color hierarchy
 
 ### Rule 1 — Colore primario per pagina
 - **Main landing** (`html/index.html`): **oro** come accento primario (`--gold: #D4A23B`). CTA, pulsanti, focus ring usano oro.
-- **Sub-landing** (`html/aurora/`, `html/atelier/` e future pagine prodotto): **verde** come accento primario (`--green: #186628` in `shared.css`). In dark mode, `shared.css` inverte automaticamente a `--gold-soft` tramite `[data-theme="dark"] { --primary: var(--gold-soft) }`.
+- **Sub-landing** (`html/aurora/`, `html/atelier/`, `html/luce/` e future pagine prodotto): **verde** come accento primario (`--green: #186628` in `shared.css`). In dark mode, `shared.css` inverte automaticamente a `--gold-soft` tramite `[data-theme="dark"] { --primary: var(--gold-soft) }`.
 
 ### Rule 2 — CTA verso sotto-landing usano il verde
 I CTA sulla main landing che **linkano a una sotto-landing** devono usare verde, non oro. In `html/index.html`, aggiungere la classe `btn-to-product` insieme a `btn-gold` per attivare l'override verde. Non usare oro per CTA verso prodotti esterni.

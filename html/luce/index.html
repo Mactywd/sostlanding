@@ -14,8 +14,8 @@
   <meta property="og:site_name" content="GoldenHour AI"/>
   <meta property="og:title" content="Luce · l'assistente AI in Slack per le PMI"/>
   <meta property="og:description" content="Un assistente AI che lavora dentro Slack: risponde nei canali, prepara report e file, conosce l'azienda dalla knowledge base su Notion e usa le vostre app con i permessi che decidete voi."/>
-  <meta property="og:url" content="https://goldenhourai.it/gos/"/>
-  <meta property="og:image" content="https://goldenhourai.it/gos/assets/logo_with_tagline.png"/>
+  <meta property="og:url" content="https://goldenhourai.it/luce/"/>
+  <meta property="og:image" content="https://goldenhourai.it/luce/assets/logo_with_tagline.png"/>
 
   <link rel="icon" href="assets/goldenhour-symbol.png" type="image/png"/>
 
@@ -25,7 +25,7 @@
   <!-- Design system condiviso (dal parent della cartella del prodotto) -->
   <link rel="stylesheet" href="../shared.css?v=8922ee96"/>
   <!-- Stili specifici della pagina -->
-  <link rel="stylesheet" href="styles.css?v=787fafcd"/>
+  <link rel="stylesheet" href="styles.css?v=1e4ed750"/>
 </head>
 <body>
 
@@ -64,10 +64,6 @@
   <section class="hero">
     <div class="container hero-grid">
 
-      <div class="hero-logo">
-        <img src="assets/logo_with_tagline.png" alt="GoldenHour AI"/>
-      </div>
-
       <span class="eyebrow">Assistente AI per le PMI</span>
 
       <h1>Luce</h1>
@@ -78,6 +74,46 @@
         dalla knowledge base su Notion e usa le vostre app solo con i permessi
         che decidete voi.
       </p>
+
+      <!-- Video della campagna, ospitato da noi (niente YouTube o Vimeo:
+           zero terze parti al caricamento). Parte muto e in loop; il tasto
+           sotto attiva l'audio. Su computer sta a destra del testo, su
+           telefono sotto il titolo e il sottotitolo (vedi .hero-video in
+           styles.css). -->
+      <figure class="hero-video">
+        <div class="phone">
+          <video id="demoVideo"
+                 src="assets/luce-demo.mp4"
+                 poster="assets/luce-demo-poster.jpg"
+                 width="478" height="850"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Video dimostrativo: Luce in Slack, dal primo messaggio al brief del mattino con una richiesta di approvazione"></video>
+        </div>
+        <script>
+          // Con «riduci movimento» il video non parte da solo. Lo script sta
+          // subito dopo il <video>: toglie autoplay prima che il browser lo
+          // avvii e mostra i controlli, per farlo partire a mano.
+          (function () {
+            var v = document.getElementById('demoVideo');
+            if (v && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              v.removeAttribute('autoplay');
+              v.autoplay = false;
+              v.pause();
+              v.controls = true;
+            }
+          })();
+        </script>
+        <!-- Nascosto senza JavaScript: senza script il tasto non farebbe niente. -->
+        <button type="button" class="btn btn-ghost btn-sm audio-toggle" id="audioToggle" aria-pressed="false" aria-controls="demoVideo" hidden>
+          <svg class="ico-muto" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/>
+          </svg>
+          <svg class="ico-audio" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/>
+          </svg>
+          <span id="audioToggleTesto">Attiva l'audio</span>
+        </button>
+      </figure>
 
       <div class="hero-cta">
         <a href="#pilota" class="btn btn-primary">
@@ -186,8 +222,8 @@
         Ogni azienda ha la propria istanza di Luce, con i propri dati e le
         proprie credenziali, separata da quelle degli altri clienti. I dati non
         vengono venduti e non vengono usati per addestrare modelli. I dettagli
-        sono nella <a href="/gos/privacy/" data-config="gosPrivacy">privacy di
-        GoldenHour OS</a>, la piattaforma su cui Luce è costruito.
+        sono nella <a href="/luce/privacy/" data-config="lucePrivacy">privacy di
+        Luce</a>.
       </p>
     </div>
   </section>
@@ -248,8 +284,10 @@
         </div>
         <p class="quiz-privacy">
           Le risposte restano nel vostro browser e non vengono salvate. Se
-          aprite il calendario per prenotare, un loro riassunto (per esempio
-          «Slack · 10–49 persone · Notion») arriva a Calendly.
+          aprite il calendario per prenotare, a Calendly arrivano un loro
+          riassunto (per esempio «Slack · 10–49 persone · Notion») e i
+          parametri della campagna da cui siete arrivati. Nella prenotazione vi
+          chiediamo anche il sito dell'azienda, per preparare la call.
         </p>
       </div>
 
@@ -296,8 +334,8 @@
             </div>
           </div>
           <p class="contact-legal">
-            <a href="/gos/privacy/" data-config="gosPrivacy">Privacy di GoldenHour OS</a> ·
-            <a href="/gos/termini/" data-config="gosTermini">Termini di GoldenHour OS</a>
+            <a href="/luce/privacy/" data-config="lucePrivacy">Privacy di Luce</a> ·
+            <a href="/luce/termini/" data-config="luceTermini">Termini di Luce</a>
           </p>
         </div>
 
@@ -354,7 +392,7 @@
             <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Cezànne · Hospitality</a></li>
             <li><a href="/aurora" data-config="aurora">Aurora · Education</a></li>
             <li><a href="/atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
-            <li><a href="/gos/" data-config="gos">GoldenHour OS · Piattaforma</a></li>
+            <li><a href="/luce/" data-config="luce">Luce</a></li>
             <li><span>Workshop</span></li>
           </ul>
         </div>
@@ -473,7 +511,7 @@
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
       // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
-      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', gos: 'urlGos', gosPrivacy: 'urlGosPrivacy', gosTermini: 'urlGosTermini' };
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', luce: 'urlLuce', lucePrivacy: 'urlLucePrivacy', luceTermini: 'urlLuceTermini' };
       Object.keys(links).forEach(name => {
         const url = cfg[links[name]];
         // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare
@@ -494,6 +532,40 @@
       document.querySelectorAll('[data-config="siteRoot"]').forEach(el => {
         el.href = cfg.siteRoot + (el.dataset.configHash || '');
       });
+    })();
+
+    // Audio del video: parte muto (i browser avviano da soli solo i video
+    // senza audio), il tasto lo attiva. Attivandolo il video riparte
+    // dall'inizio, per sentirlo tutto. aria-pressed="true" = audio attivo.
+    (function () {
+      const v = document.getElementById('demoVideo');
+      const b = document.getElementById('audioToggle');
+      if (!v || !b) return;
+      const testo = document.getElementById('audioToggleTesto');
+      const icoMuto = b.querySelector('.ico-muto'), icoAudio = b.querySelector('.ico-audio');
+      function aggiorna() {
+        const attivo = !v.muted;
+        b.setAttribute('aria-pressed', attivo ? 'true' : 'false');
+        testo.textContent = attivo ? 'Disattiva l\'audio' : 'Attiva l\'audio';
+        icoMuto.hidden = attivo;
+        icoAudio.hidden = !attivo;
+      }
+      b.addEventListener('click', () => {
+        if (v.muted) {
+          v.muted = false;
+          v.currentTime = 0;
+          const p = v.play();
+          if (p && p.catch) p.catch(() => {});
+        } else {
+          v.muted = true;
+        }
+        aggiorna();
+      });
+      // Con «riduci movimento» il video ha i controlli del browser: se
+      // l'audio si cambia da li', il tasto si allinea.
+      v.addEventListener('volumechange', aggiorna);
+      b.hidden = false;
+      aggiorna();
     })();
 
     // Theme toggle
@@ -635,7 +707,7 @@
           // Il clic e' il consenso, per questo si puo' nascondere il banner
           // GDPR di Calendly: l'informativa l'ha gia' data il segnaposto.
           p.set('hide_gdpr_banner', '1');
-          p.set('primary_color', '186628');
+          p.set('primary_color', '2F5F2E');
         }
         if (QUESTIONARIO.parametroCalendly) p.set(QUESTIONARIO.parametroCalendly, riassunto());
         // Solo i cinque UTM, e solo valori brevi e "puliti": lettere, cifre,

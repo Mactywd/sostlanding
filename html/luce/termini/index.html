@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Termini di GoldenHour OS · GoldenHour AI</title>
-  <meta name="description" content="Le condizioni d'uso di GoldenHour OS: cosa fa il servizio, cosa resta in capo al cliente e fin dove arriva la nostra responsabilità."/>
+  <title>Termini di Luce · GoldenHour AI</title>
+  <meta name="description" content="Le condizioni d'uso di Luce: cosa fa il servizio, cosa resta in capo al cliente e fin dove arriva la nostra responsabilità."/>
   <meta name="robots" content="index, follow"/>
 
   <link rel="icon" href="/assets/logo.png" type="image/png"/>
@@ -14,23 +14,23 @@
 
   <link rel="stylesheet" href="/shared.css?v=8922ee96"/>
   <link rel="stylesheet" href="/privacy/styles.css?v=55e34710"/>
-  <link rel="stylesheet" href="../legal.css?v=c2fd02c8"/>
+  <link rel="stylesheet" href="../legal.css?v=374f1759"/>
 </head>
 <body>
 
   <header class="site-header">
     <div class="container row">
-      <a href="/" class="brand" aria-label="GoldenHour AI · Termini di GoldenHour OS">
+      <a href="/" class="brand" aria-label="GoldenHour AI · Termini di Luce">
         <span>GoldenHour AI</span>
         <span class="sep">/</span>
-        <span class="product">Termini · GoldenHour OS</span>
+        <span class="product">Termini · Luce</span>
       </a>
       <div class="header-actions">
         <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
           <svg id="themeIconLight" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           <svg id="themeIconDark" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-        <a href="/gos/" data-config="gos" class="btn btn-ghost btn-sm">GoldenHour OS</a>
+        <a href="/luce/" data-config="luce" class="btn btn-ghost btn-sm">Luce</a>
       </div>
     </div>
   </header>
@@ -39,12 +39,12 @@
     <div class="container">
 
       <span class="eyebrow">Condizioni</span>
-      <h1>Termini di GoldenHour OS</h1>
+      <h1>Termini di Luce</h1>
       <p class="lead">
-        Queste condizioni regolano l'uso di <strong>GoldenHour OS</strong> da parte
+        Queste condizioni regolano l'uso di <strong>Luce</strong> da parte
         delle aziende che lo adottano. Non riguardano la semplice consultazione di
         goldenhourai.it. Il trattamento dei dati è descritto nella
-        <a href="/gos/privacy/" data-config="gosPrivacy">privacy di GoldenHour OS</a>.
+        <a href="/luce/privacy/" data-config="lucePrivacy">privacy di Luce</a>.
       </p>
       <p class="updated">Ultimo aggiornamento: 1 ottobre 2026</p>
 
@@ -62,7 +62,7 @@
       <section>
         <h2>2. A chi si applicano</h2>
         <p>
-          GoldenHour OS è fornito esclusivamente a soggetti che agiscono nell'esercizio
+          Luce è fornito esclusivamente a soggetti che agiscono nell'esercizio
           della propria attività imprenditoriale o professionale. Non è un servizio
           rivolto ai consumatori, e non si applicano quindi le tutele previste per i
           contratti conclusi con i consumatori.
@@ -76,7 +76,7 @@
       <section>
         <h2>3. Cosa fa il servizio</h2>
         <p>
-          GoldenHour OS è un software che assiste il lavoro delle persone. Legge dati
+          Luce è un software che assiste il lavoro delle persone. Legge dati
           dai sistemi che il cliente decide di collegare, li rielabora, produce report
           e sintesi, segnala scostamenti rispetto a soglie che il cliente stabilisce, e
           prepara contenuti che il cliente può poi usare.
@@ -260,7 +260,7 @@
         <h2>9. Dati personali</h2>
         <p>
           Il trattamento dei dati personali è descritto nella
-          <a href="/gos/privacy/" data-config="gosPrivacy">privacy di GoldenHour OS</a> ed è regolato
+          <a href="/luce/privacy/" data-config="lucePrivacy">privacy di Luce</a> ed è regolato
           dall'accordo sul trattamento dei dati ex art. 28 GDPR che accompagna il
           contratto. In caso di contrasto, prevale l'accordo sul trattamento.
         </p>
@@ -353,7 +353,7 @@
     (function() {
       const cfg = window.SITE_CONFIG;
       if (!cfg) return;
-      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', gos: 'urlGos', gosPrivacy: 'urlGosPrivacy', gosTermini: 'urlGosTermini' };
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', luce: 'urlLuce', lucePrivacy: 'urlLucePrivacy', luceTermini: 'urlLuceTermini' };
       Object.keys(links).forEach(name => {
         const url = cfg[links[name]];
         if (!url || url === '#') return;

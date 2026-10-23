@@ -44,24 +44,24 @@ stamp html/404.html "/shared.css" "html/shared.css"
 stamp html/privacy/index.html "/shared.css" "html/shared.css"
 stamp html/privacy/index.html "styles.css" "html/privacy/styles.css"
 
-# GoldenHour OS: la pagina prodotto sta un livello sotto la radice come aurora
+# Luce: la pagina prodotto sta un livello sotto la radice come aurora
 # e atelier, le due pagine legali un livello piu' in basso. Queste ultime
 # riusano gli stili del testo lungo della privacy del sito e aggiungono
-# gos/legal.css, quindi vanno marcati tutti e tre i CSS.
-stamp html/gos/index.html "../shared.css" "html/shared.css"
-stamp html/gos/index.html "styles.css" "html/gos/styles.css"
-for page in html/gos/privacy/index.html html/gos/termini/index.html; do
+# luce/legal.css, quindi vanno marcati tutti e tre i CSS.
+stamp html/luce/index.html "../shared.css" "html/shared.css"
+stamp html/luce/index.html "styles.css" "html/luce/styles.css"
+for page in html/luce/privacy/index.html html/luce/termini/index.html; do
   stamp "$page" "/shared.css" "html/shared.css"
   stamp "$page" "/privacy/styles.css" "html/privacy/styles.css"
-  stamp "$page" "../legal.css" "html/gos/legal.css"
+  stamp "$page" "../legal.css" "html/luce/legal.css"
 done
 
 # fonts.css e' referenziato con un path assoluto, uguale su tutte le pagine.
 # I .woff2 non hanno bisogno di versione: il nome cambia solo se cambia il
 # font, e nginx li serve immutabili.
 for page in html/index.html html/aurora/index.html html/atelier/index.html template.html \
-            html/404.html html/privacy/index.html html/gos/index.html \
-            html/gos/privacy/index.html html/gos/termini/index.html; do
+            html/404.html html/privacy/index.html html/luce/index.html \
+            html/luce/privacy/index.html html/luce/termini/index.html; do
   stamp "$page" "/assets/fonts.css" "html/assets/fonts.css"
 done
 echo "Fatto."
