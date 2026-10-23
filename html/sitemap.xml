@@ -3,21 +3,22 @@
   Sette pagine, scritte a mano. <lastmod> va aggiornata quando il contenuto di
   una pagina cambia davvero: una data ferma e' meglio di una data sbagliata,
   perche' Google smette di fidarsi di lastmod se lo trova inattendibile.
-  Le pagine legali cambiano di rado ma contano: /gos/privacy/ e' l'URL che la
-  verifica OAuth di Google va a leggere.
+  Le pagine legali cambiano di rado ma contano: /luce/privacy/ e' l'URL che la
+  verifica OAuth di Google va a leggere (prima del 2026-10-23 era
+  /gos/privacy/, che ora risponde 301 e quindi non sta qui).
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://goldenhourai.it/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://goldenhourai.it/gos/</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://goldenhourai.it/luce/</loc>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -37,15 +38,15 @@
   </url>
 
   <url>
-    <loc>https://goldenhourai.it/gos/privacy/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://goldenhourai.it/luce/privacy/</loc>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://goldenhourai.it/gos/termini/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://goldenhourai.it/luce/termini/</loc>
+    <lastmod>2026-10-23</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

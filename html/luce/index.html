@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luce · l'assistente AI in Slack per le PMI · GoldenHour AI</title>
+  <meta name="description" content="Luce è un assistente AI che lavora dentro Slack, per le piccole e medie imprese. Risponde nei canali, prepara report e file, conosce l'azienda dalla knowledge base su Notion e usa le vostre app con i permessi che decidete voi."/>
+  <meta name="robots" content="index, follow"/>
+
+  <!-- Open Graph: l'anteprima quando il link si condivide in chat o sui social.
+       Gli URL devono essere assoluti. -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="it_IT"/>
+  <meta property="og:site_name" content="GoldenHour AI"/>
+  <meta property="og:title" content="Luce · l'assistente AI in Slack per le PMI"/>
+  <meta property="og:description" content="Un assistente AI che lavora dentro Slack: risponde nei canali, prepara report e file, conosce l'azienda dalla knowledge base su Notion e usa le vostre app con i permessi che decidete voi."/>
+  <meta property="og:url" content="https://goldenhourai.it/luce/"/>
+  <meta property="og:image" content="https://goldenhourai.it/luce/assets/logo_with_tagline.png"/>
+
+  <link rel="icon" href="assets/goldenhour-symbol.png" type="image/png"/>
+
+  <link rel="preload" href="/assets/fonts.css?v=7cda0fc2" as="style"/>
+  <link href="/assets/fonts.css?v=7cda0fc2" rel="stylesheet"/>
+
+  <!-- Design system condiviso (dal parent della cartella del prodotto) -->
+  <link rel="stylesheet" href="../shared.css?v=8922ee96"/>
+  <!-- Stili specifici della pagina -->
+  <link rel="stylesheet" href="styles.css?v=1e4ed750"/>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container row">
+
+      <a href="/" class="brand" aria-label="GoldenHour AI · Luce">
+        <span>GoldenHour AI</span>
+        <span class="sep">/</span>
+        <span class="product">Luce</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="#cosa-fa">Cosa fa</a>
+        <a href="#pilota">Il pilota</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+          <svg id="themeIconLight" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg id="themeIconDark" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="#pilota" class="btn btn-primary btn-sm">Prenota una call</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="container hero-grid">
+
+      <span class="eyebrow">Assistente AI per le PMI</span>
+
+      <h1>Luce</h1>
+
+      <p class="lead">
+        Un assistente AI che lavora dentro Slack, per le piccole e medie imprese.
+        Risponde nei vostri canali, prepara report e file, conosce l'azienda
+        dalla knowledge base su Notion e usa le vostre app solo con i permessi
+        che decidete voi.
+      </p>
+
+      <!-- Video della campagna, ospitato da noi (niente YouTube o Vimeo:
+           zero terze parti al caricamento). Parte muto e in loop; il tasto
+           sotto attiva l'audio. Su computer sta a destra del testo, su
+           telefono sotto il titolo e il sottotitolo (vedi .hero-video in
+           styles.css). -->
+      <figure class="hero-video">
+        <div class="phone">
+          <video id="demoVideo"
+                 src="assets/luce-demo.mp4"
+                 poster="assets/luce-demo-poster.jpg"
+                 width="478" height="850"
+                 autoplay muted loop playsinline preload="metadata"
+                 aria-label="Video dimostrativo: Luce in Slack, dal primo messaggio al brief del mattino con una richiesta di approvazione"></video>
+        </div>
+        <script>
+          // Con «riduci movimento» il video non parte da solo. Lo script sta
+          // subito dopo il <video>: toglie autoplay prima che il browser lo
+          // avvii e mostra i controlli, per farlo partire a mano.
+          (function () {
+            var v = document.getElementById('demoVideo');
+            if (v && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              v.removeAttribute('autoplay');
+              v.autoplay = false;
+              v.pause();
+              v.controls = true;
+            }
+          })();
+        </script>
+        <!-- Nascosto senza JavaScript: senza script il tasto non farebbe niente. -->
+        <button type="button" class="btn btn-ghost btn-sm audio-toggle" id="audioToggle" aria-pressed="false" aria-controls="demoVideo" hidden>
+          <svg class="ico-muto" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/>
+          </svg>
+          <svg class="ico-audio" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/>
+          </svg>
+          <span id="audioToggleTesto">Attiva l'audio</span>
+        </button>
+      </figure>
+
+      <div class="hero-cta">
+        <a href="#pilota" class="btn btn-primary">
+          Verifica se si può partire
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+        <a href="#cosa-fa" class="btn btn-ghost">Cosa fa</a>
+      </div>
+
+      <div class="hero-meta">
+        <span>Lavora dentro Slack</span>
+        <span class="dot"></span>
+        <span>Knowledge base su Notion</span>
+        <span class="dot"></span>
+        <span>Permessi decisi azione per azione</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COSA FA — solo quello che Luce fa gia' oggi. Prima di
+       aggiungere un blocco, controllare che la funzione sia in
+       produzione (backlog del repo gos, sezione «Fatti»).
+       ============================================================ -->
+  <section class="features" id="cosa-fa">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Cosa fa</span>
+        <h2>Cosa fa Luce oggi</h2>
+        <p>
+          Luce sta nei canali Slack che scegliete e lavora con quello che gli
+          date: la knowledge base, i file, le app collegate.
+        </p>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <h3>Risponde nei canali Slack</h3>
+          <p>
+            Lo si menziona in un canale o in un thread e risponde lì. Ricorda
+            quello che vi siete detti nel thread, quindi una correzione si chiede
+            nello stesso posto. Può anche ripetere un lavoro a orari fissi, per
+            esempio un riepilogo ogni lunedì alle 9.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <h3>Conosce l'azienda</h3>
+          <p>
+            Ha una knowledge base su Notion: il Contesto, con l'azienda, le
+            persone e le regole, e una sezione per ogni area di lavoro, con gli
+            Output e le Fonti. Per archiviare un file basta la reazione 📥 su
+            Slack, per un fatto nuovo «ricordati che…».
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <path d="M14 2v6h6M9 14h6M9 18h4"/>
+            </svg>
+          </div>
+          <h3>Prepara report e file</h3>
+          <p>
+            Report e analisi in PDF, Excel, CSV o HTML, allegati al thread. Si
+            salvano da soli nella knowledge base, nella sezione del canale, e si
+            ritrovano chiedendoli: «mi rimandi il report di settembre?».
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Usa le vostre app, con i vostri permessi</h3>
+          <p>
+            Le app dell'azienda si collegano una volta. Per ogni azione si sceglie
+            se Luce può farla da solo, se deve chiedere conferma o se non può
+            farla. Di serie le letture partono da sole, mentre modifiche e invii
+            aspettano che qualcuno li approvi.
+          </p>
+        </div>
+
+      </div>
+
+      <p class="note-dati">
+        Ogni azienda ha la propria istanza di Luce, con i propri dati e le
+        proprie credenziali, separata da quelle degli altri clienti. I dati non
+        vengono venduti e non vengono usati per addestrare modelli. I dettagli
+        sono nella <a href="/luce/privacy/" data-config="lucePrivacy">privacy di
+        Luce</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       IL PILOTA — questionario e prenotazione.
+       Senza JavaScript si vede solo il blocco <noscript>; con
+       JavaScript compare il questionario (#quiz) e, a seconda
+       dell'esito, #esitoNo oppure #esitoSi con il Calendly a due clic.
+       Domande e regole stanno nell'oggetto QUESTIONARIO in fondo.
+       ============================================================ -->
+  <section class="pilota" id="pilota">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Il pilota</span>
+        <h2>Cinque domande prima della call</h2>
+        <p>
+          Luce si prova con un pilota: lo installiamo nel vostro Slack e lo
+          seguiamo insieme a una persona del vostro team. Le domande dicono se ci
+          sono le condizioni per partire. Se ci sono, prenotate una call di
+          mezz'ora.
+        </p>
+      </div>
+
+      <noscript>
+        <!-- Copia a mano delle regole di QUESTIONARIO: se cambiano le
+             regole, va cambiato anche questo elenco. Il link a Calendly
+             e' scritto qui perche' senza JavaScript config.js non gira. -->
+        <div class="quiz">
+          <h3 class="quiz-q">Prima di prenotare</h3>
+          <p>Il pilota può partire se:</p>
+          <ul class="quiz-req">
+            <li>il team lavora ogni giorno su Slack;</li>
+            <li>in azienda lavorano da 2 a 249 persone;</li>
+            <li>una persona segue il pilota, circa un'ora a settimana;</li>
+            <li>per installare Luce possiamo entrare nel vostro Slack come amministratori.</li>
+          </ul>
+          <div class="quiz-nav">
+            <a class="btn btn-primary" href="https://calendly.com/goldenhourai/discovery-call" target="_blank" rel="noopener">Prenota su calendly.com</a>
+          </div>
+        </div>
+      </noscript>
+
+      <!-- Questionario: riempito dallo script, una domanda alla volta. -->
+      <div class="quiz" id="quiz" hidden>
+        <div class="quiz-top">
+          <span class="quiz-step" id="quizStep"></span>
+          <div class="quiz-bar" id="quizBar" role="progressbar" aria-label="Avanzamento del questionario" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+            <span id="quizBarFill"></span>
+          </div>
+        </div>
+        <h3 class="quiz-q" id="quizQ" tabindex="-1"></h3>
+        <p class="quiz-hint" id="quizHint" hidden>Potete scegliere più risposte.</p>
+        <div class="quiz-options" id="quizOptions" role="group" aria-labelledby="quizQ"></div>
+        <div class="quiz-nav">
+          <button type="button" class="btn btn-ghost btn-sm" id="quizBack">Indietro</button>
+          <button type="button" class="btn btn-primary btn-sm" id="quizNext" hidden>Avanti</button>
+        </div>
+        <p class="quiz-privacy">
+          Le risposte restano nel vostro browser e non vengono salvate. Se
+          aprite il calendario per prenotare, a Calendly arrivano un loro
+          riassunto (per esempio «Slack · 10–49 persone · Notion») e i
+          parametri della campagna da cui siete arrivati. Nella prenotazione vi
+          chiediamo anche il sito dell'azienda, per preparare la call.
+        </p>
+      </div>
+
+      <!-- Esito «non passa» -->
+      <div class="quiz quiz-esito" id="esitoNo" hidden>
+        <h3 class="quiz-q" id="esitoNoTitolo" tabindex="-1">Per ora non possiamo partire</h3>
+        <p id="esitoNoTesto"></p>
+        <p>
+          Se cambia qualcosa, o volete sapere quando Luce potrà lavorare anche
+          nel vostro caso, scriveteci a
+          <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>:
+          vi avvisiamo noi.
+        </p>
+        <div class="quiz-nav">
+          <button type="button" class="btn btn-ghost btn-sm" id="esitoNoBack">Rivedi le risposte</button>
+        </div>
+      </div>
+
+      <!-- Esito «passa»: la prenotazione. Calendly a due clic, come su
+           aurora: il widget NON e' nel markup, lo aggiunge lo script solo
+           dopo il clic su «Mostra il calendario» (vedi la regola "zero
+           terze parti al caricamento" in CLAUDE.md). -->
+      <div class="contact-grid" id="esitoSi" hidden>
+        <div class="contact-info">
+          <span class="eyebrow">Prenota</span>
+          <h3 class="esito-titolo" id="esitoSiTitolo" tabindex="-1">Si può partire</h3>
+          <p>
+            Prenotate una call di mezz'ora. Ci raccontate cosa fa l'azienda e
+            quale lavoro vorreste delegare, e vi diciamo come partirebbe il
+            pilota. Se Luce non è lo strumento giusto per voi, lo diciamo.
+          </p>
+          <div class="contact-meta">
+            <div class="row">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l1.5 3.5L20 9l-3.5 1.5L15 14l-1.5-3.5L10 9l3.5-1.5L15 4z"/><path d="M3 21l9-9"/></svg>
+              <span>Mezz'ora, senza presentazione commerciale</span>
+            </div>
+            <div class="row">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a>
+            </div>
+            <div class="row">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span>Supporto in italiano · team in Italia</span>
+            </div>
+          </div>
+          <p class="contact-legal">
+            <a href="/luce/privacy/" data-config="lucePrivacy">Privacy di Luce</a> ·
+            <a href="/luce/termini/" data-config="luceTermini">Termini di Luce</a>
+          </p>
+        </div>
+
+        <div class="calendly-card">
+          <div id="calendlyWidget" style="min-width:280px;height:700px;">
+            <div class="cal-consent">
+              <svg class="ico" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              <div class="t">Prenota una call</div>
+              <p class="d">Il calendario è ospitato da Calendly. Caricandolo, il browser si collega a calendly.com, che riceve il vostro indirizzo IP e imposta i propri cookie. Al calendario passano anche il riassunto delle risposte al questionario, senza dati personali, e i parametri della campagna da cui siete arrivati. Finché non lo caricate, verso Calendly non parte nessuna richiesta.</p>
+              <button type="button" class="btn btn-primary" id="calLoad">Mostra il calendario</button>
+              <a class="alt" id="calDirect" href="#" target="_blank" rel="noopener">Oppure aprilo su calendly.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER — contenuto canonico, identico alle altre pagine.
+       Se cambia qui, va allineato in index.html, aurora, atelier,
+       privacy e template.html (vedi CLAUDE.md).
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="foot-grid">
+
+        <div class="foot-brand-col">
+          <div class="foot-brand">
+            <img src="assets/goldenhour-symbol.png" alt=""/>
+            <span>Golden Hour AI</span>
+          </div>
+          <p class="foot-payoff">Reclaim your time.</p>
+          <p class="foot-desc">Portiamo l'AI dentro le PMI. Educhiamo, mappiamo, costruiamo un passo alla volta, al fianco di chi guida l'azienda.</p>
+        </div>
+
+        <div>
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://sainet.it" data-config="sainet"><span class="foot-sainet"><span class="pip"></span>SAINET · Siena AI Network</span></a></li>
+          </ul>
+          <h4>Navigazione</h4>
+          <ul>
+            <li><a href="https://goldenhourai.it/#method" data-config="siteRoot" data-config-hash="/#method">Metodo</a></li>
+            <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Prodotti</a></li>
+            <li><a href="https://goldenhourai.it/#contact" data-config="siteRoot" data-config-hash="/#contact">Prenota una call</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Prodotti</h4>
+          <ul>
+            <li><a href="https://goldenhourai.it/#products" data-config="siteRoot" data-config-hash="/#products">Cezànne · Hospitality</a></li>
+            <li><a href="/aurora" data-config="aurora">Aurora · Education</a></li>
+            <li><a href="/atelier" data-config="atelier">Atelier · Luxury &amp; Retail</a></li>
+            <li><a href="/luce/" data-config="luce">Luce</a></li>
+            <li><span>Workshop</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contatti</h4>
+          <ul>
+            <li>Sede legale<br/><span>Siena, Toscana, Italia</span></li>
+            <li><a href="mailto:info@goldenhourai.it" data-config="emailMain">info@goldenhourai.it</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Golden Hour AI · Simone Mattera · P.IVA 01556970521</span>
+        <span><a href="/privacy/" data-config="privacy">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/config.js"></script>
+  <script>
+    // ================================================================
+    // QUESTIONARIO — domande e regole, tutte qui.
+    //
+    // Per cambiarle non serve toccare il resto dello script:
+    // - testo:      la domanda, come la legge il visitatore.
+    // - multipla:   true se si possono scegliere piu' risposte.
+    // - risposte:   le scelte possibili, nell'ordine in cui compaiono.
+    //     testo:     come compare sul bottone.
+    //     breve:     come compare nel riassunto che va a Calendly
+    //                (niente dati personali: solo categorie).
+    //     passa:     false se quella risposta chiude il questionario.
+    //     esclusiva: (solo nelle domande multiple) se la scegli, toglie
+    //                le altre, come «nessuno di questi».
+    // - seNonPassa: la frase per chi non passa, che spiega il requisito.
+    //
+    // Fonte: docs/pilota/domande-pilota.md nel repo gos, parte «Qualifica».
+    // E' una proposta da rivedere con Simone. Se cambiano le regole, va
+    // cambiato anche l'elenco nel <noscript> della sezione #pilota.
+    // ================================================================
+    const QUESTIONARIO = {
+      domande: [
+        {
+          testo: 'Su quale chat lavora il vostro team ogni giorno?',
+          risposte: [
+            { testo: 'Slack', breve: 'Slack', passa: true },
+            { testo: 'Microsoft Teams', breve: 'Teams', passa: false },
+            { testo: 'Google Chat', breve: 'Google Chat', passa: false },
+            { testo: 'WhatsApp o email', breve: 'WhatsApp o email', passa: false },
+            { testo: 'Altro', breve: 'altra chat', passa: false },
+          ],
+          seNonPassa: 'Per ora Luce lavora solo dentro Slack. Con Teams o con altre chat non possiamo ancora partire. Grazie del tempo che ci avete dedicato.',
+        },
+        {
+          testo: 'Quante persone lavorano in azienda?',
+          risposte: [
+            { testo: 'Solo io', breve: '1 persona', passa: false },
+            { testo: 'Da 2 a 9', breve: '2–9 persone', passa: true },
+            { testo: 'Da 10 a 49', breve: '10–49 persone', passa: true },
+            { testo: 'Da 50 a 249', breve: '50–249 persone', passa: true },
+            { testo: '250 o più', breve: '250+ persone', passa: false },
+          ],
+          seNonPassa: 'Il pilota di Luce è pensato per piccole e medie imprese con un team che lavora insieme in Slack. Per ora non è la soluzione giusta per voi.',
+        },
+        {
+          testo: 'Chi seguirebbe il pilota da parte vostra (circa un\'ora a settimana)?',
+          risposte: [
+            { testo: 'Il titolare', breve: 'lo segue il titolare', passa: true },
+            { testo: 'Un responsabile di reparto', breve: 'lo segue un responsabile', passa: true },
+            { testo: 'Una persona del team', breve: 'lo segue una persona del team', passa: true },
+            { testo: 'Nessuno, per ora', breve: 'nessuno lo segue', passa: false },
+          ],
+          seNonPassa: 'Il pilota funziona se una persona lo segue: prova Luce, ci dice cosa va e cosa no. Quando avete qualcuno, ripassate da qui.',
+        },
+        {
+          // Non esclude nessuno: serve a preparare la call (quali app mostrare).
+          testo: 'Quali di questi strumenti usate?',
+          multipla: true,
+          risposte: [
+            { testo: 'Notion', breve: 'Notion', passa: true },
+            { testo: 'Google Workspace (Gmail, Drive, Calendar)', breve: 'Google Workspace', passa: true },
+            { testo: 'Microsoft 365 (Outlook, OneDrive)', breve: 'Microsoft 365', passa: true },
+            { testo: 'Un gestionale o un CRM', breve: 'gestionale o CRM', passa: true },
+            { testo: 'Piattaforme di pubblicità (Google Ads, Meta)', breve: 'pubblicità', passa: true },
+            { testo: 'Un e-commerce', breve: 'e-commerce', passa: true },
+            { testo: 'Nessuno di questi', breve: 'nessuno strumento della lista', passa: true, esclusiva: true },
+          ],
+          seNonPassa: '',
+        },
+        {
+          testo: 'Per installare Luce entriamo nel vostro Slack come amministratori. Si può?',
+          risposte: [
+            { testo: 'Sì', breve: 'admin Slack: sì', passa: true },
+            { testo: 'Devo chiederlo', breve: 'admin Slack: da chiedere', passa: true },
+            { testo: 'No', breve: 'admin Slack: no', passa: false },
+          ],
+          seNonPassa: 'Per installare Luce dobbiamo entrare nel vostro Slack come amministratori, almeno il giorno dell\'installazione. Senza questo passo non possiamo partire.',
+        },
+      ],
+
+      // Il riassunto delle risposte (es. «Slack · 10–49 persone · Notion»)
+      // va a Calendly in questo parametro dell'indirizzo, che riempie la
+      // risposta a una domanda dell'evento: a1 e' la prima domanda
+      // personalizzata, a2 la seconda e cosi' via (documentazione di
+      // Calendly, «pre-fill invitee information»). Va controllato
+      // sull'evento quale domanda riempie. null = non mandare niente
+      // (e allora vanno tolte anche le frasi sul riassunto in .quiz-privacy
+      // e nel segnaposto .cal-consent).
+      parametroCalendly: 'a1',
+    };
+
+    // Config — stesso blocco su tutte le pagine: se cambia qui, cambia anche
+    // in html/index.html e nelle sotto-landing.
+    (function() {
+      const cfg = window.SITE_CONFIG;
+      if (!cfg) return;
+      // Link: data-config="<nome>" -> chiave URL in SITE_CONFIG.
+      const links = { sainet: 'sainetUrl', workshops: 'workshopsUrl', aurora: 'urlAurora', atelier: 'urlAtelier', privacy: 'urlPrivacy', luce: 'urlLuce', lucePrivacy: 'urlLucePrivacy', luceTermini: 'urlLuceTermini' };
+      Object.keys(links).forEach(name => {
+        const url = cfg[links[name]];
+        // '#' e' il segnaposto di un URL non ancora deciso: meglio lasciare
+        // l'href com'e' che promettere una destinazione che non esiste.
+        if (!url || url === '#') return;
+        document.querySelectorAll('[data-config="' + name + '"]').forEach(el => { el.href = url; });
+      });
+      // Email: href e testo insieme, cosi' l'indirizzo mostrato non puo'
+      // divergere da quello che si apre nel client di posta.
+      ['emailMain', 'emailAurora', 'emailAtelier'].forEach(key => {
+        if (!cfg[key]) return;
+        document.querySelectorAll('[data-config="' + key + '"]').forEach(el => {
+          el.href = 'mailto:' + cfg[key];
+          el.textContent = cfg[key];
+        });
+      });
+      // Usato dalle sotto-landing per tornare a una sezione della main landing.
+      document.querySelectorAll('[data-config="siteRoot"]').forEach(el => {
+        el.href = cfg.siteRoot + (el.dataset.configHash || '');
+      });
+    })();
+
+    // Audio del video: parte muto (i browser avviano da soli solo i video
+    // senza audio), il tasto lo attiva. Attivandolo il video riparte
+    // dall'inizio, per sentirlo tutto. aria-pressed="true" = audio attivo.
+    (function () {
+      const v = document.getElementById('demoVideo');
+      const b = document.getElementById('audioToggle');
+      if (!v || !b) return;
+      const testo = document.getElementById('audioToggleTesto');
+      const icoMuto = b.querySelector('.ico-muto'), icoAudio = b.querySelector('.ico-audio');
+      function aggiorna() {
+        const attivo = !v.muted;
+        b.setAttribute('aria-pressed', attivo ? 'true' : 'false');
+        testo.textContent = attivo ? 'Disattiva l\'audio' : 'Attiva l\'audio';
+        icoMuto.hidden = attivo;
+        icoAudio.hidden = !attivo;
+      }
+      b.addEventListener('click', () => {
+        if (v.muted) {
+          v.muted = false;
+          v.currentTime = 0;
+          const p = v.play();
+          if (p && p.catch) p.catch(() => {});
+        } else {
+          v.muted = true;
+        }
+        aggiorna();
+      });
+      // Con «riduci movimento» il video ha i controlli del browser: se
+      // l'audio si cambia da li', il tasto si allinea.
+      v.addEventListener('volumechange', aggiorna);
+      b.hidden = false;
+      aggiorna();
+    })();
+
+    // Theme toggle
+    (function () {
+      const toggle = document.getElementById('themeToggle');
+      const iconLight = document.getElementById('themeIconLight');
+      const iconDark  = document.getElementById('themeIconDark');
+      const html = document.documentElement;
+
+      const saved = localStorage.getItem('gh-theme') || 'light';
+      html.setAttribute('data-theme', saved);
+      if (saved === 'dark') {
+        iconLight.style.display = 'none';
+        iconDark.style.display  = 'block';
+      }
+
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('gh-theme', next);
+        iconLight.style.display = next === 'dark' ? 'none'  : 'block';
+        iconDark.style.display  = next === 'dark' ? 'block' : 'none';
+      });
+    })();
+
+    // Questionario e prenotazione. Tutto nel browser: le risposte non vanno
+    // da nessuna parte, salvo il riassunto che passa a Calendly se, dopo
+    // aver passato il questionario, si sceglie di caricare il calendario.
+    (function () {
+      const domande = QUESTIONARIO.domande;
+      const $ = id => document.getElementById(id);
+      const quiz = $('quiz'), step = $('quizStep'), bar = $('quizBar'), fill = $('quizBarFill');
+      const titolo = $('quizQ'), hint = $('quizHint'), opzioni = $('quizOptions');
+      const back = $('quizBack'), next = $('quizNext');
+      const esitoNo = $('esitoNo'), esitoSi = $('esitoSi');
+      if (!quiz || !domande.length) return;
+
+      // risposte[i] = indici delle risposte scelte alla domanda i.
+      const risposte = domande.map(() => []);
+      let corrente = 0;
+
+      function mostra(i, focus) {
+        corrente = i;
+        const d = domande[i];
+        quiz.hidden = false;
+        esitoNo.hidden = true;
+        esitoSi.hidden = true;
+        step.textContent = 'Domanda ' + (i + 1) + ' di ' + domande.length;
+        bar.setAttribute('aria-valuemax', domande.length);
+        bar.setAttribute('aria-valuenow', i + 1);
+        fill.style.width = ((i + 1) / domande.length * 100) + '%';
+        titolo.textContent = d.testo;
+        hint.hidden = !d.multipla;
+        // visibility e non hidden: il bottone tiene il suo posto e
+        // «Avanti» non salta da una parte all'altra.
+        back.style.visibility = i === 0 ? 'hidden' : 'visible';
+        // Nelle domande a scelta singola il primo clic porta avanti da solo;
+        // «Avanti» compare quando la domanda ha gia' una risposta (dopo
+        // «Indietro»), cosi' non serve ricliccare la scelta fatta.
+        next.hidden = !d.multipla && risposte[i].length === 0;
+        if (d.multipla) opzioni.setAttribute('aria-describedby', 'quizHint');
+        else opzioni.removeAttribute('aria-describedby');
+        opzioni.innerHTML = '';
+        d.risposte.forEach((r, k) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'quiz-opt' + (d.multipla ? ' multi' : '');
+          b.textContent = r.testo;
+          b.setAttribute('aria-pressed', risposte[i].includes(k) ? 'true' : 'false');
+          b.addEventListener('click', () => scegli(k));
+          opzioni.appendChild(b);
+        });
+        aggiornaAvanti();
+        if (focus) titolo.focus();
+      }
+
+      function aggiornaAvanti() {
+        next.disabled = risposte[corrente].length === 0;
+      }
+
+      function scegli(k) {
+        const d = domande[corrente];
+        if (!d.multipla) {
+          risposte[corrente] = [k];
+          avanza();
+          return;
+        }
+        let scelte = risposte[corrente];
+        if (scelte.includes(k)) {
+          scelte = scelte.filter(x => x !== k);
+        } else if (d.risposte[k].esclusiva) {
+          scelte = [k];
+        } else {
+          scelte = scelte.filter(x => !d.risposte[x].esclusiva).concat(k);
+        }
+        risposte[corrente] = scelte;
+        opzioni.querySelectorAll('.quiz-opt').forEach((b, j) => {
+          b.setAttribute('aria-pressed', scelte.includes(j) ? 'true' : 'false');
+        });
+        aggiornaAvanti();
+      }
+
+      function avanza() {
+        const d = domande[corrente];
+        const bocciata = risposte[corrente].find(k => d.risposte[k].passa === false);
+        if (bocciata !== undefined) return nonPassa(d);
+        if (corrente + 1 < domande.length) return mostra(corrente + 1, true);
+        passa();
+      }
+
+      function nonPassa(d) {
+        quiz.hidden = true;
+        $('esitoNoTesto').textContent = d.seNonPassa;
+        esitoNo.hidden = false;
+        $('esitoNoTitolo').focus();
+      }
+
+      function passa() {
+        quiz.hidden = true;
+        esitoSi.hidden = false;
+        $('calDirect').href = indirizzoCalendly(false);
+        $('esitoSiTitolo').focus();
+        esitoSi.scrollIntoView({ block: 'start' });
+      }
+
+      // «Slack · 10–49 persone · lo segue il titolare · Notion, e-commerce · admin Slack: sì»
+      function riassunto() {
+        return domande.map((d, i) => risposte[i].map(k => d.risposte[k].breve || d.risposte[k].testo).join(', '))
+          .filter(Boolean).join(' · ');
+      }
+
+      // L'indirizzo di Calendly con il riassunto e gli UTM con cui si e'
+      // arrivati sulla pagina, cosi' su Calendly si vede da quale annuncio
+      // nasce una prenotazione. Nessun dato personale.
+      function indirizzoCalendly(widget) {
+        const base = (window.SITE_CONFIG && window.SITE_CONFIG.calendarUrl) || 'https://calendly.com/goldenhourai/discovery-call';
+        const p = new URLSearchParams();
+        if (widget) {
+          // Il clic e' il consenso, per questo si puo' nascondere il banner
+          // GDPR di Calendly: l'informativa l'ha gia' data il segnaposto.
+          p.set('hide_gdpr_banner', '1');
+          p.set('primary_color', '2F5F2E');
+        }
+        if (QUESTIONARIO.parametroCalendly) p.set(QUESTIONARIO.parametroCalendly, riassunto());
+        // Solo i cinque UTM, e solo valori brevi e "puliti": lettere, cifre,
+        // '-', '_', '.', al massimo 100 caratteri. Un valore diverso (spazi,
+        // testo libero, un'email incollata nel link) non si inoltra.
+        //
+        // Attenzione: widget.js di Calendly copia da solo nell'iframe gli
+        // utm_* (e salesforce_uuid) dell'indirizzo di questa pagina, ma i
+        // parametri di data-url vincono sui suoi. Per il widget quindi un
+        // valore scartato si riscrive vuoto, altrimenti passerebbe lo stesso.
+        const qui = new URLSearchParams(location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'salesforce_uuid'].forEach(k => {
+          const v = qui.get(k);
+          if (v && k !== 'salesforce_uuid' && /^[A-Za-z0-9._-]{1,100}$/.test(v)) p.set(k, v);
+          else if (widget && qui.has(k)) p.set(k, '');
+        });
+        // encodeURIComponent e non p.toString(): quello scrive gli spazi come
+        // «+», mentre la documentazione di Calendly usa %20.
+        const q = [...p].map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+        return q ? base + '?' + q : base;
+      }
+
+      back.addEventListener('click', () => { if (corrente > 0) mostra(corrente - 1, true); });
+      next.addEventListener('click', avanza);
+      $('esitoNoBack').addEventListener('click', () => mostra(corrente, true));
+
+      // Calendly a due clic. Il widget non e' nella pagina: al posto suo c'e'
+      // un segnaposto che dice cosa succede caricandolo. Finche' non si
+      // clicca, il browser non contatta calendly.com, quindi niente IP e
+      // niente cookie verso un terzo.
+      const holder = $('calendlyWidget'), load = $('calLoad');
+      load.addEventListener('click', () => {
+        holder.innerHTML = '';
+        const w = document.createElement('div');
+        w.className = 'calendly-inline-widget';
+        w.style.cssText = 'min-width:280px;height:700px;';
+        w.setAttribute('data-url', indirizzoCalendly(true));
+        holder.appendChild(w);
+        // widget.js inizializza i .calendly-inline-widget che trova al
+        // caricamento, quindi va aggiunto dopo che il div e' nel DOM.
+        const s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        document.body.appendChild(s);
+      }, { once: true });
+
+      mostra(0, false);
+    })();
+  </script>
+</body>
+</html>
