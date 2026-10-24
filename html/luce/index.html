@@ -239,7 +239,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Il pilota</span>
-        <h2>Quattro domande prima della call</h2>
+        <h2>Tre domande prima della call</h2>
         <p>
           Luce si prova con un pilota: lo installiamo nel vostro Slack e lo
           seguiamo insieme a una persona del vostro team. Le domande dicono se ci
@@ -257,8 +257,7 @@
           <p>Il pilota può partire se:</p>
           <ul class="quiz-req">
             <li>il team lavora ogni giorno su Slack;</li>
-            <li>in azienda lavorano da 2 a 249 persone;</li>
-            <li>per installare Luce possiamo entrare nel vostro Slack come amministratori.</li>
+            <li>in azienda lavorano da 2 a 249 persone.</li>
           </ul>
           <div class="quiz-nav">
             <a class="btn btn-primary" href="https://calendly.com/goldenhourai/discovery-call" target="_blank" rel="noopener">Prenota su calendly.com</a>
@@ -270,7 +269,7 @@
       <div class="quiz" id="quiz" hidden>
         <div class="quiz-top">
           <span class="quiz-step" id="quizStep"></span>
-          <div class="quiz-bar" id="quizBar" role="progressbar" aria-label="Avanzamento del questionario" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">
+          <div class="quiz-bar" id="quizBar" role="progressbar" aria-label="Avanzamento del questionario" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1">
             <span id="quizBarFill"></span>
           </div>
         </div>
@@ -472,15 +471,6 @@
           ],
           seNonPassa: '',
         },
-        {
-          testo: 'Per installare Luce entriamo nel vostro Slack come amministratori. Si può?',
-          risposte: [
-            { testo: 'Sì', breve: 'admin Slack: sì', passa: true },
-            { testo: 'Devo chiederlo', breve: 'admin Slack: da chiedere', passa: true },
-            { testo: 'No', breve: 'admin Slack: no', passa: false },
-          ],
-          seNonPassa: 'Per installare Luce dobbiamo entrare nel vostro Slack come amministratori, almeno il giorno dell\'installazione. Senza questo passo non possiamo partire.',
-        },
       ],
 
       // Il riassunto delle risposte (es. «Slack · 10–49 persone · Notion»)
@@ -680,7 +670,7 @@
         esitoSi.scrollIntoView({ block: 'start' });
       }
 
-      // «Slack · 10–49 persone · Notion, e-commerce · admin Slack: sì»
+      // «Slack · 10–49 persone · Notion, e-commerce»
       function riassunto() {
         return domande.map((d, i) => risposte[i].map(k => d.risposte[k].breve || d.risposte[k].testo).join(', '))
           .filter(Boolean).join(' · ');
