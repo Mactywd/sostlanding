@@ -239,7 +239,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Il pilota</span>
-        <h2>Cinque domande prima della call</h2>
+        <h2>Quattro domande prima della call</h2>
         <p>
           Luce si prova con un pilota: lo installiamo nel vostro Slack e lo
           seguiamo insieme a una persona del vostro team. Le domande dicono se ci
@@ -258,7 +258,6 @@
           <ul class="quiz-req">
             <li>il team lavora ogni giorno su Slack;</li>
             <li>in azienda lavorano da 2 a 249 persone;</li>
-            <li>una persona segue il pilota, circa un'ora a settimana;</li>
             <li>per installare Luce possiamo entrare nel vostro Slack come amministratori.</li>
           </ul>
           <div class="quiz-nav">
@@ -271,7 +270,7 @@
       <div class="quiz" id="quiz" hidden>
         <div class="quiz-top">
           <span class="quiz-step" id="quizStep"></span>
-          <div class="quiz-bar" id="quizBar" role="progressbar" aria-label="Avanzamento del questionario" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+          <div class="quiz-bar" id="quizBar" role="progressbar" aria-label="Avanzamento del questionario" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">
             <span id="quizBarFill"></span>
           </div>
         </div>
@@ -457,16 +456,6 @@
             { testo: '250 o più', breve: '250+ persone', passa: false },
           ],
           seNonPassa: 'Il pilota di Luce è pensato per piccole e medie imprese con un team che lavora insieme in Slack. Per ora non è la soluzione giusta per voi.',
-        },
-        {
-          testo: 'Chi seguirebbe il pilota da parte vostra (circa un\'ora a settimana)?',
-          risposte: [
-            { testo: 'Il titolare', breve: 'lo segue il titolare', passa: true },
-            { testo: 'Un responsabile di reparto', breve: 'lo segue un responsabile', passa: true },
-            { testo: 'Una persona del team', breve: 'lo segue una persona del team', passa: true },
-            { testo: 'Nessuno, per ora', breve: 'nessuno lo segue', passa: false },
-          ],
-          seNonPassa: 'Il pilota funziona se una persona lo segue: prova Luce, ci dice cosa va e cosa no. Quando avete qualcuno, ripassate da qui.',
         },
         {
           // Non esclude nessuno: serve a preparare la call (quali app mostrare).
@@ -691,7 +680,7 @@
         esitoSi.scrollIntoView({ block: 'start' });
       }
 
-      // «Slack · 10–49 persone · lo segue il titolare · Notion, e-commerce · admin Slack: sì»
+      // «Slack · 10–49 persone · Notion, e-commerce · admin Slack: sì»
       function riassunto() {
         return domande.map((d, i) => risposte[i].map(k => d.risposte[k].breve || d.risposte[k].testo).join(', '))
           .filter(Boolean).join(' · ');
