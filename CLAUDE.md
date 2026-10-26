@@ -7,7 +7,8 @@ Single nginx container serving two landing pages under the same domain, managed 
 - **Main:** `https://goldenhourai.it` → GoldenHour AI corporate landing
 - **Aurora:** `https://goldenhourai.it/aurora/` → product landing for school substitution management
 - **Atelier:** `https://goldenhourai.it/atelier/` → product landing luxury & retail
-- **Luce:** `https://goldenhourai.it/luce/` → landing di Luce, l'assistente AI in Slack (è la pagina dell'annuncio: video, questionario e prenotazione), con le proprie pagine legali sotto `/luce/privacy/` e `/luce/termini/`
+- **Luce:** `https://goldenhourai.it/luce/` → landing di Luce, l'assistente AI in Slack (video, questionario e prenotazione), con le proprie pagine legali sotto `/luce/privacy/` e `/luce/termini/`
+- **Luce, annunci:** `https://goldenhourai.it/luce-landing/` → la pagina a cui portano gli annunci dal 2026-10-26, disegnata da Simone: un modulo di candidatura al programma pilota. Le candidature vanno a uno script Google Apps Script (`scripts/luce-landing-candidature.gs`) che aggiunge una riga al foglio condiviso e manda un'email di avviso. La privacy del modulo è la sezione `#candidature` di `/privacy/` (la privacy del sito), non `/luce/privacy/`, che riguarda il prodotto
 
 Il vecchio path `/sostituzioni` (nome del prodotto prima del rebrand) è servito da un 301 permanente verso `/aurora/`. Non rimuoverlo: esistono link esterni e risultati di ricerca che lo puntano.
 
@@ -45,11 +46,15 @@ html/
       logo_with_tagline.png
       luce-demo.mp4         # Video dell'annuncio (H.264 + AAC, faststart, ~3 MB)
       luce-demo-poster.jpg  # Primo fotogramma, mostrato prima che il video parta
+  luce-landing/
+    index.html            # Landing degli annunci (di Simone): CSS e JS inline, Archivo + Instrument Serif da /assets/fonts.css
 
 nginx.conf                # Nginx routing: / → main, /aurora/ e /luce/ → prodotti, 301 legacy
 docker-compose.yml        # Traefik labels for goldenhourai.it
 template.html             # Scheletro per nuove sotto-landing. Fuori da html/: non va servito
 scripts/rotate-logs.sh    # Rotazione log a 30 giorni, da cron sull'host
+scripts/fetch-fonts.py    # Genera assets/fonts.css (vedi «Terze parti»: non rieseguirlo dentro html/assets)
+scripts/luce-landing-candidature.gs  # Copia versionata dello script Apps Script delle candidature (gira su Google, non qui)
 logs/                     # Log di nginx sul server (gitignored, creata dal bind mount)
 ```
 
@@ -207,7 +212,8 @@ Il blocco `applyConfig` è **lo stesso identico codice** in tutte le pagine (`in
 
 Aprendo una pagina, il browser **non deve contattare nessun host oltre al nostro**. È la ragione per cui non serve un banner cookie, e va mantenuta.
 
-- **Font self-hosted** in `html/assets/fonts/`, dichiarati in `html/assets/fonts.css`. Non reintrodurre `fonts.googleapis.com`: ogni visita trasmetteva l'IP a Google. Per cambiare famiglie o pesi si modifica `CSS_URL` in `scripts/fetch-fonts.py` e lo si riesegue (`python3 scripts/fetch-fonts.py html/assets`), poi `./stamp-assets.sh`.
+- **Font self-hosted** in `html/assets/fonts/`, dichiarati in `html/assets/fonts.css`. Non reintrodurre `fonts.googleapis.com`: ogni visita trasmetteva l'IP a Google. Per cambiare famiglie o pesi si modifica `CSS_URL` in `scripts/fetch-fonts.py` e lo si riesegue (`python3 scripts/fetch-fonts.py html/assets`), poi `./stamp-assets.sh`. **Attenzione:** Google aggiorna i file a monte (il 2026-10-26 i woff2 di Source Serif 4 erano diversi da quelli committati). Rieseguendo lo script dentro `html/assets` si sovrascrivono font serviti come `immutable` con lo stesso nome, e browser e Cloudflare tengono la versione vecchia. Per aggiungere una famiglia conviene generare in una cartella a parte e copiare solo i file e i blocchi `@font-face` nuovi, come si è fatto per Archivo e Instrument Serif.
+- **Il modulo di `/luce-landing/` contatta Google solo all'invio**, non al caricamento: la richiesta a `script.google.com` parte quando si preme «Candidati». La regola resta rispettata, e la privacy lo dichiara nella sezione `#candidature`.
 - **Calendly a due clic.** Il widget non è nel markup: c'è un segnaposto `.cal-consent` che spiega cosa comporta caricarlo, e solo al clic il JS inietta `widget.js` e l'iframe. I cookie di Calendly non si possono negare dall'esterno (same-origin policy: `sandbox` senza `allow-same-origin` li bloccherebbe ma romperebbe il widget), quindi l'unica leva reale è non caricarlo finché non lo si chiede. `hide_gdpr_banner=1` resta perché l'informativa la dà il segnaposto, prima della richiesta invece che dopo.
 
 Verifica dopo ogni modifica, sulla pagina aperta nel browser:
@@ -231,6 +237,8 @@ Ce ne sono tre, e coprono due cose diverse. Non vanno confuse.
 Nota storica: questo file diceva che i Termini non servivano, "non si vende nulla online, non ci sono account né contenuti utente". Era vero del sito e resta vero del sito. Non è più vero del prodotto, che ha clienti, credenziali di terzi collegate e output su cui qualcuno prende decisioni.
 
 Le tre pagine sono complete e riviste da un legale (21 settembre 2026). I riquadri `.nota-bozza` che elencavano i punti aperti sono stati rimossi; lo stile resta in `luce/legal.css` per riusarlo se una pagina futura nasce come bozza. La regola che li giustificava vale ancora: **una pagina legale pubblicata con dentro un segnaposto e' peggio di una pagina assente**, quindi se si aggiunge una sezione incompleta si rimette il riquadro invece di pubblicarla monca.
+
+Eccezione da chiudere: la sezione `#candidature` di `/privacy/` (e i ritocchi a «Cosa raccoglie il sito da solo» e «Dove vanno i dati») è stata aggiunta il 2026-10-26 da una bozza preparata con l'AI da Simone, ed è completa ma **non ancora rivista da un legale**.
 
 Il titolare e' **Simone Mattera**, persona fisica con P.IVA: «Golden Hour AI» e' solo il marchio, non una ditta registrata. Quando nascera' la societa', i dati legali vanno cambiati in nove footer piu' le due informative, e i contratti gia' firmati non passano da soli al nuovo soggetto.
 

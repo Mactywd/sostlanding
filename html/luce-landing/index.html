@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luce, cerchiamo 5 agenzie di marketing</title>
+<meta name="description" content="Luce è il collaboratore AI per la tua agenzia di marketing. Candidati al programma pilota: 5 posti disponibili.">
+<meta name="theme-color" content="#FBF1DA">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Luce, cerchiamo 5 agenzie di marketing">
+<meta property="og:description" content="Luce vive dentro Slack, si collega agli strumenti del tuo team e ti aiuta a creare documenti, generare report e individuare opportunità e problemi nel business.">
+<meta property="og:locale" content="it_IT">
+<!-- I caratteri arrivano dal nostro server, non da Google Fonts: lo dichiara la privacy -->
+<link rel="preload" href="/assets/fonts.css?v=6d4bf372" as="style">
+<link rel="stylesheet" href="/assets/fonts.css?v=6d4bf372">
+<style>
+  :root {
+    --fondo: #FBF1DA;
+    --superficie: #FFFFFF;
+    --testo: #222B1E;
+    --testo-corrente: #4A5545;
+    --testo-nota: #6A7562;
+    --azione: #2C5F2D;
+    --azione-chiara: #3E7B3A;
+    --accento: #F4B72B;
+    --accento-scritto: #C8891C;
+    --bordo-campo: #D8E2D0;
+    --salvia: #D8E2D0;
+    --serif: "Instrument Serif", Georgia, serif;
+    --sans: "Archivo", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--testo-corrente);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 27px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--azione); }
+  a:hover { color: var(--testo); }
+
+  .pagina {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 0 32px;
+  }
+
+  .contenuto {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Il marchio, compatto */
+  .marchio { display: flex; align-items: center; gap: 12px; }
+  .marchio svg { width: 56px; height: 56px; display: block; }
+  .logotipo {
+    font-family: var(--serif);
+    font-size: 44px;
+    line-height: 1;
+    background-image: linear-gradient(96deg, #F4B72B 0%, #C8891C 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tagline { margin: 14px 0 0; font-size: 18px; line-height: 27px; color: var(--testo-corrente); }
+
+  /* Il titolo */
+  h1 {
+    margin: 30px 0 0;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    color: var(--testo);
+  }
+
+  .paragrafo { margin: 26px 0 0; max-width: 30em; }
+  .paragrafo + .paragrafo { margin-top: 16px; }
+
+  /* La riga della scarsità */
+  .posti {
+    margin: 28px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 22px;
+    color: var(--testo);
+  }
+  .pallino {
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--accento);
+  }
+
+  /* Il modulo */
+  form { margin-top: 28px; display: flex; flex-direction: column; gap: 18px; }
+
+  .etichetta {
+    display: block;
+    padding: 0;
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 21px;
+    color: var(--testo);
+  }
+
+  .campo {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    border: 1px solid var(--bordo-campo);
+    border-radius: 14px;
+    background: var(--superficie);
+    color: var(--testo);
+    font-family: var(--sans);
+    font-size: 17px;
+  }
+  .campo::placeholder { color: #9DB090; }
+  .campo:focus { outline: none; border-color: var(--azione); box-shadow: 0 0 0 2px rgba(44, 95, 45, 0.18); }
+  .campo[aria-invalid="true"] { border-color: var(--accento-scritto); }
+
+  .gruppo { border: none; padding: 0; margin: 0; min-width: 0; }
+
+  .opzioni { display: flex; flex-wrap: wrap; gap: 8px; }
+  .radio { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .opzione {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 140px;
+    min-height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--bordo-campo);
+    border-radius: 999px;
+    background: var(--superficie);
+    color: var(--testo-corrente);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 120ms ease-out, color 120ms ease-out;
+  }
+  .radio:checked + .opzione { background: var(--testo); border-color: var(--testo); color: var(--fondo); }
+  .radio:focus-visible + .opzione { outline: 2px solid var(--azione); outline-offset: 2px; }
+
+  .consenso {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--testo-corrente);
+    cursor: pointer;
+  }
+  .consenso input {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    margin: 1px 0 0;
+    accent-color: var(--azione);
+  }
+
+  .invia {
+    width: 100%;
+    min-height: 56px;
+    border: none;
+    border-radius: 999px;
+    background: var(--azione);
+    color: var(--superficie);
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 120ms ease-out, background-color 120ms ease-out;
+  }
+  .invia:hover { background: var(--azione-chiara); }
+  .invia:active { transform: scale(0.98); }
+  .invia:focus-visible { outline: 2px solid var(--testo); outline-offset: 3px; }
+  .invia:disabled { background: var(--salvia); color: var(--testo-corrente); cursor: not-allowed; }
+  .invia:disabled:active { transform: none; }
+
+  .avviso {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    margin: 8px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    color: var(--testo);
+  }
+  .avviso svg { flex: 0 0 auto; margin-top: 2px; }
+  .avviso[hidden] { display: none; }
+
+  /* Campo trappola per i bot: fuori dallo schermo, non raggiungibile col tab */
+  .trappola { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* La conferma */
+  .conferma { display: flex; flex-direction: column; gap: 20px; margin-top: 36px; }
+  .conferma p {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 30px;
+    line-height: 34px;
+    color: var(--testo);
+  }
+  .conferma[hidden] { display: none; }
+
+  footer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 24px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--testo-nota);
+  }
+
+  /* Entrata, una volta sola */
+  .entra { animation: entra 280ms ease-out both; }
+  .entra-dopo { animation: entra 280ms ease-out 80ms both; }
+  .dissolve { animation: dissolve 200ms ease-out both; }
+  @keyframes entra { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes dissolve { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .entra, .entra-dopo, .dissolve { animation: none; }
+    .opzione, .invia { transition: none; }
+  }
+
+  /* Due colonne da 1040 in su */
+  @media (min-width: 1040px) {
+    .pagina { padding: 56px 0 48px; }
+    .contenuto {
+      padding: 0 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 80px;
+      align-items: flex-start;
+    }
+    .testa { flex: 1 1 500px; min-width: 0; }
+    .colonna-modulo { flex: 1 1 420px; min-width: 0; max-width: 480px; }
+
+    .marchio svg { width: 72px; height: 72px; }
+    .logotipo { font-size: 56px; }
+    .tagline { margin-top: 16px; font-size: 19px; line-height: 28px; }
+
+    h1 { margin-top: 44px; font-size: 60px; line-height: 58px; }
+    .paragrafo { margin-top: 32px; }
+    .paragrafo + .paragrafo { margin-top: 18px; }
+    .posti { margin-top: 36px; }
+
+    form { margin-top: 0; }
+    .campo { height: 48px; }
+    .opzione { min-height: 44px; flex: 1 1 auto; }
+    .consenso input { width: 20px; height: 20px; }
+
+    .conferma {
+      margin-top: 0;
+      min-height: 620px;
+      justify-content: center;
+      gap: 24px;
+    }
+    .conferma svg.spunta { width: 44px; height: 44px; }
+    .conferma p { font-size: 36px; line-height: 40px; }
+
+    footer { margin-top: 72px; padding: 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="pagina">
+  <div class="contenuto">
+
+    <div class="testa entra">
+      <div class="marchio">
+        <!-- luce_simbolo.svg, dal gruppo Marchio del design system Golden Hour AI. Non ridisegnare. -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-hidden="true"><defs>
+        <linearGradient id="gos" x1="0.2" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="#FFD866"></stop><stop offset=".55" stop-color="#F4B72B"></stop><stop offset="1" stop-color="#C8891C"></stop></linearGradient>
+        <linearGradient id="grs" x1="0" y1="0.3" x2="1" y2="0.9"><stop offset="0" stop-color="#A8D04A"></stop><stop offset=".5" stop-color="#4E9A2E"></stop><stop offset="1" stop-color="#1F5A26"></stop></linearGradient>
+        <linearGradient id="ars" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#A86E12"></stop><stop offset="1" stop-color="#F4B72B"></stop></linearGradient>
+        <mask id="m1s"><rect x="-50" y="-50" width="300" height="300" fill="#fff"></rect><circle cx="100" cy="80" r="86" fill="#000"></circle></mask>
+        <mask id="m2s"><rect x="-50" y="-50" width="300" height="300" fill="#fff"></rect><circle cx="108" cy="104" r="64" fill="#000"></circle></mask>
+        <clipPath id="c1s"><path d="M-50 -50H250V122C150 104 70 108 -50 140Z"></path></clipPath></defs>
+        <g mask="url(#m2s)"><circle cx="100" cy="100" r="72" fill="url(#ars)" clip-path="url(#c1s)"></circle></g>
+        <circle cx="108" cy="104" r="44" fill="url(#gos)" clip-path="url(#c1s)"></circle>
+        <circle cx="100" cy="100" r="92" fill="url(#grs)" mask="url(#m1s)"></circle>
+        <path d="M18 138 C70 104 140 98 190 112 C140 112 80 124 30 150 Z" fill="url(#grs)"></path></svg>
+        <span class="logotipo">Luce</span>
+      </div>
+      <p class="tagline">Il collaboratore AI per la tua <em>agenzia di marketing</em>.</p>
+
+      <h1>Cerchiamo 5 agenzie di marketing che vogliono lavorare in modo diverso con l'AI.</h1>
+
+      <div id="testa-modulo">
+        <p class="paragrafo">Luce vive dentro Slack, si collega agli strumenti del tuo team e ti aiuta a creare documenti, generare report e individuare opportunità e problemi nel business.</p>
+
+        <p class="paragrafo">Candidati al programma pilota per scoprire come Luce può aiutare la tua agenzia a lavorare meglio, con meno attività manuali e più visibilità su ciò che conta.</p>
+
+        <p class="posti">
+          <span class="pallino" aria-hidden="true"></span>
+          5 posti disponibili
+        </p>
+      </div>
+    </div>
+
+    <div class="colonna-modulo">
+
+      <form id="candidatura" class="entra-dopo" novalidate>
+
+        <div>
+          <label class="etichetta" for="nome">Nome e cognome</label>
+          <input class="campo" id="nome" name="nome" type="text" autocomplete="name" aria-describedby="avviso-nome">
+          <p class="avviso" id="avviso-nome" hidden>
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.7 15.2 14.3H0.8L8 1.7Z" fill="none" stroke="#C8891C" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8 6.2v3.6" stroke="#C8891C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="8" cy="12.1" r="0.95" fill="#C8891C"></circle></svg>
+            <span>Serve il tuo nome per poterti ricontattare.</span>
+          </p>
+        </div>
+
+        <div>
+          <label class="etichetta" for="email">Email</label>
+          <input class="campo" id="email" name="email" type="email" autocomplete="email" aria-describedby="avviso-email">
+          <p class="avviso" id="avviso-email" hidden>
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.7 15.2 14.3H0.8L8 1.7Z" fill="none" stroke="#C8891C" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8 6.2v3.6" stroke="#C8891C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="8" cy="12.1" r="0.95" fill="#C8891C"></circle></svg>
+            <span>Serve un indirizzo email valido, per esempio nome@agenzia.it</span>
+          </p>
+        </div>
+
+        <div>
+          <label class="etichetta" for="sito">Sito dell'agenzia</label>
+          <input class="campo" id="sito" name="sito" type="text" inputmode="url" autocomplete="url" aria-describedby="avviso-sito">
+          <p class="avviso" id="avviso-sito" hidden>
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.7 15.2 14.3H0.8L8 1.7Z" fill="none" stroke="#C8891C" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8 6.2v3.6" stroke="#C8891C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="8" cy="12.1" r="0.95" fill="#C8891C"></circle></svg>
+            <span>Serve il sito dell'agenzia.</span>
+          </p>
+        </div>
+
+        <fieldset class="gruppo" aria-describedby="avviso-persone">
+          <legend class="etichetta">Quante persone siete?</legend>
+          <div class="opzioni">
+            <input class="radio" type="radio" id="persone-a" name="persone" value="Da 1 a 3">
+            <label class="opzione" for="persone-a">Da 1 a 3</label>
+            <input class="radio" type="radio" id="persone-b" name="persone" value="Da 4 a 10">
+            <label class="opzione" for="persone-b">Da 4 a 10</label>
+            <input class="radio" type="radio" id="persone-c" name="persone" value="Da 11 a 30">
+            <label class="opzione" for="persone-c">Da 11 a 30</label>
+            <input class="radio" type="radio" id="persone-d" name="persone" value="Più di 30">
+            <label class="opzione" for="persone-d">Più di 30</label>
+          </div>
+          <p class="avviso" id="avviso-persone" hidden>
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.7 15.2 14.3H0.8L8 1.7Z" fill="none" stroke="#C8891C" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8 6.2v3.6" stroke="#C8891C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="8" cy="12.1" r="0.95" fill="#C8891C"></circle></svg>
+            <span>Scegli una risposta.</span>
+          </p>
+        </fieldset>
+
+        <fieldset class="gruppo" aria-describedby="avviso-brand">
+          <legend class="etichetta">Quanti brand D2C avete nel vostro portfolio?</legend>
+          <div class="opzioni">
+            <input class="radio" type="radio" id="brand-a" name="brand" value="Nessuno">
+            <label class="opzione" for="brand-a">Nessuno</label>
+            <input class="radio" type="radio" id="brand-b" name="brand" value="Da 1 a 3">
+            <label class="opzione" for="brand-b">Da 1 a 3</label>
+            <input class="radio" type="radio" id="brand-c" name="brand" value="Da 4 a 10">
+            <label class="opzione" for="brand-c">Da 4 a 10</label>
+            <input class="radio" type="radio" id="brand-d" name="brand" value="Più di 10">
+            <label class="opzione" for="brand-d">Più di 10</label>
+          </div>
+          <p class="avviso" id="avviso-brand" hidden>
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.7 15.2 14.3H0.8L8 1.7Z" fill="none" stroke="#C8891C" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8 6.2v3.6" stroke="#C8891C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="8" cy="12.1" r="0.95" fill="#C8891C"></circle></svg>
+            <span>Scegli una risposta.</span>
+          </p>
+        </fieldset>
+
+        <fieldset class="gruppo" aria-describedby="avviso-slack">
+          <legend class="etichetta">Usate Slack in agenzia?</legend>
+          <div class="opzioni">
+            <input class="radio" type="radio" id="slack-a" name="slack" value="Sì">
+            <label class="opzione" for="slack-a">Sì</label>
+            <input class="radio" type="radio" id="slack-b" name="slack" value="No ma lo useremmo">
+            <label class="opzione" for="slack-b">No ma lo useremmo</label>
+            <input class="radio" type="radio" id="slack-c" name="slack" value="No">
+            <label class="opzione" for="slack-c">No</label>
+          </div>
+          <p class="avviso" id="avviso-slack" hidden>
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.7 15.2 14.3H0.8L8 1.7Z" fill="none" stroke="#C8891C" stroke-width="1.6" stroke-linejoin="round"></path><path d="M8 6.2v3.6" stroke="#C8891C" stroke-width="1.6" stroke-linecap="round"></path><circle cx="8" cy="12.1" r="0.95" fill="#C8891C"></circle></svg>
+            <span>Scegli una risposta.</span>
+          </p>
+        </fieldset>
+
+        <div class="trappola" aria-hidden="true">
+          <label>Lascia vuoto questo campo <input type="text" id="indirizzo" name="indirizzo" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <div>
+          <label class="consenso">
+            <input type="checkbox" id="consenso" name="consenso">
+            <span id="nota-consenso">Ho letto l'<a href="/privacy/#candidature">informativa privacy</a>.</span>
+          </label>
+        </div>
+
+        <button class="invia" id="invia" type="submit" disabled aria-describedby="nota-consenso">Candidati al programma pilota</button>
+      </form>
+
+      <div class="conferma" id="conferma" hidden>
+        <svg class="spunta" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.8 9.6 18.4 20 5.8" fill="none" stroke="#2C5F2D" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <p>Grazie, abbiamo ricevuto la tua candidatura. Le leggiamo una per una e ti facciamo sapere a breve.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    Golden Hour AI · <a href="mailto:info@goldenhourai.it">info@goldenhourai.it</a> · <a href="/privacy/#candidature">Informativa privacy</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // Dove arrivano le candidature: l'app web Google Apps Script legata al foglio
+  // condiviso (scripts/luce-landing-candidature.gs), che aggiunge la riga e
+  // manda l'email di avviso. Con la stringa vuota la pagina si prova in locale
+  // senza inviare niente; online, invece, mostra l'errore invece di una
+  // conferma finta, cosi' una candidatura non si perde in silenzio.
+  var DESTINAZIONE = '';
+  var IN_LOCALE = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+
+  var modulo = document.getElementById('candidatura');
+  var conferma = document.getElementById('conferma');
+  var testaModulo = document.getElementById('testa-modulo');
+  var consenso = document.getElementById('consenso');
+  var bottone = document.getElementById('invia');
+
+  var emailValida = function (valore) {
+    return /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(valore);
+  };
+
+  // Il bottone resta spento finché non viene dato il consenso
+  consenso.addEventListener('change', function () {
+    bottone.disabled = !consenso.checked;
+  });
+
+  var mostraAvviso = function (nomeAvviso, acceso, campo) {
+    var avviso = document.getElementById('avviso-' + nomeAvviso);
+    if (avviso) { avviso.hidden = !acceso; }
+    if (campo) {
+      if (acceso) {
+        campo.setAttribute('aria-invalid', 'true');
+      } else {
+        campo.removeAttribute('aria-invalid');
+      }
+    }
+  };
+
+  var scelta = function (nomeGruppo) {
+    var segnato = modulo.querySelector('input[name="' + nomeGruppo + '"]:checked');
+    return segnato ? segnato.value : '';
+  };
+
+  // Appena si corregge un campo, il suo avviso sparisce
+  ['nome', 'email', 'sito'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function (e) {
+      if (e.target.hasAttribute('aria-invalid')) { mostraAvviso(id, false, e.target); }
+    });
+  });
+  ['persone', 'brand', 'slack'].forEach(function (nomeGruppo) {
+    modulo.querySelectorAll('input[name="' + nomeGruppo + '"]').forEach(function (radio) {
+      radio.addEventListener('change', function () { mostraAvviso(nomeGruppo, false); });
+    });
+  });
+
+  modulo.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    var campoNome = document.getElementById('nome');
+    var campoEmail = document.getElementById('email');
+    var campoSito = document.getElementById('sito');
+
+    var nome = campoNome.value.trim();
+    var email = campoEmail.value.trim();
+    var sito = campoSito.value.trim();
+
+    var problemi = [];
+
+    if (!nome) { problemi.push('nome'); }
+    mostraAvviso('nome', !nome, campoNome);
+
+    if (!emailValida(email)) { problemi.push('email'); }
+    mostraAvviso('email', !emailValida(email), campoEmail);
+
+    if (!sito) { problemi.push('sito'); }
+    mostraAvviso('sito', !sito, campoSito);
+
+    ['persone', 'brand', 'slack'].forEach(function (nomeGruppo) {
+      var vuoto = !scelta(nomeGruppo);
+      if (vuoto) { problemi.push(nomeGruppo); }
+      mostraAvviso(nomeGruppo, vuoto);
+    });
+
+    if (!consenso.checked) { return; }
+
+    if (problemi.length > 0) {
+      var primo = document.getElementById(problemi[0]) || modulo.querySelector('input[name="' + problemi[0] + '"]');
+      if (primo && primo.focus) { primo.focus(); }
+      return;
+    }
+
+    var candidatura = {
+      nome: nome,
+      email: email,
+      sito: sito,
+      persone: scelta('persone'),
+      brand: scelta('brand'),
+      slack: scelta('slack'),
+      informativa: true,
+      inviata: new Date().toISOString(),
+      indirizzo: document.getElementById('indirizzo').value
+    };
+
+    var nonInviata = function () {
+      bottone.disabled = false;
+      alert('Non siamo riusciti a inviare la candidatura. Riprova, oppure scrivici a info@goldenhourai.it');
+    };
+
+    var passaAllaConferma = function () {
+      modulo.hidden = true;
+      if (testaModulo) { testaModulo.hidden = true; }
+      conferma.hidden = false;
+      conferma.classList.add('dissolve');
+      conferma.setAttribute('role', 'status');
+      conferma.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    };
+
+    if (!DESTINAZIONE) {
+      if (IN_LOCALE) { passaAllaConferma(); } else { nonInviata(); }
+      return;
+    }
+
+    bottone.disabled = true;
+    // text/plain e non application/json: cosi' la richiesta e' "semplice" e
+    // non parte il preflight CORS, che Apps Script non gestisce. Il corpo e'
+    // comunque JSON, e lo script lo legge come tale.
+    fetch(DESTINAZIONE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(candidatura)
+    }).then(function (risposta) {
+      if (!risposta.ok) { throw new Error('invio non riuscito'); }
+      return risposta.json();
+    }).then(function (esito) {
+      if (!esito || !esito.ok) { throw new Error('candidatura rifiutata'); }
+      passaAllaConferma();
+    }).catch(nonInviata);
+  });
+})();
+</script>
+
+</body>
+</html>

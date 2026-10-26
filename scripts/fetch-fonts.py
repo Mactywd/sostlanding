@@ -16,6 +16,9 @@ CSS_URL = (
     "&family=Inter+Tight:wght@400..700"
     "&family=Source+Serif+4:ital,wght@1,400..500"
     "&family=JetBrains+Mono:wght@400..500"
+    # La landing degli annunci di Luce (/luce-landing/), disegnata da Simone
+    "&family=Archivo:ital,wght@0,400..800;1,400..600"
+    "&family=Instrument+Serif:ital@0;1"
     "&display=swap"
 )
 

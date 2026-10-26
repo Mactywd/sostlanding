@@ -61,7 +61,8 @@ done
 # font, e nginx li serve immutabili.
 for page in html/index.html html/aurora/index.html html/atelier/index.html template.html \
             html/404.html html/privacy/index.html html/luce/index.html \
-            html/luce/privacy/index.html html/luce/termini/index.html; do
+            html/luce/privacy/index.html html/luce/termini/index.html \
+            html/luce-landing/index.html; do
   stamp "$page" "/assets/fonts.css" "html/assets/fonts.css"
 done
 echo "Fatto."

@@ -1,0 +1,147 @@
+/**
+ * Riceve le candidature del modulo di /luce-landing/: aggiunge una riga al
+ * foglio Google che fa da CRM e manda una email di avviso a Simone e Mattia.
+ *
+ * Non gira sul nostro server: e' uno script Google Apps Script legato al foglio
+ * condiviso, pubblicato come app web. Questo file e' la copia versionata; se
+ * lo cambi, incollalo di nuovo nell'editor e pubblica una nuova versione.
+ *
+ * Messa in opera (una volta sola, con l'account Google che possiede il foglio):
+ *  1. Nel foglio: Estensioni > Apps Script, incolla questo file al posto di
+ *     Codice.gs e salva.
+ *  2. Impostazioni progetto (rotella) > Proprieta' script: aggiungi
+ *     DESTINATARI = gli indirizzi a cui arriva l'avviso, separati da virgola.
+ *     Stanno li' e non qui perche' il repo e' pubblico.
+ *  3. Esegui > prova() una volta: chiede le autorizzazioni (foglio e invio
+ *     email), crea la scheda "Candidature" con le intestazioni e manda una
+ *     candidatura di prova. Poi cancella la riga di prova.
+ *  4. Esegui il deployment > Nuovo deployment > tipo "App web".
+ *     Esegui come: Me. Chi ha accesso: Chiunque.
+ *  5. Copia l'URL che finisce in /exec e mettilo in DESTINAZIONE in
+ *     html/luce-landing/index.html.
+ *
+ * Per cambiare lo script senza cambiare l'URL: Gestisci deployment > modifica
+ * quello esistente > Versione: nuova. Un "Nuovo deployment" crea un URL nuovo.
+ *
+ * La pagina manda il corpo come text/plain: e' una richiesta "semplice", senza
+ * preflight CORS, che Apps Script non saprebbe gestire. Il contenuto e' JSON.
+ */
+
+var SCHEDA = 'Candidature';
+var INTESTAZIONI = ['Ricevuta', 'Nome e cognome', 'Email', 'Sito', 'Persone',
+                    'Brand D2C', 'Slack', 'Informativa letta', 'Inviata dal browser'];
+var MAX_LUNGHEZZA = 300;
+
+function doPost(e) {
+  var dati;
+  try {
+    dati = JSON.parse(e.postData.contents);
+  } catch (err) {
+    return risposta_({ ok: false, errore: 'formato' });
+  }
+
+  // Il campo trappola e' invisibile alle persone: se e' pieno, l'ha compilato
+  // un bot. Rispondiamo ok, cosi' il bot non impara niente, e non salviamo.
+  if (dati.indirizzo) {
+    return risposta_({ ok: true });
+  }
+
+  var c = {
+    nome: pulisci_(dati.nome),
+    email: pulisci_(dati.email),
+    sito: pulisci_(dati.sito),
+    persone: pulisci_(dati.persone),
+    brand: pulisci_(dati.brand),
+    slack: pulisci_(dati.slack),
+    informativa: dati.informativa === true,
+    inviata: pulisci_(dati.inviata)
+  };
+
+  var mancanti = ['nome', 'email', 'sito', 'persone', 'brand', 'slack'].filter(function (k) {
+    return !c[k];
+  });
+  if (mancanti.length || !c.informativa || !/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(c.email)) {
+    return risposta_({ ok: false, errore: 'campi' });
+  }
+
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    scheda_().appendRow([new Date(), c.nome, c.email, c.sito, c.persone, c.brand,
+                         c.slack, 'Sì', c.inviata].map(cella_));
+  } finally {
+    lock.releaseLock();
+  }
+
+  // La riga e' gia' salvata: se l'email non parte, la candidatura non e'
+  // persa. Rispondere errore farebbe solo reinviare il modulo, con un doppione.
+  try {
+    avvisa_(c);
+  } catch (err) {
+    console.error('Avviso email non inviato: ' + err);
+  }
+  return risposta_({ ok: true });
+}
+
+// Una candidatura finta, da lanciare dall'editor per autorizzare lo script
+// e controllare che riga ed email arrivino.
+function prova() {
+  doPost({ postData: { contents: JSON.stringify({
+    nome: 'Prova Prova', email: 'prova@example.com', sito: 'example.com',
+    persone: 'Da 4 a 10', brand: 'Da 1 a 3', slack: 'Sì', informativa: true,
+    inviata: new Date().toISOString()
+  }) } });
+}
+
+function avvisa_(c) {
+  var destinatari = PropertiesService.getScriptProperties().getProperty('DESTINATARI');
+  if (!destinatari) {
+    throw new Error('Manca la proprieta\' script DESTINATARI');
+  }
+  var foglio = SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  MailApp.sendEmail({
+    to: destinatari,
+    replyTo: c.email,
+    subject: 'Nuova candidatura Luce: ' + c.nome + ' (' + c.sito + ')',
+    body: [
+      'È arrivata una candidatura al programma pilota di Luce.',
+      '',
+      'Nome e cognome: ' + c.nome,
+      'Email: ' + c.email,
+      'Sito: ' + c.sito,
+      'Persone: ' + c.persone,
+      'Brand D2C: ' + c.brand,
+      'Slack: ' + c.slack,
+      '',
+      'Rispondendo a questa email scrivi direttamente a chi si è candidato.',
+      'Il foglio delle candidature: ' + foglio
+    ].join('\n')
+  });
+}
+
+function scheda_() {
+  var file = SpreadsheetApp.getActiveSpreadsheet();
+  var scheda = file.getSheetByName(SCHEDA);
+  if (!scheda) {
+    scheda = file.insertSheet(SCHEDA);
+    scheda.appendRow(INTESTAZIONI);
+    scheda.setFrozenRows(1);
+    scheda.getRange(1, 1, 1, INTESTAZIONI.length).setFontWeight('bold');
+  }
+  return scheda;
+}
+
+function pulisci_(valore) {
+  return String(valore == null ? '' : valore).trim().slice(0, MAX_LUNGHEZZA);
+}
+
+// Un valore che comincia con = + - @ verrebbe letto dal foglio come formula:
+// l'apostrofo davanti lo fa restare testo.
+function cella_(valore) {
+  return typeof valore === 'string' && /^[=+\-@]/.test(valore) ? "'" + valore : valore;
+}
+
+function risposta_(oggetto) {
+  return ContentService.createTextOutput(JSON.stringify(oggetto))
+    .setMimeType(ContentService.MimeType.JSON);
+}
