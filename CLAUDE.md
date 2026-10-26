@@ -152,7 +152,7 @@ Il VPS deve avere la rete Docker `web` gia' esistente e un Traefik attivo con ce
 **1. Se cambi `nginx.conf`, il reload non basta: serve `docker compose up -d --force-recreate`.**
 Senza `--force-recreate`, se `docker-compose.yml` non e' cambiato, `up -d` risponde «Running» e non ricrea niente: il 2026-10-26 gli inode dopo `up -d` erano ancora diversi.
 `nginx.conf` e' montato come *singolo file*. `git pull` non modifica il file sul posto, lo sostituisce creando un nuovo inode, e il bind mount del container resta agganciato a quello vecchio. Risultato: `nginx -s reload` rilegge una config che non e' piu' quella su disco, in silenzio. `html/` invece e' montata come directory, quindi le modifiche ai contenuti passano sempre.
-Verifica: `docker exec goldenhourai stat -c %i /etc/nginx/conf.d/default.conf` deve coincidere con `stat -c %i /home/gh/sites/ghlanding/nginx.conf`. `up -d` invece di `restart` perche' ricrea il container: serve se e' cambiato anche `docker-compose.yml`, e va bene in entrambi i casi.
+Verifica: `docker exec goldenhourai stat -c %i /etc/nginx/conf.d/default.conf` deve coincidere con `stat -c %i /home/gh/sites/ghlanding/nginx.conf`. `up -d --force-recreate` invece di `restart` perche' ricrea il container: serve se e' cambiato anche `docker-compose.yml`, e va bene in entrambi i casi.
 
 **2. Cambiando un CSS, esegui `./stamp-assets.sh` prima di committare.**
 Le pagine HTML sono servite `no-store` (sempre fresche), i CSS no. Senza una query string nuova, Cloudflare e i browser continuano a servire il CSS precedente: si ottiene **HTML nuovo con CSS vecchio**, cioe' pagine senza stile, non semplicemente pagine diverse. Lo script mette `?v=<hash del contenuto>` nei `<link>`, cambiando la chiave di cache. E' idempotente: se il CSS non e' cambiato, l'hash resta lo stesso.
@@ -245,7 +245,7 @@ Il titolare e' **Simone Mattera**, persona fisica con P.IVA: «Golden Hour AI» 
 
 Le due pagine del prodotto caricano `shared.css`, poi `privacy/styles.css` (gli stili del testo lungo, riusati) e infine `luce/legal.css`, che aggiunge solo liste, tabelle e il riquadro di bozza. Toccando `privacy/styles.css` si toccano anche loro.
 
-`/luce/` ha un `location` proprio in `nginx.conf` (con `/luce` → `/luce/` che tiene la query string), come `/aurora/`. `/privacy/` invece non ne ha bisogno: `location /` fa `try_files $uri $uri/`. Ricorda che cambiare `nginx.conf` costringe a `docker compose up -d` per via del bind mount su file singolo (vedi sopra).
+`/luce/` ha un `location` proprio in `nginx.conf` (con `/luce` → `/luce/` che tiene la query string), come `/aurora/`. `/privacy/` invece non ne ha bisogno: `location /` fa `try_files $uri $uri/`. Ricorda che cambiare `nginx.conf` costringe a `docker compose up -d --force-recreate` per via del bind mount su file singolo (vedi sopra).
 
 ## Color hierarchy
 
