@@ -52,7 +52,11 @@ function doPost(e) {
 
   // Il campo trappola e' invisibile alle persone: se e' pieno, l'ha compilato
   // un bot. Rispondiamo ok, cosi' il bot non impara niente, e non salviamo.
-  if (dati.indirizzo) {
+  // Fino al 2026-10-26 si chiamava "indirizzo": l'autocompletamento di Chrome
+  // lo riempiva e le candidature vere sparivano in silenzio. Il log serve a
+  // vedere nelle Esecuzioni se succede ancora.
+  if (dati.trappola) {
+    console.log('Scartata dal campo trappola: ' + pulisci_(dati.email));
     return risposta_({ ok: true });
   }
 
@@ -144,13 +148,19 @@ function conferma_(c) {
     to: c.email,
     name: 'Golden Hour AI',
     replyTo: destinatari_(),
-    subject: 'Abbiamo ricevuto la tua candidatura a Luce',
+    subject: 'Luce: abbiamo ricevuto la tua richiesta di demo',
     body: [
       'Ciao ' + nome + ',',
       '',
-      'grazie per la tua candidatura al programma pilota di Luce. L\'abbiamo presa in carico: leggiamo le candidature una per una e ti ricontattiamo a breve.',
+      'grazie per il tuo interesse in Luce!',
       '',
-      'Se nel frattempo vuoi aggiungere qualcosa, rispondi pure a questa email.',
+      'Abbiamo ricevuto la tua richiesta di demo. Ti ricontatteremo entro 48 ore per conoscere meglio la tua agenzia e capire se ci sono i presupposti per avviare un progetto pilota insieme.',
+      '',
+      'Stiamo selezionando 5 agenzie di marketing per questa prima fase, quindi la demo verrà confermata dopo una prima valutazione della richiesta.',
+      '',
+      'Nel frattempo, se vuoi aggiungere qualche informazione sulla tua agenzia o su come lavora il tuo team, puoi rispondere direttamente a questa email.',
+      '',
+      'A presto,',
       '',
       'Simone e Mattia',
       'Golden Hour AI · https://goldenhourai.it'

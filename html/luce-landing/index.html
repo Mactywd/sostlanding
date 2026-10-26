@@ -401,8 +401,10 @@
           </p>
         </fieldset>
 
+        <!-- Il nome non deve ricordare un dato personale: un campo "indirizzo" veniva riempito
+             dall'autocompletamento di Chrome, e la candidatura scartata come bot (2026-10-26) -->
         <div class="trappola" aria-hidden="true">
-          <label>Lascia vuoto questo campo <input type="text" id="indirizzo" name="indirizzo" tabindex="-1" autocomplete="off"></label>
+          <label>Lascia vuoto questo campo <input type="text" id="trappola" name="trappola" tabindex="-1" autocomplete="off"></label>
         </div>
 
         <div>
@@ -531,7 +533,7 @@
       slack: scelta('slack'),
       informativa: true,
       inviata: new Date().toISOString(),
-      indirizzo: document.getElementById('indirizzo').value
+      trappola: document.getElementById('trappola').value
     };
 
     var nonInviata = function () {
