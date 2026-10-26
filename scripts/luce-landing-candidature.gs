@@ -1,17 +1,26 @@
 /**
  * Riceve le candidature del modulo di /luce-landing/: aggiunge una riga al
- * foglio Google che fa da CRM e manda una email di avviso a Simone e Mattia.
+ * foglio Google che fa da CRM e manda una email di avviso agli indirizzi di DESTINATARI.
  *
- * Non gira sul nostro server: e' uno script Google Apps Script legato al foglio
- * condiviso, pubblicato come app web. Questo file e' la copia versionata; se
- * lo cambi, incollalo di nuovo nell'editor e pubblica una nuova versione.
+ * Non gira sul nostro server: e' un progetto Google Apps Script pubblicato come
+ * app web. Questo file e' la copia versionata; se lo cambi, incollalo di nuovo
+ * nell'editor e pubblica una nuova versione.
  *
- * Messa in opera (una volta sola, con l'account Google che possiede il foglio):
- *  1. Nel foglio: Estensioni > Apps Script, incolla questo file al posto di
+ * In produzione (dal 2026-10-26) e' il progetto "Luce · candidature" su
+ * script.google.com, nell'account Google di GoldenHour che possiede la cartella
+ * luce-aios (le email di avviso partono da li'), e scrive nel foglio
+ * "Luce · candidature programma pilota" della cartella condivisa luce-aios/lead.
+ * E' un progetto a se', non legato al foglio: con piu' account Google aperti,
+ * Estensioni > Apps Script dal foglio dava "Impossibile aprire il file".
+ *
+ * Messa in opera (una volta sola):
+ *  1. script.google.com > Nuovo progetto, incolla questo file al posto di
  *     Codice.gs e salva.
- *  2. Impostazioni progetto (rotella) > Proprieta' script: aggiungi
- *     DESTINATARI = gli indirizzi a cui arriva l'avviso, separati da virgola.
- *     Stanno li' e non qui perche' il repo e' pubblico.
+ *  2. Impostazioni progetto (rotella) > Proprieta' script:
+ *     DESTINATARI = gli indirizzi a cui arriva l'avviso, separati da virgola;
+ *     FOGLIO_ID = l'ID del foglio, il pezzo di URL fra /d/ e /edit.
+ *     Stanno li' e non qui perche' il repo e' pubblico. Senza FOGLIO_ID lo
+ *     script usa il foglio a cui e' legato, se lo si crea da Estensioni.
  *  3. Esegui > prova() una volta: chiede le autorizzazioni (foglio e invio
  *     email), crea la scheda "Candidature" con le intestazioni e manda una
  *     candidatura di prova. Poi cancella la riga di prova.
@@ -98,7 +107,7 @@ function avvisa_(c) {
   if (!destinatari) {
     throw new Error('Manca la proprieta\' script DESTINATARI');
   }
-  var foglio = SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  var foglio = file_().getUrl();
   MailApp.sendEmail({
     to: destinatari,
     replyTo: c.email,
@@ -119,8 +128,13 @@ function avvisa_(c) {
   });
 }
 
+function file_() {
+  var id = PropertiesService.getScriptProperties().getProperty('FOGLIO_ID');
+  return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
+}
+
 function scheda_() {
-  var file = SpreadsheetApp.getActiveSpreadsheet();
+  var file = file_();
   var scheda = file.getSheetByName(SCHEDA);
   if (!scheda) {
     scheda = file.insertSheet(SCHEDA);
