@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Luce, cerchiamo 5 agenzie di marketing</title>
-<meta name="description" content="Luce è il collaboratore AI per la tua agenzia di marketing. Candidati al programma pilota: 5 posti disponibili.">
+<meta name="description" content="Luce è il collaboratore AI per la tua agenzia di marketing. Prenota una demo: stiamo selezionando 5 agenzie per il programma pilota.">
 <meta name="theme-color" content="#FBF1DA">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
@@ -91,27 +91,12 @@
   .paragrafo { margin: 26px 0 0; max-width: 30em; }
   .paragrafo + .paragrafo { margin-top: 16px; }
 
-  /* La riga della scarsità */
-  .posti {
-    margin: 28px 0 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 22px;
-    color: var(--testo);
-  }
-  .pallino {
-    flex: 0 0 auto;
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: var(--accento);
-  }
+  .paragrafo strong { font-weight: 700; color: var(--testo); }
 
   /* Il modulo */
   form { margin-top: 28px; display: flex; flex-direction: column; gap: 18px; }
+  /* Senza questa, display: flex batte l'attributo hidden e dopo l'invio il modulo resta sopra la conferma */
+  form[hidden] { display: none; }
 
   .etichetta {
     display: block;
@@ -198,6 +183,15 @@
   .invia:disabled { background: var(--salvia); color: var(--testo-corrente); cursor: not-allowed; }
   .invia:disabled:active { transform: none; }
 
+  /* La nota sotto il pulsante: il form ha gap 18, qui la avviciniamo */
+  .nota-invio {
+    margin: -8px 0 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: var(--testo-nota);
+  }
+
   .avviso {
     display: flex;
     gap: 6px;
@@ -222,6 +216,12 @@
     font-size: 30px;
     line-height: 34px;
     color: var(--testo);
+  }
+  .conferma p.dettaglio {
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 27px;
+    color: var(--testo-corrente);
   }
   .conferma[hidden] { display: none; }
 
@@ -267,7 +267,6 @@
     h1 { margin-top: 44px; font-size: 60px; line-height: 58px; }
     .paragrafo { margin-top: 32px; }
     .paragrafo + .paragrafo { margin-top: 18px; }
-    .posti { margin-top: 36px; }
 
     form { margin-top: 0; }
     .campo { height: 48px; }
@@ -313,14 +312,9 @@
       <h1>Cerchiamo 5 agenzie di marketing che vogliono lavorare in modo diverso con l'AI.</h1>
 
       <div id="testa-modulo">
-        <p class="paragrafo">Luce vive dentro Slack, si collega agli strumenti del tuo team e ti aiuta a creare documenti, generare report e individuare opportunità e problemi nel business.</p>
+        <p class="paragrafo">Luce vive dentro <strong>Slack</strong>, si collega agli strumenti del tuo team e ti aiuta a creare documenti, generare report e individuare opportunità e problemi nel business.</p>
 
-        <p class="paragrafo">Candidati al programma pilota per scoprire come Luce può aiutare la tua agenzia a lavorare meglio, con meno attività manuali e più visibilità su ciò che conta.</p>
-
-        <p class="posti">
-          <span class="pallino" aria-hidden="true"></span>
-          5 posti disponibili
-        </p>
+        <p class="paragrafo">Stiamo selezionando <strong>5 agenzie di marketing</strong> per il nostro programma pilota.</p>
       </div>
     </div>
 
@@ -418,12 +412,14 @@
           </label>
         </div>
 
-        <button class="invia" id="invia" type="submit" disabled aria-describedby="nota-consenso">Candidati al programma pilota</button>
+        <button class="invia" id="invia" type="submit" disabled aria-describedby="nota-consenso nota-invio">Prenota una demo</button>
+        <p class="nota-invio" id="nota-invio">Ti ricontatteremo entro 48 ore per valutare la tua richiesta e confermare i prossimi passi.</p>
       </form>
 
       <div class="conferma" id="conferma" hidden>
         <svg class="spunta" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.8 9.6 18.4 20 5.8" fill="none" stroke="#2C5F2D" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        <p>Grazie, abbiamo ricevuto la tua candidatura. Le leggiamo una per una e ti facciamo sapere a breve.</p>
+        <p>Grazie, abbiamo ricevuto la tua richiesta!</p>
+        <p class="dettaglio">Ti ricontatteremo entro 48 ore per valutare se Luce è adatta alla tua agenzia e confermare i prossimi passi.</p>
       </div>
 
     </div>
@@ -540,7 +536,7 @@
 
     var nonInviata = function () {
       bottone.disabled = false;
-      alert('Non siamo riusciti a inviare la candidatura. Riprova, oppure scrivici a info@goldenhourai.it');
+      alert('Non siamo riusciti a inviare la richiesta. Riprova, oppure scrivici a info@goldenhourai.it');
     };
 
     var passaAllaConferma = function () {
