@@ -142,14 +142,15 @@ ssh gn1 'cd /home/gh/sites/ghlanding && git pull --ff-only origin master'
 ssh gn1 'docker exec goldenhourai nginx -t && docker exec goldenhourai nginx -s reload'
 
 # 3-bis. Solo se hai toccato nginx.conf o docker-compose.yml (vedi trappola 1)
-ssh gn1 'cd /home/gh/sites/ghlanding && docker compose up -d'
+ssh gn1 'cd /home/gh/sites/ghlanding && docker compose up -d --force-recreate'
 ```
 
 Il VPS deve avere la rete Docker `web` gia' esistente e un Traefik attivo con certresolver `letsencrypt`.
 
 ### Due trappole, entrambe gia' costate un deploy rotto
 
-**1. Se cambi `nginx.conf`, il reload non basta: serve `docker compose up -d`.**
+**1. Se cambi `nginx.conf`, il reload non basta: serve `docker compose up -d --force-recreate`.**
+Senza `--force-recreate`, se `docker-compose.yml` non e' cambiato, `up -d` risponde «Running» e non ricrea niente: il 2026-10-26 gli inode dopo `up -d` erano ancora diversi.
 `nginx.conf` e' montato come *singolo file*. `git pull` non modifica il file sul posto, lo sostituisce creando un nuovo inode, e il bind mount del container resta agganciato a quello vecchio. Risultato: `nginx -s reload` rilegge una config che non e' piu' quella su disco, in silenzio. `html/` invece e' montata come directory, quindi le modifiche ai contenuti passano sempre.
 Verifica: `docker exec goldenhourai stat -c %i /etc/nginx/conf.d/default.conf` deve coincidere con `stat -c %i /home/gh/sites/ghlanding/nginx.conf`. `up -d` invece di `restart` perche' ricrea il container: serve se e' cambiato anche `docker-compose.yml`, e va bene in entrambi i casi.
 
