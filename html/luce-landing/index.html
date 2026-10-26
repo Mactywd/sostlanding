@@ -471,6 +471,12 @@
     }
   };
 
+  // Parametri utm del link dell'annuncio (vuoti se la pagina è aperta direttamente)
+  var parametriLink = new URLSearchParams(window.location.search);
+  var parametro = function (nome) {
+    return (parametriLink.get(nome) || '').slice(0, 100);
+  };
+
   var scelta = function (nomeGruppo) {
     var segnato = modulo.querySelector('input[name="' + nomeGruppo + '"]:checked');
     return segnato ? segnato.value : '';
@@ -531,6 +537,11 @@
       persone: scelta('persone'),
       brand: scelta('brand'),
       slack: scelta('slack'),
+      // Da quale annuncio arriva: si legge dai parametri utm del link, senza cookie
+      utm_source: parametro('utm_source'),
+      utm_medium: parametro('utm_medium'),
+      utm_campaign: parametro('utm_campaign'),
+      utm_content: parametro('utm_content'),
       informativa: true,
       inviata: new Date().toISOString(),
       trappola: document.getElementById('trappola').value

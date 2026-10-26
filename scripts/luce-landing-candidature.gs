@@ -38,8 +38,11 @@
  */
 
 var SCHEDA = 'Candidature';
+// Le colonne utm sono in fondo perche' sono arrivate dopo: le righe gia'
+// scritte restano allineate. scheda_() aggiunge le intestazioni che mancano.
 var INTESTAZIONI = ['Ricevuta', 'Nome e cognome', 'Email', 'Sito', 'Persone',
-                    'Brand D2C', 'Slack', 'Informativa letta', 'Inviata dal browser'];
+                    'Brand D2C', 'Slack', 'Informativa letta', 'Inviata dal browser',
+                    'utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
 var MAX_LUNGHEZZA = 300;
 
 function doPost(e) {
@@ -68,7 +71,11 @@ function doPost(e) {
     brand: pulisci_(dati.brand),
     slack: pulisci_(dati.slack),
     informativa: dati.informativa === true,
-    inviata: pulisci_(dati.inviata)
+    inviata: pulisci_(dati.inviata),
+    utm_source: pulisci_(dati.utm_source),
+    utm_medium: pulisci_(dati.utm_medium),
+    utm_campaign: pulisci_(dati.utm_campaign),
+    utm_content: pulisci_(dati.utm_content)
   };
 
   var mancanti = ['nome', 'email', 'sito', 'persone', 'brand', 'slack'].filter(function (k) {
@@ -82,7 +89,8 @@ function doPost(e) {
   lock.waitLock(20000);
   try {
     scheda_().appendRow([new Date(), c.nome, c.email, c.sito, c.persone, c.brand,
-                         c.slack, 'Sì', c.inviata].map(cella_));
+                         c.slack, 'Sì', c.inviata, c.utm_source, c.utm_medium,
+                         c.utm_campaign, c.utm_content].map(cella_));
   } finally {
     lock.releaseLock();
   }
@@ -108,6 +116,7 @@ function prova() {
   doPost({ postData: { contents: JSON.stringify({
     nome: 'Prova Prova', email: 'prova@example.com', sito: 'example.com',
     persone: 'Da 4 a 10', brand: 'Da 1 a 3', slack: 'Sì', informativa: true,
+    utm_source: 'prova', utm_campaign: 'prova',
     inviata: new Date().toISOString()
   }) } });
 }
@@ -134,6 +143,7 @@ function avvisa_(c) {
       'Persone: ' + c.persone,
       'Brand D2C: ' + c.brand,
       'Slack: ' + c.slack,
+      'Da dove arriva: ' + provenienza_(c),
       '',
       'Il foglio delle candidature: ' + foglio
     ].join('\n')
@@ -168,6 +178,16 @@ function conferma_(c) {
   });
 }
 
+// Una riga leggibile sui parametri utm, per l'avviso
+function provenienza_(c) {
+  var parti = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].filter(function (k) {
+    return c[k];
+  }).map(function (k) {
+    return k.replace('utm_', '') + ' ' + c[k];
+  });
+  return parti.length ? parti.join(', ') : 'nessun parametro utm (pagina aperta direttamente)';
+}
+
 function file_() {
   var id = PropertiesService.getScriptProperties().getProperty('FOGLIO_ID');
   return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
@@ -181,6 +201,9 @@ function scheda_() {
     scheda.appendRow(INTESTAZIONI);
     scheda.setFrozenRows(1);
     scheda.getRange(1, 1, 1, INTESTAZIONI.length).setFontWeight('bold');
+  } else if (scheda.getLastColumn() < INTESTAZIONI.length) {
+    // Il foglio e' stato creato prima delle colonne nuove
+    scheda.getRange(1, 1, 1, INTESTAZIONI.length).setValues([INTESTAZIONI]).setFontWeight('bold');
   }
   return scheda;
 }
