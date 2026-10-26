@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<? /* L'email di conferma a chi chiede una demo da /luce-landing/ (testo di
+     Simone, 2026-10-26). Nel progetto Apps Script e' il file "conferma":
+     conferma_() in luce-landing-candidature.gs lo riempie e lo manda.
+     Nel titolo, nome e' il nome di battesimo: HtmlService lo fa uscire gia'
+     protetto, quindi un nome con < o & non rompe l'HTML.
+     Il logo e' html/assets/logo-email.png, servito da goldenhourai.it. */ ?>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>Luce: abbiamo ricevuto la tua richiesta di demo</title>
+<!-- Font: caricati dove il programma di posta lo permette (Apple Mail, iOS). Altrove: Georgia e Arial. -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; padding:0; background:#FBF1DA; }
+  a { color:#2C5F2D; }
+  @media (max-width:620px) {
+    .wrap { width:100% !important; }
+    .pad { padding-left:24px !important; padding-right:24px !important; }
+    .title { font-size:34px !important; line-height:38px !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background:#FBF1DA;">
+
+<!-- Anteprima mostrata nella lista delle email -->
+<div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
+  La tua richiesta è arrivata. Ti scriviamo entro 48 ore per fissare la demo.
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#FBF1DA;">
+<tr><td align="center" style="padding:32px 12px;">
+
+  <table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px;">
+
+    <!-- Logo -->
+    <tr><td class="pad" style="padding:0 40px 24px 40px;">
+      <img src="https://goldenhourai.it/assets/logo-email.png" width="160" alt="Golden Hour AI" style="display:block; width:160px; height:auto; border:0;">
+    </td></tr>
+
+    <!-- Card principale -->
+    <tr><td style="background:#FFFFFF; border-radius:8px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+
+        <!-- Etichetta con linea -->
+        <tr><td class="pad" style="padding:40px 40px 0 40px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+            <td style="width:24px; border-top:2px solid #C8891C; font-size:0; line-height:0;">&nbsp;</td>
+            <td style="padding-left:10px; font-family:Archivo, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#C8891C; text-transform:uppercase;">Luce, programma pilota</td>
+          </tr></table>
+        </td></tr>
+
+        <!-- Titolo -->
+        <tr><td class="pad" style="padding:18px 40px 0 40px;">
+          <h1 class="title" style="margin:0; font-family:'Instrument Serif', Georgia, serif; font-weight:400; font-size:42px; line-height:46px; color:#222B1E;">
+            Ciao <?= nome ?>,<br>la tua richiesta <em style="color:#2C5F2D;">è arrivata.</em>
+          </h1>
+        </td></tr>
+
+        <!-- Apertura -->
+        <tr><td class="pad" style="padding:20px 40px 0 40px; font-family:Archivo, Arial, sans-serif; font-size:16px; line-height:25px; color:#4A5545;">
+          Grazie per l'interesse in Luce, il collaboratore AI che vive nella chat del tuo team. Stiamo scegliendo 5 agenzie di marketing per questa prima fase e leggiamo ogni richiesta con attenzione.
+        </td></tr>
+
+        <!-- Cosa succede adesso -->
+        <tr><td class="pad" style="padding:32px 40px 8px 40px; font-family:Archivo, Arial, sans-serif; font-size:13px; font-weight:700; color:#222B1E;">
+          Cosa succede adesso
+        </td></tr>
+
+        <tr><td class="pad" style="padding:0 40px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td valign="top" style="width:44px; padding:14px 0; border-top:1px solid #D8E2D0; font-family:'Instrument Serif', Georgia, serif; font-size:28px; line-height:28px; color:#C8891C;">1</td>
+              <td valign="top" style="padding:14px 0; border-top:1px solid #D8E2D0; font-family:Archivo, Arial, sans-serif; font-size:15px; line-height:23px; color:#4A5545;">
+                <strong style="color:#222B1E;">Leggiamo la tua richiesta.</strong><br>Guardiamo la tua agenzia e come lavora il tuo team.
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" style="width:44px; padding:14px 0; border-top:1px solid #D8E2D0; font-family:'Instrument Serif', Georgia, serif; font-size:28px; line-height:28px; color:#C8891C;">2</td>
+              <td valign="top" style="padding:14px 0; border-top:1px solid #D8E2D0; font-family:Archivo, Arial, sans-serif; font-size:15px; line-height:23px; color:#4A5545;">
+                <strong style="color:#222B1E;">Ti scriviamo entro 48 ore.</strong><br>Ti diciamo se ci sono i presupposti per un progetto pilota insieme.
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" style="width:44px; padding:14px 0; border-top:1px solid #D8E2D0; border-bottom:1px solid #D8E2D0; font-family:'Instrument Serif', Georgia, serif; font-size:28px; line-height:28px; color:#C8891C;">3</td>
+              <td valign="top" style="padding:14px 0; border-top:1px solid #D8E2D0; border-bottom:1px solid #D8E2D0; font-family:Archivo, Arial, sans-serif; font-size:15px; line-height:23px; color:#4A5545;">
+                <strong style="color:#222B1E;">Fissiamo la demo.</strong><br>Una call di 20 minuti in cui vedi Luce al lavoro sui numeri di un cliente.
+              </td>
+            </tr>
+          </table>
+        </td></tr>
+
+        <!-- Card in evidenza: rispondi -->
+        <tr><td class="pad" style="padding:32px 40px 0 40px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#2C5F2D; border-radius:8px;">
+            <tr><td style="padding:24px 26px;">
+              <div style="font-family:Archivo, Arial, sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#F4B72B; text-transform:uppercase;">Nel frattempo</div>
+              <div style="padding-top:8px; font-family:'Instrument Serif', Georgia, serif; font-size:24px; line-height:29px; color:#FFFFFF;">Raccontaci il tuo lunedì.</div>
+              <div style="padding-top:8px; font-family:Archivo, Arial, sans-serif; font-size:15px; line-height:23px; color:#FFFFFF;">
+                Quanti clienti seguite, quali strumenti usate, cosa vi porta via più tempo. Basta rispondere a questa email: ci aiuta a preparare una demo su misura.
+              </div>
+            </td></tr>
+          </table>
+        </td></tr>
+
+        <!-- Firma -->
+        <tr><td class="pad" style="padding:32px 40px 40px 40px; font-family:Archivo, Arial, sans-serif; font-size:16px; line-height:25px; color:#4A5545;">
+          A presto,<br>
+          <span style="font-family:'Instrument Serif', Georgia, serif; font-size:24px; line-height:32px; color:#222B1E;">Simone e Mattia</span><br>
+          <span style="font-size:14px; color:#6A7562;">Golden Hour AI</span>
+        </td></tr>
+
+      </table>
+    </td></tr>
+
+    <!-- Footer -->
+    <tr><td class="pad" style="padding:24px 40px 0 40px; font-family:Archivo, Arial, sans-serif; font-size:12px; line-height:19px; color:#6A7562;">
+      Ricevi questa email perché hai chiesto una demo di Luce su <a href="https://goldenhourai.it" style="color:#2C5F2D;">goldenhourai.it</a>.
+      Come trattiamo i tuoi dati: <a href="https://goldenhourai.it/privacy/#candidature" style="color:#2C5F2D;">informativa privacy</a>.
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+</body>
+</html>

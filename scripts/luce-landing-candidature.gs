@@ -16,7 +16,8 @@
  *
  * Messa in opera (una volta sola):
  *  1. script.google.com > Nuovo progetto, incolla questo file al posto di
- *     Codice.gs e salva.
+ *     Codice.gs. Poi File (+) > HTML, chiamalo "conferma" e incollaci
+ *     luce-landing-conferma.html. Salva.
  *  2. Impostazioni progetto (rotella) > Proprieta' script:
  *     DESTINATARI = gli indirizzi a cui arriva l'avviso, separati da virgola;
  *     FOGLIO_ID = l'ID del foglio, il pezzo di URL fra /d/ e /edit.
@@ -152,30 +153,43 @@ function avvisa_(c) {
 
 // La conferma a chi si e' candidato. Parte dall'account che esegue lo script,
 // ma le risposte vanno ai DESTINATARI, che leggono la posta di goldenhourai.it.
+// La versione HTML e' il file "conferma" del progetto (copia versionata:
+// luce-landing-conferma.html); body e' il testo per chi non legge l'HTML.
 function conferma_(c) {
-  var nome = c.nome.split(/\s+/)[0];
+  var modello = HtmlService.createTemplateFromFile('conferma');
+  modello.nome = c.nome.split(/\s+/)[0];
   MailApp.sendEmail({
     to: c.email,
     name: 'Golden Hour AI',
     replyTo: destinatari_(),
     subject: 'Luce: abbiamo ricevuto la tua richiesta di demo',
+    htmlBody: modello.evaluate().getContent(),
     body: [
-      'Ciao ' + nome + ',',
+      'Ciao ' + modello.nome + ', la tua richiesta è arrivata.',
       '',
-      'grazie per il tuo interesse in Luce!',
+      'Grazie per l\'interesse in Luce, il collaboratore AI che vive nella chat del tuo team. Stiamo scegliendo 5 agenzie di marketing per questa prima fase e leggiamo ogni richiesta con attenzione.',
       '',
-      'Abbiamo ricevuto la tua richiesta di demo. Ti ricontatteremo entro 48 ore per conoscere meglio la tua agenzia e capire se ci sono i presupposti per avviare un progetto pilota insieme.',
+      'Cosa succede adesso:',
+      '1. Leggiamo la tua richiesta. Guardiamo la tua agenzia e come lavora il tuo team.',
+      '2. Ti scriviamo entro 48 ore. Ti diciamo se ci sono i presupposti per un progetto pilota insieme.',
+      '3. Fissiamo la demo. Una call di 20 minuti in cui vedi Luce al lavoro sui numeri di un cliente.',
       '',
-      'Stiamo selezionando 5 agenzie di marketing per questa prima fase, quindi la demo verrà confermata dopo una prima valutazione della richiesta.',
-      '',
-      'Nel frattempo, se vuoi aggiungere qualche informazione sulla tua agenzia o su come lavora il tuo team, puoi rispondere direttamente a questa email.',
+      'Nel frattempo, raccontaci il tuo lunedì: quanti clienti seguite, quali strumenti usate, cosa vi porta via più tempo. Basta rispondere a questa email: ci aiuta a preparare una demo su misura.',
       '',
       'A presto,',
-      '',
       'Simone e Mattia',
-      'Golden Hour AI · https://goldenhourai.it'
+      'Golden Hour AI · https://goldenhourai.it',
+      '',
+      'Come trattiamo i tuoi dati: https://goldenhourai.it/privacy/#candidature'
     ].join('\n')
   });
+}
+
+// Manda solo la conferma, al primo dei DESTINATARI: per vedere com'e' l'email
+// senza aggiungere righe al foglio. Non usa Session.getEffectiveUser(), che
+// chiederebbe un'autorizzazione in piu' a tutto il progetto.
+function provaConferma() {
+  conferma_({ nome: 'Prova Prova', email: destinatari_().split(',')[0].trim() });
 }
 
 // Una riga leggibile sui parametri utm, per l'avviso
