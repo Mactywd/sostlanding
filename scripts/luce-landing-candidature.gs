@@ -1,6 +1,7 @@
 /**
  * Riceve le candidature del modulo di /luce-landing/: aggiunge una riga al
- * foglio Google che fa da CRM e manda una email di avviso agli indirizzi di DESTINATARI.
+ * foglio Google che fa da CRM, manda una email di avviso agli indirizzi di
+ * DESTINATARI e una email di conferma a chi si e' candidato.
  *
  * Non gira sul nostro server: e' un progetto Google Apps Script pubblicato come
  * app web. Questo file e' la copia versionata; se lo cambi, incollalo di nuovo
@@ -82,12 +83,17 @@ function doPost(e) {
     lock.releaseLock();
   }
 
-  // La riga e' gia' salvata: se l'email non parte, la candidatura non e'
+  // La riga e' gia' salvata: se un'email non parte, la candidatura non e'
   // persa. Rispondere errore farebbe solo reinviare il modulo, con un doppione.
   try {
     avvisa_(c);
   } catch (err) {
     console.error('Avviso email non inviato: ' + err);
+  }
+  try {
+    conferma_(c);
+  } catch (err) {
+    console.error('Conferma al candidato non inviata: ' + err);
   }
   return risposta_({ ok: true });
 }
@@ -102,15 +108,18 @@ function prova() {
   }) } });
 }
 
-function avvisa_(c) {
+function destinatari_() {
   var destinatari = PropertiesService.getScriptProperties().getProperty('DESTINATARI');
   if (!destinatari) {
     throw new Error('Manca la proprieta\' script DESTINATARI');
   }
+  return destinatari;
+}
+
+function avvisa_(c) {
   var foglio = file_().getUrl();
   MailApp.sendEmail({
-    to: destinatari,
-    replyTo: c.email,
+    to: destinatari_(),
     subject: 'Nuova candidatura Luce: ' + c.nome + ' (' + c.sito + ')',
     body: [
       'È arrivata una candidatura al programma pilota di Luce.',
@@ -122,8 +131,29 @@ function avvisa_(c) {
       'Brand D2C: ' + c.brand,
       'Slack: ' + c.slack,
       '',
-      'Rispondendo a questa email scrivi direttamente a chi si è candidato.',
       'Il foglio delle candidature: ' + foglio
+    ].join('\n')
+  });
+}
+
+// La conferma a chi si e' candidato. Parte dall'account che esegue lo script,
+// ma le risposte vanno ai DESTINATARI, che leggono la posta di goldenhourai.it.
+function conferma_(c) {
+  var nome = c.nome.split(/\s+/)[0];
+  MailApp.sendEmail({
+    to: c.email,
+    name: 'Golden Hour AI',
+    replyTo: destinatari_(),
+    subject: 'Abbiamo ricevuto la tua candidatura a Luce',
+    body: [
+      'Ciao ' + nome + ',',
+      '',
+      'grazie per la tua candidatura al programma pilota di Luce. L\'abbiamo presa in carico: leggiamo le candidature una per una e ti ricontattiamo a breve.',
+      '',
+      'Se nel frattempo vuoi aggiungere qualcosa, rispondi pure a questa email.',
+      '',
+      'Simone e Mattia',
+      'Golden Hour AI · https://goldenhourai.it'
     ].join('\n')
   });
 }
